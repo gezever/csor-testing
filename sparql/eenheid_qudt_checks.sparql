@@ -1,0 +1,82 @@
+# ============================================================================
+# QUDT-koppeling van csor:Eenheid: dekking en (voorbereiding op) kwaliteitscontrole.
+# De eigenlijke kwaliteitstoets (live dereferentie + symboolvergelijking) gebeurt in Python
+# (scripts/check_eenheden_qudt.py), omdat SPARQL geen HTTP-calls of edit-distance kan doen.
+# Deze queries leveren de invoerlijst en de dekkingscijfers.
+# ============================================================================
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX csor: <https://data.omgeving.vlaanderen.be/ns/csor#>
+
+# ----------------------------------------------------------------------------
+# QUERY 1 — Matchtype-verdeling naar QUDT (exactMatch/closeMatch/broadMatch/narrowMatch/
+# relatedMatch), enkel actieve eenheden.
+# ----------------------------------------------------------------------------
+SELECT ?matchType (COUNT(DISTINCT ?eenheid) AS ?aantal)
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid> {
+    ?eenheid a csor:Eenheid .
+    FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+    { ?eenheid skos:exactMatch ?q . BIND("exactMatch" AS ?matchType) }
+    UNION { ?eenheid skos:closeMatch ?q . BIND("closeMatch" AS ?matchType) }
+    UNION { ?eenheid skos:broadMatch ?q . BIND("broadMatch" AS ?matchType) }
+    UNION { ?eenheid skos:narrowMatch ?q . BIND("narrowMatch" AS ?matchType) }
+    UNION { ?eenheid skos:relatedMatch ?q . BIND("relatedMatch" AS ?matchType) }
+    FILTER(STRSTARTS(STR(?q), "http://qudt.org/"))
+  }
+}
+GROUP BY ?matchType
+
+
+# ----------------------------------------------------------------------------
+# QUERY 2 — Volledige lijst QUDT-koppelingen (eenheid, label, symbool, matchtype, qudt-URI) —
+# input voor de Python live-dereferentie-/kwaliteitscheck.
+# ----------------------------------------------------------------------------
+SELECT ?eenheid ?label ?symbool ?matchType ?qudt
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid> {
+    ?eenheid a csor:Eenheid ; skos:prefLabel ?label .
+    OPTIONAL { ?eenheid csor:symbool ?symbool }
+    FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+    { ?eenheid skos:exactMatch ?qudt . BIND("exactMatch" AS ?matchType) }
+    UNION { ?eenheid skos:broadMatch ?qudt . BIND("broadMatch" AS ?matchType) }
+    UNION { ?eenheid skos:closeMatch ?qudt . BIND("closeMatch" AS ?matchType) }
+    UNION { ?eenheid skos:narrowMatch ?qudt . BIND("narrowMatch" AS ?matchType) }
+    UNION { ?eenheid skos:relatedMatch ?qudt . BIND("relatedMatch" AS ?matchType) }
+    FILTER(STRSTARTS(STR(?qudt), "http://qudt.org/"))
+  }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 3 — Alle actieve eenheden ZONDER QUDT-koppeling (basis voor de interne
+# spelling-/consistentiecheck, die op alle eenheden draait, niet enkel de gekoppelde).
+# ----------------------------------------------------------------------------
+SELECT ?eenheid ?label ?symbool
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid> {
+    ?eenheid a csor:Eenheid ; skos:prefLabel ?label .
+    OPTIONAL { ?eenheid csor:symbool ?symbool }
+    FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+    FILTER NOT EXISTS {
+      ?eenheid ?p ?q .
+      FILTER(?p IN (skos:exactMatch, skos:closeMatch, skos:broadMatch, skos:narrowMatch, skos:relatedMatch))
+      FILTER(STRSTARTS(STR(?q), "http://qudt.org/"))
+    }
+  }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 4 — Alle actieve eenheden (dekkingsbasis, ongeacht koppeling) — gebruikt door de
+# interne spelling-/label-symbool-consistentiecheck in scripts/check_eenheden_qudt.py.
+# ----------------------------------------------------------------------------
+SELECT ?eenheid ?label ?symbool
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid> {
+    ?eenheid a csor:Eenheid ; skos:prefLabel ?label .
+    OPTIONAL { ?eenheid csor:symbool ?symbool }
+    FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+  }
+}

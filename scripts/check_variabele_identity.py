@@ -11,11 +11,13 @@ buiten scope (zie reports/rapport_variabele_identiteit.md, paragraaf "buiten sco
 
 DATA PROVENANCE
 ----------------
-Endpoint: https://data-ontwikkel.omgeving.vlaanderen.be/sparql
-Graph:    https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-variabele (25.312 triples,
-          gepagineerd opgehaald — zie common.sparql_client.fetch_graph en
-          sparql/csor-variabele-fetch.sparql).
-Externe bron: PubChem PUG-REST (common.pubchem), met bestandscache.
+Bron: de lokale volledige-registersnapshot (`analyse/csor_merged.ttl`), bij elke
+`scripts/run_all.py`-run vers geregenereerd door `scripts/common/dataset.py::fetch_and_save()`
+— bevat o.a. de `variabele`-instanties (25.312 triples, voorheen rechtstreeks als apart graph
+opgehaald via sparql/csor-variabele-fetch.sparql; die paginatie/verificatie gebeurt nu bij de
+snapshot-regeneratie zelf, zie common/dataset.py).
+Externe bron: PubChem PUG-REST (common.pubchem), met bestandscache — blijft per definitie
+live/extern.
 
 METHODOLOGY
 -----------
@@ -47,24 +49,22 @@ output/tables/cas_resolution.csv
 output/tables/cid_crosscheck.csv
 output/tables/internal_flags.csv
 data/interim/variabele_records.parquet (tussentijds)
-data/raw/csor-variabele-<datum>.ttl (+.meta.json) (ruwe snapshot, provenance)
 """
 
 from __future__ import annotations
 
 import re
 import sys
-from datetime import date
 from pathlib import Path
 
 import pandas as pd
+import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import pubchem, sparql_client as sc  # noqa: E402
+from common import dataset, pubchem, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
-RAW_DIR = REPO_ROOT / "data" / "raw"
 CACHE_ROOT = REPO_ROOT / "data" / "cache" / "pubchem"
 OUTPUT_DIR = REPO_ROOT / "output" / "tables"
 
@@ -94,10 +94,9 @@ def cas_checksum_valid(cas: str) -> bool:
     return total % 10 == check_digit
 
 
-def build_records() -> tuple["pd.DataFrame", "sc.FetchResult"]:  # noqa: F821
-    fetch = sc.fetch_graph("variabele")
+def build_records(graph: rdflib.Graph) -> "pd.DataFrame":  # noqa: F821
     df = sc.to_dataframe(
-        fetch.graph,
+        graph,
         class_uri=f"{CSOR}Variabele",
         predicates={
             "notatie": "http://www.w3.org/2004/02/skos/core#notation",
@@ -116,7 +115,7 @@ def build_records() -> tuple["pd.DataFrame", "sc.FetchResult"]:  # noqa: F821
         lambda u: CID_RE.search(u).group(1) if isinstance(u, str) and CID_RE.search(u) else None
     )
     df = df[~df["deprecated"]].reset_index(drop=True)
-    return df, fetch
+    return df
 
 
 def self_test(df: "pd.DataFrame") -> None:  # noqa: F821
@@ -259,15 +258,16 @@ def cas_resolution(df: "pd.DataFrame") -> "pd.DataFrame":  # noqa: F821
     )
 
 
-def main() -> None:
+def main(graph: rdflib.Graph | None = None) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
 
-    df, fetch = build_records()
-    sc.save_snapshot(fetch, RAW_DIR, f"csor-variabele-{date.today().isoformat()}")
+    if graph is None:
+        graph = dataset.fetch_and_save()
+
+    df = build_records(graph)
     df.to_parquet(INTERIM_DIR / "variabele_records.parquet")
 
-    print(f"Fetch geverifieerd: {fetch.parsed_count} triples ({fetch.pages} pagina's).")
     print(
         f"Actieve variabelen: {len(df)} — cas={df['cas'].notna().sum()}, "
         f"inchikey={df['inchikey'].notna().sum()}, iupacNaam={df['iupacNaam'].notna().sum()}, "

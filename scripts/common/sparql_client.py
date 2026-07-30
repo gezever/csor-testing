@@ -18,7 +18,10 @@ METHODOLOGY
   COUNT-query. Reden: de endpoint knipt CONSTRUCT-resultaten stil af op 10.000 triples zonder
   foutmelding (zie CLAUDE.md §4) — zonder paginatie + verificatie zou dit onopgemerkt data
   laten wegvallen.
-- select_dataframe(): SELECT-query rechtstreeks naar een pandas DataFrame.
+- select_dataframe(): SELECT-query rechtstreeks naar een pandas DataFrame (live, via HTTP).
+- select_dataframe_local() / construct_local(): zelfde soort uitvoering maar lokaal tegen een
+  reeds geladen rdflib.Graph (zie common/dataset.py) — geen HTTP-call, dezelfde querytekst
+  herbruikbaar omdat rdflib's eigen SPARQL-engine dezelfde taal ondersteunt.
 - to_dataframe(): rdflib-graph -> tidy pandas DataFrame, één rij per subject van een gegeven
   rdf:type, één kolom per predicaat.
 
@@ -166,6 +169,27 @@ def select_dataframe(query: str, endpoint: str = DEFAULT_ENDPOINT) -> pd.DataFra
         row = {var: (binding[var]["value"] if var in binding else None) for var in variables}
         rows.append(row)
     return pd.DataFrame(rows, columns=variables)
+
+
+def select_dataframe_local(query: str, graph: rdflib.Graph) -> pd.DataFrame:
+    """Voert een SPARQL SELECT-query lokaal uit tegen een reeds geladen rdflib.Graph.
+
+    Zelfde signatuur/vorm als select_dataframe() (kolommen = SELECT-projectievolgorde, waarden
+    als string of None) — enkel de uitvoeringslaag verschilt (geen HTTP-call), zodat bestaande
+    querydefinities ongewijzigd herbruikt kunnen worden. Zie common/dataset.py.
+    """
+    result = graph.query(query)
+    variables = [str(v) for v in result.vars]
+    rows = []
+    for row in result:
+        rows.append({var: (str(row[var]) if row[var] is not None else None) for var in variables})
+    return pd.DataFrame(rows, columns=variables)
+
+
+def construct_local(query: str, graph: rdflib.Graph) -> rdflib.Graph:
+    """Voert een SPARQL CONSTRUCT-query lokaal uit tegen een reeds geladen rdflib.Graph."""
+    result = graph.query(query)
+    return result.graph
 
 
 def to_dataframe(

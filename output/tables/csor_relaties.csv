@@ -1,0 +1,25 @@
+prop,label,domain,range
+https://data.omgeving.vlaanderen.be/ns/csor#classificatielijst,Referentie naar classificatielijst,,http://www.w3.org/2000/01/rdf-schema#Resource
+https://data.omgeving.vlaanderen.be/ns/csor#geldigTot,Is geldig tot,,http://www.w3.org/2001/XMLSchema#date
+https://data.omgeving.vlaanderen.be/ns/csor#heeftAfleiding,heeft afleiding,,
+https://data.omgeving.vlaanderen.be/ns/csor#heeftAspect,Heeft aspect,,ndd3bea63c01547ccb28a6d991f7e254eb2
+https://data.omgeving.vlaanderen.be/ns/csor#heeftBronEenheid,Eenheid van,,https://data.omgeving.vlaanderen.be/ns/csor#Eenheid
+https://data.omgeving.vlaanderen.be/ns/csor#heeftBronParameter,heeft bronparameter,,https://data.omgeving.vlaanderen.be/ns/csor#Parameter
+https://data.omgeving.vlaanderen.be/ns/csor#heeftBronParameterAspect,Parameteraspect van,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect
+https://data.omgeving.vlaanderen.be/ns/csor#heeftDoelEenheid,Eenheid naar,,https://data.omgeving.vlaanderen.be/ns/csor#Eenheid
+https://data.omgeving.vlaanderen.be/ns/csor#heeftDoelParameter,heeft doelparameter,,https://data.omgeving.vlaanderen.be/ns/csor#Parameter
+https://data.omgeving.vlaanderen.be/ns/csor#heeftDoelParameterAspect,Parameteraspect naar,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect
+https://data.omgeving.vlaanderen.be/ns/csor#heeftDrager,Drager,,https://data.omgeving.vlaanderen.be/ns/csor#Drager
+https://data.omgeving.vlaanderen.be/ns/csor#heeftKwantificeerbaarAspect,heeft kwantificeerbaar aspect,,https://data.omgeving.vlaanderen.be/ns/csor#KwantificeerbaarAspect
+https://data.omgeving.vlaanderen.be/ns/csor#heeftNatuurkundigeDimensie,Natuurkundige dimensie,,https://data.omgeving.vlaanderen.be/ns/csor#NatuurkundigeDimensie
+https://data.omgeving.vlaanderen.be/ns/csor#heeftNoemer,noemer,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterTerm
+https://data.omgeving.vlaanderen.be/ns/csor#heeftParameter,Heeft parameter,,https://data.omgeving.vlaanderen.be/ns/csor#Parameter
+https://data.omgeving.vlaanderen.be/ns/csor#heeftParameterAspect,heeft parameter aspect,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect
+https://data.omgeving.vlaanderen.be/ns/csor#heeftResultaattype,Resultaattype,,ndd3bea63c01547ccb28a6d991f7e254eb1
+https://data.omgeving.vlaanderen.be/ns/csor#heeftSoortWaardebepaling,Soort waardebepaling,,https://data.omgeving.vlaanderen.be/ns/csor#SoortWaardebepaling
+https://data.omgeving.vlaanderen.be/ns/csor#heeftTeller,teller,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterTerm
+https://data.omgeving.vlaanderen.be/ns/csor#heeftTerm,Term,,https://data.omgeving.vlaanderen.be/ns/csor#VeeltermParameterTerm
+https://data.omgeving.vlaanderen.be/ns/csor#heeftVariabele,Variabele,,https://data.omgeving.vlaanderen.be/ns/csor#Variabele
+https://data.omgeving.vlaanderen.be/ns/csor#referentieEenheid,Referentie-eenheid,,https://data.omgeving.vlaanderen.be/ns/csor#Eenheid
+https://data.omgeving.vlaanderen.be/ns/csor#toepasbareEenheid,Toepasbare eenheid,,https://data.omgeving.vlaanderen.be/ns/csor#Eenheid
+https://data.omgeving.vlaanderen.be/ns/csor#uitgedruktIn,Uitgedrukt in,,https://data.omgeving.vlaanderen.be/ns/csor#Variabele

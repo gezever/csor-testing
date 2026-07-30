@@ -1,0 +1,97 @@
+# ============================================================================
+# Inhoudelijke consistentiechecks op Parameter, ParameterAspect en de EEA-code-velden.
+#
+# LET OP — correctie op een eerdere aanname: `csor:eea` is niet het EC/EINECS-nummer maar
+# de **EEA-code** (bevestigd via de property-definitie zelf: rdfs:label "EEA-code",
+# rdfs:comment "EEA-code gekoppeld aan de parameter"). Een formatcheck op basis van het
+# EC-patroon (XXX-XXX-X) gaf daardoor 56/176 valse "afwijkingen". De queries hieronder
+# gebruiken het correcte, generieke `\d+-\d+-\d+`-patroon (drie cijfergroepen van
+# willekeurige lengte, gescheiden door een koppelteken) — dat geeft 174/176 conform en
+# precies 2 échte afwijkingen (P_618, V_403).
+#
+# LET OP 2 — een hypothese die NIET in dit bestand staat: `csor:symbool` op
+# `csor:SoortWaardebepaling` bleek GEEN kanonieke transformatie van `skos:prefLabel` te zijn
+# (op de steekproef leek dat zo, op de volle populatie van 80 bleek het een handmatige
+# afkorting, bv. "kiem-inhibitie" -> "KI"). Zie reports/rapport_parameter_inhoud.md voor de
+# toelichting — geen check op basis van een fout patroon.
+# ============================================================================
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX csor: <https://data.omgeving.vlaanderen.be/ns/csor#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+# ----------------------------------------------------------------------------
+# QUERY 1 — altLabel vs. verkorteNotatie: horen identiek te zijn.
+# ----------------------------------------------------------------------------
+SELECT ?p ?altLabel ?verkorteNotatie WHERE {
+  ?p a csor:Parameter ; skos:altLabel ?altLabel ; csor:verkorteNotatie ?verkorteNotatie .
+  FILTER(STR(?altLabel) != STR(?verkorteNotatie))
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 2 — geldigTot in het verleden maar niet gedeprecieerd.
+# Own addition: dit is geen momentopname-toets maar hoort herhaald te draaien, want een
+# vandaag nog geldige datum kan morgen al verstreken zijn.
+# ----------------------------------------------------------------------------
+SELECT ?p ?label ?geldigTot WHERE {
+  ?p a csor:Parameter ; csor:geldigTot ?geldigTot ; skos:prefLabel ?label .
+  FILTER NOT EXISTS { ?p owl:deprecated true }
+  FILTER(?geldigTot < NOW())
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 3 — CAS-verrijkingskansen: Parameter heeft een CAS-nummer, gekoppelde Variabele niet.
+# ----------------------------------------------------------------------------
+SELECT ?p ?pLabel ?pCas ?v WHERE {
+  ?p a csor:Parameter ; csor:cas ?pCas ; csor:heeftVariabele ?v ; skos:prefLabel ?pLabel .
+  FILTER NOT EXISTS { ?v csor:cas ?vCas }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 4 — EEA-code-formatcheck (Parameter + Variabele samen, register-breed).
+# Generiek digit-hyphen-patroon i.p.v. het foutieve EC-nummerpatroon (zie header).
+# SPARQL REGEX i.p.v. FILTER-functie hier, want dit moet ook buiten Python herbruikbaar zijn.
+# ----------------------------------------------------------------------------
+SELECT ?s ?eea WHERE {
+  { ?s a csor:Parameter } UNION { ?s a csor:Variabele }
+  ?s csor:eea ?eea .
+  FILTER(!REGEX(STR(?eea), "^[0-9]+-[0-9]+-[0-9]+$"))
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 5 — Parameter- vs. Variabele-EEA-mismatch: beide hebben een EEA-code, maar verschillend.
+# Vlag voor handmatige review — kan legitiem zijn (andere rol/fractie), geen automatische fout.
+# ----------------------------------------------------------------------------
+SELECT ?p ?pLabel ?pEea ?vEea WHERE {
+  ?p a csor:Parameter ; csor:eea ?pEea ; csor:heeftVariabele ?v ; skos:prefLabel ?pLabel .
+  ?v csor:eea ?vEea .
+  FILTER(STR(?pEea) != STR(?vEea))
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 6 — ParameterAspect-labelreconstructie.
+# Patroon (bevestigd op de volledige populatie van 8537 actieve ParameterAspecten, 0
+# mismatches tijdens de verkenning):
+#   ParameterAspect.prefLabel =
+#     "{Parameter.symbool} ({SoortWaardebepaling.prefLabel} in {Drager.prefLabel}): {KwantificeerbaarAspect.prefLabel}"
+# Deze query levert de bouwstenen; de stringconcatenatie en -vergelijking gebeurt in Python
+# (scripts/check_parameter_inhoud.py) omdat SPARQL-stringconcatenatie met de juiste
+# scheidingstekens minder leesbaar/onderhoudbaar is dan een f-string.
+# ----------------------------------------------------------------------------
+SELECT ?pa ?label ?paramSymbool ?swbLabel ?dragerLabel ?kwaLabel WHERE {
+  ?pa a csor:ParameterAspect ; skos:prefLabel ?label ;
+      csor:heeftParameter ?param ; csor:heeftAspect ?kwa .
+  FILTER NOT EXISTS { ?pa owl:deprecated true }
+  ?param csor:symbool ?paramSymbool ;
+         csor:heeftDrager ?drager ;
+         csor:heeftSoortWaardebepaling ?swb .
+  ?drager skos:prefLabel ?dragerLabel .
+  ?swb skos:prefLabel ?swbLabel .
+  ?kwa skos:prefLabel ?kwaLabel .
+}

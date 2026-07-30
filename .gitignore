@@ -57,3 +57,8 @@ __pycache__/
 data/raw/
 data/interim/
 data/cache/
+
+# Lokale volledige-registersnapshot (analyse/csor_merged.ttl) — bij elke scripts/run_all.py-run
+# vers geregenereerd door scripts/common/dataset.py::fetch_and_save(), net als data/raw/ dus
+# bewust niet gecommit.
+analyse/

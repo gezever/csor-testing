@@ -11,17 +11,39 @@ verouderd raakt als het register wijzigt.
 
 DATA PROVENANCE
 ----------------
-Endpoint: https://data-ontwikkel.omgeving.vlaanderen.be/sparql (default/union-graph — deze
-queries gebruiken geen GRAPH-clausule, in tegenstelling tot check_variabele_identity.py).
+Gemengd, met opzet — zie de gedocumenteerde valkuil in METHODOLOGY:
+- Queries 1a/1b: de lokale volledige-registersnapshot (`analyse/csor_merged.ttl`, bij elke
+  `scripts/run_all.py`-run vers geregenereerd door `scripts/common/dataset.py::fetch_and_save()`),
+  via `sparql_client.select_dataframe_local()`.
+- Queries 1c/2/3/4/5: BLIJVEN live tegen https://data-ontwikkel.omgeving.vlaanderen.be/sparql
+  (default/union-graph) — zie METHODOLOGY voor de reden (blanke-knoop-identiteit).
 Queries: sparql/samenstellende_variabelen_check.sparql (bron van waarheid; dit script bevat
 dezelfde queryteksten inline om ze programmatisch te kunnen uitvoeren).
 
 METHODOLOGY
 -----------
-- Queries 1a, 1b, 1c, 2, 4, 5 zijn SELECT-queries -> rechtstreeks naar een DataFrame
-  (common.sparql_client.select_dataframe), geen paginatie nodig (kleine resultaatsets).
+- **Gedocumenteerde valkuil — blanke-knoop-identiteit gaat verloren over gepagineerde CONSTRUCT-
+  pagina's heen.** Queries 1c, 2, 3, 4 en 5 navigeren via `csor:heeftTerm`/`csor:heeftBronParameter`
+  naar `csor:ParameterTerm`-tussenobjecten — dit zijn RDF-**blanke knopen** (geen URI's). RDF/
+  Turtle-blanke-knoopscoping is per document: elke gepagineerde CONSTRUCT-pagina wordt apart
+  geparset (`common/sparql_client.py::fetch_construct`), dus een blanke knoop wiens
+  samenhorende triples (bv. `?afleiding heeftTerm ?term` op pagina k, `?term heeftBronParameter
+  ?p` op pagina k+1) over twee pagina's verspreid raken, wordt na het samenvoegen tot TWEE
+  losse, niet-gerelateerde blanke knopen — de join breekt stil (0 resultaten in plaats van een
+  foutmelding). Empirisch geverifieerd: het `parameter`-graph (155.530 triples, 16 pagina's)
+  bevat de ~1279 `heeftTerm`-triples die dit raken; lokaal joinen gaf stelselmatig 0/1279 in
+  plaats van 1279/1279 live. Dit treft **geen** van de andere vier check-scripts of
+  generate_diagram.py — die navigeren uitsluitend URI-getypeerde entiteiten (Parameter,
+  Variabele, Eenheid, ...), nooit de anonieme Term/Afleiding-machinerie. Zie ook CLAUDE.md §4.
+- Queries 1a, 1b (geen blanke knopen, enkel `csor:heeftVariabele` tussen URI-entiteiten) zijn
+  daarom wél naar de lokale snapshot gemigreerd -> `sparql_client.select_dataframe_local()`.
+- Queries 1c, 2, 4, 5 blijven SELECT-queries rechtstreeks naar een DataFrame
+  (common.sparql_client.select_dataframe, live).
 - Query 3 is een CONSTRUCT (genereert csor:heeftSamenstellendeVariabele-relaties) -> gepagineerd
-  via common.sparql_client.fetch_construct (dezelfde 10k-cap-veiligheid als bij graph-fetches).
+  via common.sparql_client.fetch_construct (dezelfde 10k-cap-veiligheid als bij graph-fetches;
+  het eindresultaat van déze CONSTRUCT bevat zelf geen blanke knopen, enkel de WHERE-clausule
+  navigeert ze — dus geen paginatie-identiteitsprobleem in de output, wel in de evaluatie als
+  het lokaal zou draaien, vandaar ook hier live).
 - Own addition: elke query wordt afzonderlijk als tussentijdse parquet bewaard onder
   data/interim/, zodat een volgende stap (of handmatige inspectie) niet opnieuw hoeft te
   bevragen.
@@ -50,8 +72,10 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import rdflib
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import sparql_client as sc  # noqa: E402
+from common import dataset, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
@@ -235,32 +259,44 @@ EXPECTED = {
 }
 
 
-def run_and_save(name: str, query: str) -> "pd.DataFrame":  # noqa: F821
+def run_and_save_local(name: str, query: str, graph: rdflib.Graph) -> "pd.DataFrame":  # noqa: F821
+    df = sc.select_dataframe_local(query, graph)
+    INTERIM_DIR.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(INTERIM_DIR / f"samenstellende_{name}.parquet")
+    return df
+
+
+def run_and_save_live(name: str, query: str) -> "pd.DataFrame":  # noqa: F821
+    # Blijft live — zie METHODOLOGY (blanke-knoop-identiteit gaat verloren over gepagineerde
+    # CONSTRUCT-pagina's van de lokale snapshot heen).
     df = sc.select_dataframe(query)
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
     df.to_parquet(INTERIM_DIR / f"samenstellende_{name}.parquet")
     return df
 
 
-def main() -> None:
+def main(graph: rdflib.Graph | None = None) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    df_1a = run_and_save("1a", QUERY_1A)
+    if graph is None:
+        graph = dataset.fetch_and_save()
+
+    df_1a = run_and_save_local("1a", QUERY_1A, graph)
     df_1a.to_csv(OUTPUT_DIR / "samenstellende_1a_multivariabele_parameters.csv", index=False)
 
-    df_1b = run_and_save("1b", QUERY_1B)
+    df_1b = run_and_save_local("1b", QUERY_1B, graph)
     df_1b.to_csv(OUTPUT_DIR / "samenstellende_1b_gedeelde_variabelen.csv", index=False)
 
-    df_1c = run_and_save("1c", QUERY_1C)
+    df_1c = run_and_save_live("1c", QUERY_1C)
     df_1c.to_csv(OUTPUT_DIR / "samenstellende_1c_inconsistente_composities.csv", index=False)
 
-    df_2 = run_and_save("2", QUERY_2)
+    df_2 = run_and_save_live("2", QUERY_2)
     df_2.to_csv(OUTPUT_DIR / "samenstellende_2_probleemgevallen.csv", index=False)
 
-    df_4 = run_and_save("4", QUERY_4)
+    df_4 = run_and_save_live("4", QUERY_4)
     df_4.to_csv(OUTPUT_DIR / "samenstellende_4_verschilafleidingen.csv", index=False)
 
-    df_5 = run_and_save("5", QUERY_5)
+    df_5 = run_and_save_live("5", QUERY_5)
     df_5.to_csv(OUTPUT_DIR / "samenstellende_5_eenterm_afleidingen.csv", index=False)
 
     g3, pages3 = sc.fetch_construct(QUERY_3_BODY)
@@ -286,7 +322,7 @@ def main() -> None:
     print(f"Query 1b (gedeelde variabelen):         {actual['1b_rows']} rijen")
     print(f"Query 1c (inconsistente composities):   {len(df_1c)} rijen")
     print(f"Query 2  (probleemgevallen):             {actual['2_rows']} rijen")
-    print(f"Query 3  (gegenereerde relaties):        {len(g3)} triples, {pages3} pagina('s)")
+    print(f"Query 3  (gegenereerde relaties):        {len(g3)} triples")
     print(
         f"Query 4  (verschilafleidingen):          {len(df_4)} rijen, "
         f"{actual['4_rows']} distincte afleidingen"

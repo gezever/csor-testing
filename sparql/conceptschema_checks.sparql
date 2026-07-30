@@ -1,0 +1,117 @@
+# ============================================================================
+# Structuur, volledigheid en kardinaliteit van CSOR-conceptschema's.
+#
+# LET OP — twee valkuilen ontdekt tijdens verkenning, vermeden in de queries hieronder:
+#   (a) Tellen op generiek `a skos:Concept` i.p.v. de specifieke csor:-klasse geeft een
+#       vertekend beeld: externe DCAT-thema-URI's (EuroVoc/GEMET/...) die de dataset-metadata
+#       van een codelijst-graph classificeren, zijn zelf ook `a skos:Concept` maar geen
+#       CSOR-domeinconcepten.
+#   (b) `skos:Collection`-instanties (bv. "Lijst van groepsparameters") kunnen legitiem lid
+#       zijn van een conceptschema zonder zelf `a skos:Concept` te zijn — dat is geen gat,
+#       geen fout.
+# Zie CLAUDE.md en reports/rapport_conceptschemas_en_qudt.md voor de volledige toelichting.
+# ============================================================================
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX csor: <https://data.omgeving.vlaanderen.be/ns/csor#>
+
+# ----------------------------------------------------------------------------
+# QUERY 1 — De 10 CSOR-conceptschema's met ledenaantal.
+# ----------------------------------------------------------------------------
+SELECT ?scheme ?label (COUNT(DISTINCT ?concept) AS ?aantalLeden)
+WHERE {
+  ?scheme a skos:ConceptScheme .
+  FILTER(STRSTARTS(STR(?scheme), "https://data.omgeving.vlaanderen.be/id/conceptscheme/csor/"))
+  OPTIONAL { ?scheme rdfs:label|skos:prefLabel ?label }
+  OPTIONAL { ?concept skos:inScheme ?scheme }
+}
+GROUP BY ?scheme ?label
+ORDER BY ?scheme
+
+
+# ----------------------------------------------------------------------------
+# QUERY 2 — Klasse-ontdekking: ALLE csor:-getypeerde klassen, met instantie- en
+# scheme-lidmaatschapstelling. Zelfdocumenterend: als er ooit een 18e klasse bijkomt,
+# duikt die hier automatisch op (i.p.v. een hardgecodeerde lijst van 10).
+# ----------------------------------------------------------------------------
+SELECT ?class (COUNT(DISTINCT ?inst) AS ?totaal)
+       (COUNT(DISTINCT ?withScheme) AS ?metScheme)
+       (COUNT(DISTINCT ?withConceptType) AS ?isConcept)
+WHERE {
+  ?inst a ?class .
+  FILTER(STRSTARTS(STR(?class), STR(csor:)))
+  OPTIONAL { ?inst skos:inScheme ?s . BIND(?inst AS ?withScheme) }
+  OPTIONAL { ?inst a skos:Concept . BIND(?inst AS ?withConceptType) }
+}
+GROUP BY ?class
+ORDER BY DESC(?totaal)
+
+
+# ----------------------------------------------------------------------------
+# QUERY 3 — Object-property-inventarisatie (de relatie-kaart tussen klassen).
+# ----------------------------------------------------------------------------
+SELECT ?prop ?label ?domain ?range
+WHERE {
+  ?prop a owl:ObjectProperty .
+  FILTER(STRSTARTS(STR(?prop), STR(csor:)))
+  OPTIONAL { ?prop rdfs:label ?label }
+  OPTIONAL { ?prop rdfs:domain ?domain }
+  OPTIONAL { ?prop rdfs:range ?range }
+}
+ORDER BY ?prop
+
+
+# ----------------------------------------------------------------------------
+# QUERY 4 — Kardinaliteit-template voor één property (herhalen per gevonden property uit
+# QUERY 3). Forward = aantal objecten per subject; los uitvoeren met de omgekeerde
+# subject/object-volgorde voor backward-kardinaliteit.
+# ----------------------------------------------------------------------------
+SELECT (MIN(?n) AS ?min) (MAX(?n) AS ?max) (AVG(?n) AS ?avg) (COUNT(?s) AS ?aantalSubjecten)
+WHERE {
+  SELECT ?s (COUNT(DISTINCT ?o) AS ?n)
+  WHERE { ?s csor:heeftVariabele ?o }
+  GROUP BY ?s
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 5 — Voorbeeld inverse-paar-consistentie: heeft elke Parameter->ParameterAspect-relatie
+# ook de omgekeerde ParameterAspect->Parameter-relatie (en vice versa)? Analoog patroon voor
+# csor:toepasbareEenheid <-> csor:heeftKwantificeerbaarAspect.
+# ----------------------------------------------------------------------------
+SELECT (COUNT(*) AS ?inconsistentForward) WHERE {
+  ?param csor:heeftParameterAspect ?aspect .
+  FILTER NOT EXISTS { ?aspect csor:heeftParameter ?param }
+}
+
+SELECT (COUNT(*) AS ?inconsistentBackward) WHERE {
+  ?aspect csor:heeftParameter ?param .
+  FILTER NOT EXISTS { ?param csor:heeftParameterAspect ?aspect }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 6 — Orphans: parameters zonder ParameterAspect, eenheden zonder KwantificeerbaarAspect.
+# ----------------------------------------------------------------------------
+SELECT ?param ?label WHERE {
+  ?param a csor:Parameter ; skos:prefLabel ?label .
+  FILTER NOT EXISTS { ?param csor:heeftParameterAspect ?a }
+}
+
+SELECT ?eenheid ?label WHERE {
+  ?eenheid a csor:Eenheid ; skos:prefLabel ?label .
+  FILTER NOT EXISTS { ?eenheid csor:heeftKwantificeerbaarAspect ?k }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 7 — Ongebruikte Drager(s): leden van het Dragers-schema die door geen enkele
+# Parameter via csor:heeftDrager gebruikt worden.
+# ----------------------------------------------------------------------------
+SELECT ?drager ?label WHERE {
+  ?drager a csor:Drager ; skos:prefLabel ?label .
+  FILTER NOT EXISTS { ?p csor:heeftDrager ?drager }
+}
