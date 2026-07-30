@@ -47,3 +47,13 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Regenereerbare data: ruwe snapshots, tussentijdse pandas-tabellen, API-cache
+data/raw/
+data/interim/
+data/cache/

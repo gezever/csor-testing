@@ -1,0 +1,231 @@
+# ============================================================================
+# Eenduidigheidstoets: kunnen samenstellende VARIABELEN automatisch worden
+# afgeleid uit de parameterafleidingen (csor:ParameterAfleidingVeelterm)?
+#
+# Definitieve versie, na inspectie van P_269 (parameter), AFL_38 (afleiding)
+# en V_230 (variabele). Kernbevinding: een variabele draagt zelf géén
+# onderscheidende dimensies (geen drager, eenheid, context of aspect) —
+# alleen notatie, label en symbool. Een matchingregel op inhoudelijke
+# dimensies is dus niet mogelijk én niet nodig: de afleidbaarheid hangt
+# volledig af van de kardinaliteit van csor:heeftVariabele.
+# Query 1a en 1b toetsen die kardinaliteit in beide richtingen.
+# ============================================================================
+
+PREFIX csor: <https://data.omgeving.vlaanderen.be/ns/csor#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+# ----------------------------------------------------------------------------
+# QUERY 1a — Heeft een parameter ooit meer dan één (actieve) variabele?
+# Zo nee, dan levert het pad bronparameter -> variabele altijd precies één
+# kandidaat op en is automatische generatie veilig.
+# ----------------------------------------------------------------------------
+SELECT ?parameter ?parameterLabel (COUNT(?variabele) AS ?aantalVariabelen)
+WHERE {
+  ?parameter csor:heeftVariabele ?variabele ;
+             skos:prefLabel ?parameterLabel .
+  FILTER NOT EXISTS { ?variabele owl:deprecated true }
+}
+GROUP BY ?parameter ?parameterLabel
+HAVING (COUNT(?variabele) > 1)
+ORDER BY DESC(?aantalVariabelen)
+
+
+# ----------------------------------------------------------------------------
+# QUERY 1b — Wordt een variabele door meer dan één parameter gebruikt?
+# Dit blokkeert de generatie niet (de somvariabele erft dan de composities
+# van al haar parameters), maar het is goed om te weten of dit voorkomt,
+# omdat het de interpretatie van "Heeft Samenstellende Variabele" beïnvloedt:
+# de compositie geldt dan mogelijk alleen binnen een bepaalde drager.
+# ----------------------------------------------------------------------------
+SELECT ?variabele ?variabeleLabel (COUNT(?parameter) AS ?aantalParameters)
+WHERE {
+  ?parameter csor:heeftVariabele ?variabele .
+  ?variabele skos:prefLabel ?variabeleLabel .
+  FILTER NOT EXISTS { ?variabele owl:deprecated true }
+}
+GROUP BY ?variabele ?variabeleLabel
+HAVING (COUNT(?parameter) > 1)
+ORDER BY DESC(?aantalParameters)
+
+
+# ----------------------------------------------------------------------------
+# QUERY 1c — Consistentietoets over dragers heen.
+# Query 1b toonde dat variabelen breed gedeeld worden door parameters
+# (tot 27 parameters per variabele). Dat is onschadelijk voor de generatie,
+# TENZIJ twee parameters van dezelfde somvariabele afleidingen hebben die
+# naar verschillende verzamelingen bronvariabelen leiden. In dat geval zou
+# de relatie op variabeleniveau twee onverenigbare composities samenklappen
+# en hoort ze alleen op parameterniveau thuis.
+# Deze query toont somvariabelen waarvan minstens twee parameters een
+# verschillende compositie (verzameling bronvariabelen) opleveren.
+# ----------------------------------------------------------------------------
+SELECT DISTINCT ?somVariabele ?somLabel ?doelParameter1 ?doelParameter2
+WHERE {
+  ?doelParameter1 csor:heeftVariabele ?somVariabele ;
+                  csor:heeftAfleiding ?afl1 .
+  ?doelParameter2 csor:heeftVariabele ?somVariabele ;
+                  csor:heeftAfleiding ?afl2 .
+  ?afl1 a csor:ParameterAfleidingVeelterm .
+  ?afl2 a csor:ParameterAfleidingVeelterm .
+  FILTER (STR(?doelParameter1) < STR(?doelParameter2))
+
+  OPTIONAL { ?somVariabele skos:prefLabel ?somLabel }
+
+  # er bestaat een bronvariabele in de ene compositie die in de andere
+  # ontbreekt (in minstens één richting)
+  {
+    ?afl1 csor:heeftTerm/csor:heeftBronParameter/csor:heeftVariabele ?bronVar .
+    FILTER NOT EXISTS {
+      ?afl2 csor:heeftTerm/csor:heeftBronParameter/csor:heeftVariabele ?bronVar .
+    }
+  } UNION {
+    ?afl2 csor:heeftTerm/csor:heeftBronParameter/csor:heeftVariabele ?bronVar .
+    FILTER NOT EXISTS {
+      ?afl1 csor:heeftTerm/csor:heeftBronParameter/csor:heeftVariabele ?bronVar .
+    }
+  }
+}
+ORDER BY ?somLabel
+
+
+# ----------------------------------------------------------------------------
+# QUERY 2 — De eigenlijke toets.
+# Voor elke somvariabele (= variabele van een parameter met een veelterm-
+# afleiding) en elke bronparameter uit die afleiding: tel de kandidaat-
+# variabelen van die bronparameter.
+#
+# Interpretatie van ?aantalKandidaten:
+#   1  -> eenduidig afleidbaar, automatisch genereren is veilig
+#   0  -> de bronparameter heeft geen (actieve) variabele: gat in het
+#         register dat eerst opgevuld of bewust aanvaard moet worden
+#   >1 -> ambigue match (kan alleen als query 1a resultaten had):
+#         hier is een expliciete keuze / relatie nodig
+#
+# De query toont alléén de probleemgevallen (aantal != 1). Verwijder de
+# HAVING-regel voor het volledige overzicht.
+# ----------------------------------------------------------------------------
+SELECT ?somVariabele ?somLabel ?bronParameter ?bronLabel
+       (COUNT(DISTINCT ?kandidaat) AS ?aantalKandidaten)
+WHERE {
+  ?doelParameter csor:heeftVariabele ?somVariabele ;
+                 csor:heeftAfleiding ?afleiding .
+  ?afleiding a csor:ParameterAfleidingVeelterm ;
+             csor:heeftTerm/csor:heeftBronParameter ?bronParameter .
+
+  FILTER NOT EXISTS { ?somVariabele owl:deprecated true }
+
+  OPTIONAL { ?somVariabele skos:prefLabel ?somLabel }
+  OPTIONAL { ?bronParameter skos:prefLabel ?bronLabel }
+
+  OPTIONAL {
+    ?bronParameter csor:heeftVariabele ?kandidaat .
+    FILTER NOT EXISTS { ?kandidaat owl:deprecated true }
+  }
+}
+GROUP BY ?somVariabele ?somLabel ?bronParameter ?bronLabel
+HAVING (COUNT(DISTINCT ?kandidaat) != 1)
+ORDER BY ?somLabel ?bronLabel
+
+
+# ----------------------------------------------------------------------------
+# QUERY 3 — Generatie (CONSTRUCT), aangescherpt na inspectie van de output.
+# Twee extra filters t.o.v. de eerste versie:
+#
+# (a) Alleen ECHTE SOMMEN. Een veelterm-afleiding drukt berekenbaarheid
+#     uit; dat valt alleen samen met samenstelling als alle factoren
+#     positief zijn. Verschil-afleidingen (bv. Kjeldahl = Ntot - N+N,
+#     factor -1) veroorzaakten wederzijdse paren zoals V_231 <-> V_798
+#     ("X bestaat uit Y en Y bestaat uit X") en worden uitgesloten.
+#
+# (b) Geen ZELFVERWIJZINGEN. Afleidingen tussen parameters van dezelfde
+#     variabele (bv. opgeloste vs. totale fractie van eenzelfde metaal)
+#     klappen op variabeleniveau samen tot "Arseen bestaat uit Arseen"
+#     (V_329, V_333, V_335, V_339, V_340, V_341, V_344, V_351, V_420,
+#     V_47) en worden uitgesloten.
+#
+# (c) Minstens TWEE termen. Query 5 wees uit dat alle enkelterm-
+#     afleidingen omrekeningen/schattingen zijn (CZV <-> TOC,
+#     EC20 <-> EC25, Cl/F-verbindingen in lucht, TOC = NPOC) en geen
+#     composities. Dit filter elimineert ook de resterende cycli
+#     V_47 <-> V_424 en V_787 <-> V_860.
+# ----------------------------------------------------------------------------
+CONSTRUCT {
+  ?somVariabele csor:heeftSamenstellendeVariabele ?kandidaat .
+  ?kandidaat csor:isSamenstellendeVariabeleVan ?somVariabele .
+}
+WHERE {
+  ?doelParameter csor:heeftVariabele ?somVariabele ;
+                 csor:heeftAfleiding ?afleiding .
+  ?afleiding a csor:ParameterAfleidingVeelterm ;
+             csor:heeftTerm ?term .
+  ?term csor:heeftBronParameter ?bronParameter .
+  ?bronParameter csor:heeftVariabele ?kandidaat .
+
+  # (b) geen zelfverwijzingen
+  FILTER (?somVariabele != ?kandidaat)
+
+  # (a) alleen afleidingen waarvan ALLE termen een positieve factor hebben
+  FILTER NOT EXISTS {
+    ?afleiding csor:heeftTerm/csor:factor ?f .
+    FILTER (?f <= 0)
+  }
+
+  # (c) alleen afleidingen met minstens twee termen (echte sommen)
+  ?afleiding csor:heeftTerm ?t1 , ?t2 .
+  FILTER (?t1 != ?t2)
+
+  FILTER NOT EXISTS { ?somVariabele owl:deprecated true }
+  FILTER NOT EXISTS { ?kandidaat owl:deprecated true }
+}
+
+
+# ----------------------------------------------------------------------------
+# QUERY 4 — Diagnose bij (a): welke veelterm-afleidingen bevatten termen
+# met factor <= 0? Dit zijn de verschil-afleidingen die van de compositie-
+# relatie uitgesloten worden; handig om te verifiëren dat de uitsluiting
+# klopt met de inhoudelijke verwachting (bv. Kjeldahl-stikstof).
+# ----------------------------------------------------------------------------
+SELECT ?afleiding ?afleidingLabel ?doelParameter ?doelLabel ?factor ?bronLabel
+WHERE {
+  ?afleiding a csor:ParameterAfleidingVeelterm ;
+             csor:heeftDoelParameter ?doelParameter ;
+             csor:heeftTerm ?term .
+  ?term csor:factor ?factor ;
+        csor:heeftBronParameter ?bronParameter .
+  FILTER (?factor <= 0)
+  OPTIONAL { ?afleiding skos:prefLabel ?afleidingLabel }
+  OPTIONAL { ?doelParameter skos:prefLabel ?doelLabel }
+  OPTIONAL { ?bronParameter skos:prefLabel ?bronLabel }
+}
+ORDER BY ?doelLabel
+
+
+# ----------------------------------------------------------------------------
+# QUERY 5 — Diagnose: veelterm-afleidingen met precies ÉÉN term.
+# Een "som" met één bestanddeel is doorgaans geen compositie maar een
+# omrekening of andere uitdrukkingswijze (bv. gehalte als N vs. als NO3).
+# Twee zulke afleidingen in tegengestelde richting veroorzaken de
+# resterende cycli tussen verschillende variabelen (V_47 <-> V_424,
+# V_787 <-> V_860). Beoordeel deze lijst inhoudelijk: wat omrekening
+# blijkt, hoort niet in heeftSamenstellendeVariabele thuis en kan met
+# een extra filter (minstens 2 termen) uit query 3 geweerd worden:
+#
+#   ?afleiding csor:heeftTerm ?t1 , ?t2 . FILTER (?t1 != ?t2)
+# ----------------------------------------------------------------------------
+SELECT ?afleiding ?afleidingLabel ?doelLabel ?factor ?bronLabel
+WHERE {
+  ?afleiding a csor:ParameterAfleidingVeelterm ;
+             csor:heeftDoelParameter ?doelParameter ;
+             csor:heeftTerm ?enigeTerm .
+  ?enigeTerm csor:factor ?factor ;
+             csor:heeftBronParameter ?bronParameter .
+  FILTER NOT EXISTS {
+    ?afleiding csor:heeftTerm ?andereTerm .
+    FILTER (?andereTerm != ?enigeTerm)
+  }
+  OPTIONAL { ?afleiding skos:prefLabel ?afleidingLabel }
+  OPTIONAL { ?doelParameter skos:prefLabel ?doelLabel }
+  OPTIONAL { ?bronParameter skos:prefLabel ?bronLabel }
+}
+ORDER BY ?doelLabel

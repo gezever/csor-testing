@@ -1,0 +1,80 @@
+# ============================================================================
+# Interne consistentiechecks op de chemische-identiteitsvelden van csor:Variabele.
+# Zuiver declaratief (geen externe bron nodig) — vult scripts/check_variabele_identity.py
+# aan, dat dezelfde checks als kruiscontrole nog eens in pandas uitvoert.
+#
+# Alle queries scopen bewust op de codelijst-csor-variabele-graph (klein genoeg om zonder
+# paginatie te bevragen als SELECT — enkel de volledige CONSTRUCT-ophaling van die graph
+# heeft paginatie nodig, zie csor-variabele-fetch.sparql).
+# ============================================================================
+
+PREFIX csor: <https://data.omgeving.vlaanderen.be/ns/csor#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+# ----------------------------------------------------------------------------
+# QUERY A — Dubbele InChIKey over verschillende V_xxx-notaties heen.
+# Interpretatie: als twee "verschillende" variabelen structureel dezelfde stof zijn
+# (zelfde InChIKey), is dat een kandidaat voor samenvoeging/deprecatie-met-isReplacedBy
+# (vgl. het triazool-patroon uit reports/rapport_samenstellende_variabelen.md §4.2), of een
+# bewuste modelleerkeuze die een skos:editorialNote verdient.
+# ----------------------------------------------------------------------------
+SELECT ?inchikey (COUNT(DISTINCT ?variabele) AS ?aantal)
+       (GROUP_CONCAT(DISTINCT ?notatie; separator=", ") AS ?notaties)
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-variabele> {
+    ?variabele a csor:Variabele ;
+               csor:inchikey ?inchikey ;
+               skos:notation ?notatie .
+    FILTER NOT EXISTS { ?variabele owl:deprecated true }
+  }
+}
+GROUP BY ?inchikey
+HAVING (COUNT(DISTINCT ?variabele) > 1)
+ORDER BY DESC(?aantal)
+
+
+# ----------------------------------------------------------------------------
+# QUERY B — Dubbel CAS-nummer over verschillende V_xxx-notaties heen.
+# Zelfde interpretatie als query A, maar op CAS-niveau (minder streng dan InChIKey: eenzelfde
+# CAS-nummer wordt soms bewust op meerdere entries herbruikt bij tautomeren/isomeren-varianten
+# — controleer per geval of dat een echte duplicatie is of een bewuste keuze).
+# ----------------------------------------------------------------------------
+SELECT ?cas (COUNT(DISTINCT ?variabele) AS ?aantal)
+       (GROUP_CONCAT(DISTINCT ?notatie; separator=", ") AS ?notaties)
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-variabele> {
+    ?variabele a csor:Variabele ;
+               csor:cas ?cas ;
+               skos:notation ?notatie .
+    FILTER NOT EXISTS { ?variabele owl:deprecated true }
+  }
+}
+GROUP BY ?cas
+HAVING (COUNT(DISTINCT ?variabele) > 1)
+ORDER BY DESC(?aantal)
+
+
+# ----------------------------------------------------------------------------
+# QUERY C — Kruistabel: hoeveel (niet-gedeprecieerde) variabelen hebben welke combinatie van
+# cas/inchikey/PubChem-CID/iupacNaam? Own addition: GROUP BY moet de BOUND(...)-expressies zelf
+# herhalen (niet de SELECT-alias) — anders geeft deze endpoint een HTTP 400.
+# Interpretatie: de grootste groep zou "alle vier aanwezig" moeten zijn (rijk record); een
+# grote groep met enkel cas (geen inchikey/CID) is de resolutie-kandidatenset van
+# scripts/check_variabele_identity.py.
+# ----------------------------------------------------------------------------
+SELECT (BOUND(?cas) AS ?heeftCas) (BOUND(?inchikey) AS ?heeftInchikey)
+       (BOUND(?cid) AS ?heeftCid) (BOUND(?iupac) AS ?heeftIupac)
+       (COUNT(*) AS ?aantal)
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-variabele> {
+    ?variabele a csor:Variabele .
+    FILTER NOT EXISTS { ?variabele owl:deprecated true }
+    OPTIONAL { ?variabele csor:cas ?cas }
+    OPTIONAL { ?variabele csor:inchikey ?inchikey }
+    OPTIONAL { ?variabele <https://pubchem.ncbi.nlm.nih.gov/rest/rdf/compound> ?cid }
+    OPTIONAL { ?variabele csor:iupacNaam ?iupac }
+  }
+}
+GROUP BY (BOUND(?cas)) (BOUND(?inchikey)) (BOUND(?cid)) (BOUND(?iupac))
+ORDER BY DESC(?aantal)

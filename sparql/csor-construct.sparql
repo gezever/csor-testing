@@ -1,0 +1,30 @@
+# LET OP — niet veilig voor volledige data-ophaling.
+#
+# De endpoint (https://data-ontwikkel.omgeving.vlaanderen.be/sparql) knipt CONSTRUCT-resultaten
+# stil af op 10.000 triples, zonder foutmelding. Deze query combineert 10 graphs via UNION; het
+# werkelijke totaal over die graphs is 274.931 triples (parameter: 155.530, variabele: 25.312 —
+# net de graphs met de chemische identiteitsdata). Omdat die twee als laatste aan bod komen in de
+# UNION, vallen ze bij een live run volledig weg: deze query gaf empirisch exact 10.001 triples
+# terug in plaats van het volledige register.
+#
+# Gebruik in plaats daarvan de gepagineerde per-graph aanpak in csor-variabele-fetch.sparql
+# (of scripts/common/sparql_client.py), en verifieer het resultaat altijd tegen een losse
+# COUNT-query. Zie CLAUDE.md §4 voor de volledige toelichting.
+#
+# Dit bestand blijft staan als referentie/voorbeeld van het oorspronkelijke queryvoorbeeld.
+
+CONSTRUCT
+{?s ?p ?o}
+where
+{
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-drager>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-kwalificeerbaar-aspect>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-kwantificeerbaar-aspect>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-natuurkundige-dimensie>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-parameter>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-parameteraspect>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-resultaat-type>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-soort-waardebepaling>)} UNION
+{graph ?g {?s ?p ?o} FILTER(?g = <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-variabele>)}
+}

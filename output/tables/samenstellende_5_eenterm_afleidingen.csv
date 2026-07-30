@@ -1,0 +1,8 @@
+afleiding,afleidingLabel,doelLabel,factor,bronLabel
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_82,Chemisch zuurstofverbruik,Chemisch zuurstofverbruik in water,3,Koolstof organisch totaal in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_111,Chloor en zijn anorganische verbindingen,Chloor en zijn anorganische verbindingen in lucht,1.0288,Chloorverbindingen in lucht
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_110,Fluor en zijn anorganische verbindingen,Fluor en zijn anorganische verbindingen in lucht,1.0526,Fluorverbindingen in lucht
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_4,EC 20 (berekend uit EC 25),Geleidbaarheid (20°C) in water,0.9045,Geleidbaarheid (25°C) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_85,EC 25 (berekend uit EC 20),Geleidbaarheid (25°C) in water,1.0955,Geleidbaarheid (20°C) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_2,"Organische koolstof, totaal",Koolstof organisch totaal in water,0.3333,Chemisch zuurstofverbruik in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_90,"Organische koolstof, niet purgeerbaar",Koolstof organisch totaal in water,1,Koolstof organisch niet purgeerbaar in water

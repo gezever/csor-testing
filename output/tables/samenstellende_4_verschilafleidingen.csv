@@ -1,0 +1,9 @@
+afleiding,afleidingLabel,doelParameter,doelLabel,factor,bronLabel
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_66,EtPFOSAtotaal - EtPFOSA,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2241,= EtPFOSAtotaal - EtPFOSA in water,-1,N-ethylperfluoroctaan-1-sulfonamide (EtPFOSA) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_20,MePFOSAtotaal - MePFOSA,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2238,= MePFOSAtotaal - MePFOSA in water,-1,N-methylperfluoroctaan-1-sulfonamide (MePFOSA) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_76,PFHxStotaal - PFHxS,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2244,= PFHxStotaal - PFHxS in water,-1,Perfluorhexaansulfonzuur (PFHxS) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_5,PFOAtotaal - PFOA,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2036,= PFOAtotaal - PFOA in water,-1,Perfluoroctaanzuur (PFOA) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_33,PFOSAtoaal - PFOSA,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2247,= PFOSAtotaal - PFOSA in water,-1,Perfluoroctaansulfonamide (PFOSA) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_1,PFOStotaal - PFOS,https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2052,= PFOStotaal - PFOS in water,-1,Perfluoroctaansulfonzuur (PFOS) in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_62,N t - (NO2) - (NO3),https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1226,Kjeldahlstikstof in water,-1,Nitriet in water
+https://data.omgeving.vlaanderen.be/id/concept/csor/parameterAfleiding/AFL_62,N t - (NO2) - (NO3),https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1226,Kjeldahlstikstof in water,-1,Nitraat in water
