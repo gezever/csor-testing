@@ -34,6 +34,19 @@ METHODOLOGY
   oplevert én er nog geen inchikey gekend is, een fallback-lookup op prefLabel (substantienaam).
   Waar CSOR al een inchikey had, wordt die vergeleken met het resolutieresultaat (match/mismatch);
   waar niet, wordt het resolutieresultaat gerapporteerd als suggestie (niet teruggeschreven).
+- Omgekeerde CAS-resolutie via InChIKey (own addition): de CAS-resolutie hierboven probeert een
+  naam-fallback enkel wanneer er nog géén inchikey gekend is — een variabele met zowel `cas` als
+  `inchikey`, waarvoor de CAS-lookup toch niets oplevert, blijft dus zonder verdere poging
+  `unresolved` (8 van de 34 huidige `unresolved`-gevallen hebben wél al een inchikey). Voor die
+  8 wordt de al gekende inchikey omgekeerd bij PubChem opgezocht (`pubchem.get_by_inchikey()`)
+  en, bij een gevonden CID, de volledige synoniemenlijst opgevraagd (`pubchem.get_synonyms()`).
+  Daaruit worden CAS-vormige synoniemen gefilterd (dezelfde `CAS_RE` als de interne checks) om te
+  zien of PubChem een ander CAS-nummer voor die stof gebruikt, en wordt getoetst of
+  `skos:prefLabel` letterlijk (case-insensitief) als synoniem voorkomt. Bewust geen fuzzy/
+  edit-distance-matching op de naam — een kleine edit-distance tussen twee lange chemische namen
+  is geen betrouwbaar signaal (zie ook de near-duplicate-voorzichtigheid elders in dit project);
+  de volledige synoniemenlijst wordt wel meegeschreven zodat een reviewer een niet-letterlijke
+  gelijkenis (bv. taalverschil NL/EN) zelf kan beoordelen.
 
 INTERPRETATION
 --------------
@@ -41,11 +54,16 @@ Een "mismatch" in cid_crosscheck.csv is de sterkste rode vlag (CSOR en PubChem z
 exact dezelfde CID oneens) en verdient prioriteit boven CAS-resolutie-afwijkingen (die ook een
 naam-matching-onzekerheid bij PubChem kunnen weerspiegelen, niet per se een CSOR-fout).
 Een "unresolved" CAS-nummer is geen CSOR-fout, wel een aanwijzing dat het CAS-nummer zelf
-mogelijk incorrect is (zie ook de CAS-checksumcheck) of dat PubChem die stof niet kent.
+mogelijk incorrect is (zie ook de CAS-checksumcheck) of dat PubChem die stof niet kent. Een
+`cas_afwijkend`-resultaat in cas_resolution_omgekeerd.csv is een sterke aanwijzing dat CSOR's
+CAS-nummer verouderd/fout is (de inchikey — een structuurgebaseerde sleutel — wijst naar een
+andere PubChem-CAS-notatie); `geen_cas_synoniem` is geen aanwijzing van een fout, enkel dat
+PubChem voor die stof geen CAS-synoniem publiceert.
 
 OUTPUTS
 -------
 output/tables/cas_resolution.csv
+output/tables/cas_resolution_omgekeerd.csv
 output/tables/cid_crosscheck.csv
 output/tables/internal_flags.csv
 output/reports/variabele_identity.html
@@ -259,8 +277,72 @@ def cas_resolution(df: "pd.DataFrame") -> "pd.DataFrame":  # noqa: F821
     )
 
 
+def reverse_resolve_unresolved(cas_df: "pd.DataFrame") -> "pd.DataFrame":  # noqa: F821
+    """Omgekeerde CAS-resolutie via de al gekende inchikey (zie METHODOLOGY) voor de subset van
+    'unresolved' CAS-resolutiegevallen die toch al een inchikey hebben."""
+    candidates = cas_df[(cas_df["status"] == "unresolved") & cas_df["stored_inchikey"].notna()]
+    rows = []
+    for _, r in candidates.iterrows():
+        pc = pubchem.get_by_inchikey(r["stored_inchikey"], CACHE_ROOT)
+
+        cid = pc.get("CID") if pc.get("found") else None
+        iupac = pc.get("IUPACName") if pc.get("found") else None
+        cas_kandidaten: list[str] = []
+        synoniemen: list[str] = []
+        label_in_synoniemen = False
+
+        if cid is not None:
+            syn = pubchem.get_synonyms(cid, CACHE_ROOT)
+            synoniemen = syn.get("synonyms", [])
+            cas_kandidaten = sorted({s for s in synoniemen if CAS_RE.match(s)})
+            label_lower = str(r["label"]).strip().lower()
+            label_in_synoniemen = any(s.strip().lower() == label_lower for s in synoniemen)
+
+        if cid is None:
+            resultaat = "niet_gevonden"
+        elif not cas_kandidaten:
+            resultaat = "geen_cas_synoniem"
+        elif r["cas"] in cas_kandidaten:
+            resultaat = "cas_bevestigd"
+        else:
+            resultaat = "cas_afwijkend"
+
+        rows.append(
+            {
+                "notatie": r["notatie"],
+                "cas": r["cas"],
+                "label": r["label"],
+                "stored_inchikey": r["stored_inchikey"],
+                "pubchem_cid": cid,
+                "pubchem_iupac": iupac,
+                "pubchem_cas_kandidaten": "; ".join(cas_kandidaten),
+                "resultaat": resultaat,
+                "label_in_synoniemen": label_in_synoniemen,
+                "pubchem_synoniemen": "; ".join(synoniemen),
+            }
+        )
+    return pd.DataFrame(
+        rows,
+        columns=[
+            "notatie",
+            "cas",
+            "label",
+            "stored_inchikey",
+            "pubchem_cid",
+            "pubchem_iupac",
+            "pubchem_cas_kandidaten",
+            "resultaat",
+            "label_in_synoniemen",
+            "pubchem_synoniemen",
+        ],
+    )
+
+
 def build_html_report(
-    flags_df: "pd.DataFrame", cid_df: "pd.DataFrame", cas_df: "pd.DataFrame"  # noqa: F821
+    flags_df: "pd.DataFrame",  # noqa: F821
+    cid_df: "pd.DataFrame",  # noqa: F821
+    cas_df: "pd.DataFrame",  # noqa: F821
+    reverse_df: "pd.DataFrame",  # noqa: F821
 ) -> Path:
     fig_flags = report.bar_counts(
         flags_df["flag_type"].value_counts(),
@@ -281,10 +363,13 @@ def build_html_report(
     )
     n_unresolved = int((cas_df["status"] == "unresolved").sum())
     n_mismatch = int((cas_df["status"] == "mismatch").sum())
+    geen_match_df = cas_df[cas_df["status"] != "match"]
     disc_status = (
         f"{len(cas_df)} CAS-kandidaten getoetst — {n_mismatch} mismatch(es), {n_unresolved} "
         "unresolved. Een 'unresolved' CAS-nummer is geen CSOR-fout, wel een aanwijzing dat het "
-        "CAS-nummer zelf mogelijk incorrect is of dat PubChem die stof niet kent."
+        "CAS-nummer zelf mogelijk incorrect is of dat PubChem die stof niet kent. Onderstaande "
+        f"tabel toont alle {len(geen_match_df)} stoffen-variabelen zonder 'match'-status "
+        "(mismatch, unresolved of resolved_new)."
     )
 
     mismatches = cid_df[cid_df["inchikey_match"] == False]  # noqa: E712
@@ -312,6 +397,10 @@ def build_html_report(
             heading="CAS-resolutie",
             discussion=disc_status,
             figures=[fig_status],
+            table_df=geen_match_df if len(geen_match_df) else None,
+            # Own addition t.o.v. de Section-default (table_n=10): compacte, volledig
+            # actionable lijst — de standaard top-10-afkap zou hier de meerderheid verbergen.
+            table_n=len(geen_match_df),
         ),
         report.Section(
             heading="PubChem CID-crosscheck",
@@ -319,6 +408,31 @@ def build_html_report(
             table_df=mismatches if len(mismatches) else None,
         ),
     ]
+
+    if len(reverse_df):
+        n_afwijkend = int((reverse_df["resultaat"] == "cas_afwijkend").sum())
+        n_bevestigd = int((reverse_df["resultaat"] == "cas_bevestigd").sum())
+        disc_reverse = (
+            f"{len(reverse_df)} 'unresolved' CAS-gevallen hadden toch al een inchikey — "
+            "omgekeerd opgezocht bij PubChem via die inchikey. "
+            f"{n_afwijkend} tonen een ander CAS-nummer bij PubChem dan CSOR's opgeslagen "
+            "waarde (sterke aanwijzing van een verouderd/fout CAS-nummer), "
+            f"{n_bevestigd} bevestigen CSOR's CAS-nummer alsnog (PubChem kende het CAS-nummer "
+            "enkel niet als zoekterm)."
+            if n_afwijkend or n_bevestigd
+            else f"{len(reverse_df)} 'unresolved' CAS-gevallen hadden toch al een inchikey — "
+            "omgekeerd opgezocht bij PubChem, maar geen enkele levert een CAS-vormig synoniem "
+            "op om tegen CSOR's waarde af te toetsen."
+        )
+        sections.append(
+            report.Section(
+                heading="Omgekeerde CAS-resolutie via InChIKey",
+                discussion=disc_reverse,
+                table_df=reverse_df,
+                table_n=len(reverse_df),
+            )
+        )
+
     return report.build_report(
         name="variabele_identity",
         title="CSOR — chemische-identiteitscheck op csor:Variabele",
@@ -368,9 +482,23 @@ def main(graph: rdflib.Graph | None = None) -> None:
     status_counts = cas_df["status"].value_counts().to_dict()
     print(f"CAS-resolutie: {len(cas_df)} kandidaten — {status_counts}")
 
+    # Columns: notatie/cas/label/stored_inchikey zoals cas_resolution.csv (subset met
+    # status=unresolved en stored_inchikey niet leeg); pubchem_cid/pubchem_iupac van de
+    # omgekeerde inchikey-lookup; pubchem_cas_kandidaten (";"-gescheiden CAS-vormige synoniemen);
+    # resultaat (niet_gevonden/geen_cas_synoniem/cas_bevestigd/cas_afwijkend);
+    # label_in_synoniemen (True als skos:prefLabel letterlijk als PubChem-synoniem voorkomt);
+    # pubchem_synoniemen (volledige synoniemenlijst, ";"-gescheiden, voor handmatige review).
+    print("\nOmgekeerde CAS-resolutie via InChIKey loopt (gecached, ~0.2s/live-call)...")
+    reverse_df = reverse_resolve_unresolved(cas_df)
+    reverse_df.to_csv(OUTPUT_DIR / "cas_resolution_omgekeerd.csv", index=False)
+    print(
+        f"Omgekeerde CAS-resolutie: {len(reverse_df)} kandidaten — "
+        f"{reverse_df['resultaat'].value_counts().to_dict() if len(reverse_df) else {}}"
+    )
+
     print(f"\nlive PubChem-calls deze run: {pubchem.live_call_count}")
 
-    report_path = build_html_report(flags_df, cid_df, cas_df)
+    report_path = build_html_report(flags_df, cid_df, cas_df, reverse_df)
     print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 

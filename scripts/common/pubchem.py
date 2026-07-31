@@ -4,8 +4,10 @@ pubchem.py — PubChem PUG-REST-client met bestandscache, voor csor-testing
 PURPOSE
 -------
 Haalt substance-eigenschappen (InChIKey, IUPAC-naam, molecuulformule, SMILES) op bij PubChem,
-by CID (ondubbelzinnig), by CAS-nummer of by naam (fuzzy, "name"-lookup — PubChem accepteert
-CAS-nummers als naam). Wordt gebruikt door scripts/check_variabele_identity.py.
+by CID (ondubbelzinnig), by CAS-nummer, by naam (fuzzy, "name"-lookup — PubChem accepteert
+CAS-nummers als naam) of by InChIKey (omgekeerde lookup, zie METHODOLOGY). Biedt daarnaast
+`get_synonyms()` om de PubChem-synoniemenlijst van een CID op te vragen (bevat doorgaans ook
+CAS-nummers en alternatieve namen). Wordt gebruikt door scripts/check_variabele_identity.py.
 
 DATA PROVENANCE
 ----------------
@@ -15,12 +17,18 @@ Aanpak overgenomen in geest (niet cross-repo geïmporteerd) van
 
 METHODOLOGY
 -----------
-Elke lookup gaat eerst via een JSON-file-cache onder data/cache/pubchem/{by_cid,by_cas,by_name}/.
-Own addition: negatieve resultaten (geen compound gevonden) worden ook gecachet
-(`{"found": false}`), zodat een herhaalde run niet telkens dezelfde mislukte lookup herdoet.
-`time.sleep(0.2)` tussen live calls (niet bij cache-hit) — etiquette t.o.v. de publieke API.
-`live_call_count` telt live HTTP-calls sinds het laatste `reset_call_count()`, gebruikt om te
-verifiëren dat een tweede run met gevulde cache nul live calls doet.
+Elke lookup gaat eerst via een JSON-file-cache onder
+data/cache/pubchem/{by_cid,by_cas,by_name,by_inchikey,by_cid_synonyms}/. Own addition: negatieve
+resultaten (geen compound gevonden) worden ook gecachet (`{"found": false}`), zodat een
+herhaalde run niet telkens dezelfde mislukte lookup herdoet. `time.sleep(0.2)` tussen live calls
+(niet bij cache-hit) — etiquette t.o.v. de publieke API. `live_call_count` telt live HTTP-calls
+sinds het laatste `reset_call_count()`, gebruikt om te verifiëren dat een tweede run met gevulde
+cache nul live calls doet.
+
+`get_synonyms()` gebruikt een ander PUG-REST-endpoint (`.../cid/{cid}/synonyms/JSON`) met een
+andere JSON-vorm dan de property-lookups hierboven (`InformationList.Information[0].Synonym`,
+een lijst strings, i.p.v. `PropertyTable.Properties[0]`) — vereist daarom een eigen
+fetch-helper (`_fetch_synonyms()`) i.p.v. hergebruik van `_fetch_properties()`.
 
 OUTPUTS
 -------
@@ -137,3 +145,41 @@ def get_by_name(
     properties = properties or ["InChIKey"]
     encoded = urllib.parse.quote(name, safe="")
     return _lookup(cache_root, "by_name", name, f"name/{encoded}", properties)
+
+
+def get_by_inchikey(
+    inchikey: str, cache_root: Path, properties: list[str] = None
+) -> dict:
+    properties = properties or DEFAULT_PROPERTIES
+    return _lookup(cache_root, "by_inchikey", inchikey, f"inchikey/{inchikey}", properties)
+
+
+def _fetch_synonyms(cid: str) -> dict:
+    """Live PUG-REST-call naar het synonyms-endpoint (andere JSON-vorm, zie METHODOLOGY)."""
+    global live_call_count
+    url = f"{PUG_BASE}/cid/{cid}/synonyms/JSON"
+    live_call_count += 1
+    try:
+        resp = requests.get(url, timeout=30)
+        time.sleep(RATE_LIMIT_SECONDS)
+        if resp.status_code == 404:
+            return {"found": False, "synonyms": []}
+        resp.raise_for_status()
+        data = resp.json()
+        info = data.get("InformationList", {}).get("Information", [])
+        synonyms = info[0].get("Synonym", []) if info else []
+        return {"found": bool(synonyms), "synonyms": synonyms}
+    except requests.RequestException as exc:
+        time.sleep(RATE_LIMIT_SECONDS)
+        return {"found": False, "synonyms": [], "error": str(exc)}
+
+
+def get_synonyms(cid: str | int, cache_root: Path) -> dict:
+    cid = str(cid)
+    path = _cache_path(cache_root, "by_cid_synonyms", cid)
+    cached = _read_cache(path)
+    if cached is not None:
+        return cached
+    result = _fetch_synonyms(cid)
+    _write_cache(path, result)
+    return result

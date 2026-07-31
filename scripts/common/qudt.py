@@ -5,11 +5,16 @@ PURPOSE
 -------
 Dereferentieert QUDT-eenheid-URI's (http://qudt.org/vocab/unit/...) en extraheert
 qudt:symbol, rdfs:label (en), qudt:ucumCode en qudt:hasQuantityKind. Wordt gebruikt door
-scripts/check_eenheden_qudt.py om csor:Eenheid tegen QUDT te valideren.
+scripts/check_eenheden_qudt.py om csor:Eenheid tegen QUDT te valideren. Biedt daarnaast
+`fetch_unit_vocabulary()`: een bulk-fetch van de volledige QUDT-eenhedenvocabulaire, gebruikt om
+voor de nog niet-gekoppelde csor:Eenheid-instanties te zoeken naar een QUDT-eenheid met een
+(bijna) identiek symbool — een kandidaat voor een vergeten koppeling.
 
 DATA PROVENANCE
 ----------------
-Bron: QUDT Linked Data, https://qudt.org/vocab/unit/ (dereferentieerbaar, Accept: text/turtle).
+Bron: QUDT Linked Data, https://qudt.org/vocab/unit/ (dereferentieerbaar, Accept: text/turtle)
+voor per-URI-lookups (`fetch()`); https://qudt.org/{version}/vocab/unit (het volledige,
+versioned vocabulaire-document) voor de bulk-fetch (`fetch_unit_vocabulary()`).
 
 METHODOLOGY
 -----------
@@ -24,6 +29,13 @@ en of de opgehaalde RDF-payload de OORSPRONKELIJK opgevraagde URI (dus de exacte
 CSOR die opslaat) zelf als subject gebruikt — dat is de eigenlijke toets of CSOR's schema-
 keuze de canonieke QUDT-identifier is, los van of de HTTP-verbinding toevallig via een
 tussenliggende redirect loopt.
+
+`fetch_unit_vocabulary()`: own addition, aparte cache-vorm t.o.v. `fetch()` — dit is één
+statisch ~4MB Turtle-document (2.773 units) i.p.v. honderden kleine per-URI-lookups, dus één
+gecachete `.ttl`-bestandscache i.p.v. het JSON-per-lookup-patroon hierboven. QUDT-versie is
+gepind in de URL (standaard 3.5.0, QUDT's eigen versioned-IRI-conventie) — een toekomstige
+versiebump vereist een bewuste code-wijziging, geen stilzwijgende drift. `qudt:deprecated
+true`-units worden eruit gefilterd.
 
 OUTPUTS
 -------
@@ -42,6 +54,9 @@ import requests
 
 QUDT = rdflib.Namespace("http://qudt.org/schema/qudt/")
 RDFS = rdflib.RDFS
+RDF = rdflib.RDF
+
+DEFAULT_UNIT_VOCAB_VERSION = "3.5.0"
 
 _SAFE_KEY_RE = re.compile(r"[^A-Za-z0-9_.-]")
 
@@ -125,3 +140,37 @@ def fetch(uri: str, cache_root: Path) -> dict:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2))
     return result
+
+
+def fetch_unit_vocabulary(
+    cache_root: Path, version: str = DEFAULT_UNIT_VOCAB_VERSION
+) -> list[dict]:
+    """Haalt (gecached) de volledige QUDT-eenhedenvocabulaire op.
+
+    Geeft een lijst `[{"uri": ..., "symbol": ...}, ...]` terug voor alle niet-`qudt:deprecated`
+    units met een `qudt:symbol` (zie METHODOLOGY voor de cache-/versie-aanpak).
+    """
+    global live_call_count
+    cache_path = cache_root / f"vocab-unit-{version}.ttl"
+    if cache_path.exists():
+        data = cache_path.read_bytes()
+    else:
+        live_call_count += 1
+        url = f"https://qudt.org/{version}/vocab/unit"
+        resp = requests.get(url, headers={"Accept": "text/turtle"}, timeout=60)
+        resp.raise_for_status()
+        data = resp.content
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_bytes(data)
+
+    g = rdflib.Graph()
+    g.parse(data=data, format="turtle")
+
+    units = []
+    for s in g.subjects(RDF.type, QUDT.Unit):
+        if (s, QUDT.deprecated, rdflib.Literal(True)) in g:
+            continue
+        symbol = g.value(s, QUDT.symbol)
+        if symbol is not None:
+            units.append({"uri": str(s), "symbol": str(symbol)})
+    return units
