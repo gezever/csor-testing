@@ -48,6 +48,7 @@ OUTPUTS
 output/tables/cas_resolution.csv
 output/tables/cid_crosscheck.csv
 output/tables/internal_flags.csv
+output/reports/variabele_identity.html
 data/interim/variabele_records.parquet (tussentijds)
 """
 
@@ -61,7 +62,7 @@ import pandas as pd
 import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import dataset, pubchem, sparql_client as sc  # noqa: E402
+from common import dataset, pubchem, report, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
@@ -258,6 +259,78 @@ def cas_resolution(df: "pd.DataFrame") -> "pd.DataFrame":  # noqa: F821
     )
 
 
+def build_html_report(
+    flags_df: "pd.DataFrame", cid_df: "pd.DataFrame", cas_df: "pd.DataFrame"  # noqa: F821
+) -> Path:
+    fig_flags = report.bar_counts(
+        flags_df["flag_type"].value_counts(),
+        title="Interne vlaggen per type",
+        xaxis_title="flag_type",
+    )
+    disc_flags = (
+        f"{len(flags_df)} interne vlag(gen) — CAS-checksum, InChIKey-vorm, of duplicaten, "
+        "zonder externe afhankelijkheid."
+        if len(flags_df)
+        else "Geen interne vlaggen gevonden — het verwachte patroon."
+    )
+
+    fig_status = report.bar_counts(
+        cas_df["status"].value_counts(),
+        title="CAS-resolutie per status",
+        xaxis_title="status",
+    )
+    n_unresolved = int((cas_df["status"] == "unresolved").sum())
+    n_mismatch = int((cas_df["status"] == "mismatch").sum())
+    disc_status = (
+        f"{len(cas_df)} CAS-kandidaten getoetst — {n_mismatch} mismatch(es), {n_unresolved} "
+        "unresolved. Een 'unresolved' CAS-nummer is geen CSOR-fout, wel een aanwijzing dat het "
+        "CAS-nummer zelf mogelijk incorrect is of dat PubChem die stof niet kent."
+    )
+
+    mismatches = cid_df[cid_df["inchikey_match"] == False]  # noqa: E712
+    disc_cid = (
+        f"{int(cid_df['found'].sum())} van {len(cid_df)} CID-kandidaten teruggevonden bij "
+        "PubChem. "
+        + (
+            f"{len(mismatches)} InChIKey-mismatch(en) — dit is de sterkste rode vlag in dit "
+            "script: CSOR en PubChem zijn het voor exact dezelfde CID oneens, en dit verdient "
+            f"prioriteit boven CAS-resolutie-afwijkingen. Voorbeelden: "
+            f"{', '.join(mismatches['notatie'].head(5))}."
+            if len(mismatches)
+            else "Geen InChIKey-mismatches — het verwachte patroon."
+        )
+    )
+
+    sections = [
+        report.Section(
+            heading="Interne checks",
+            discussion=disc_flags,
+            figures=[fig_flags] if len(flags_df) else [],
+            table_df=flags_df if len(flags_df) else None,
+        ),
+        report.Section(
+            heading="CAS-resolutie",
+            discussion=disc_status,
+            figures=[fig_status],
+        ),
+        report.Section(
+            heading="PubChem CID-crosscheck",
+            discussion=disc_cid,
+            table_df=mismatches if len(mismatches) else None,
+        ),
+    ]
+    return report.build_report(
+        name="variabele_identity",
+        title="CSOR — chemische-identiteitscheck op csor:Variabele",
+        intro=(
+            "Kan een CAS-nummer betrouwbaar naar een InChIKey herleid worden, en zijn de "
+            "reeds opgeslagen eigenschappen (cas, inchikey, iupacNaam) consistent met PubChem "
+            "als externe referentiebron?"
+        ),
+        sections=sections,
+    )
+
+
 def main(graph: rdflib.Graph | None = None) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
@@ -296,6 +369,9 @@ def main(graph: rdflib.Graph | None = None) -> None:
     print(f"CAS-resolutie: {len(cas_df)} kandidaten — {status_counts}")
 
     print(f"\nlive PubChem-calls deze run: {pubchem.live_call_count}")
+
+    report_path = build_html_report(flags_df, cid_df, cas_df)
+    print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

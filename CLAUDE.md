@@ -2,8 +2,9 @@
 
 Dit document beschrijft de werkwijze en conventies voor dit project. Het is geïnspireerd op
 `SKILL.md` uit het zusterproject `A-Substance-Is-Not-Always-a-Substance`, maar aangepast aan
-csor-testing: Python in plaats van R, en een veel lichter gewicht (geen figuren/plots, enkel
-tabellen en Markdown-rapporten).
+csor-testing: Python in plaats van R, en een lichter gewicht (geen bookdown-/publicatiepijplijn
+— wel tabellen, per-check-script gegenereerde Plotly-HTML-rapporten, en Markdown-rapporten, zie
+§10).
 
 `csor-testing` test de **datakwaliteit van het Vlaamse CSO-register (CSOR)**: SPARQL-analyses
 over de RDF-data op `https://data-ontwikkel.omgeving.vlaanderen.be/sparql`, uitgevoerd op een
@@ -18,7 +19,7 @@ rapporten.
 csor-testing/
 ├── CLAUDE.md                # dit bestand
 ├── README.md
-├── requirements.txt         # rdflib, requests, pandas, pyarrow
+├── requirements.txt         # rdflib, requests, pandas, pyarrow, plotly
 ├── .venv/                   # gitignored — python3 -m venv .venv
 ├── sparql/                  # SPARQL-querydefinities: de "wat meten we"-laag
 ├── analyse/
@@ -31,21 +32,37 @@ csor-testing/
 │   ├── generate_diagram.py   # datamodeldiagram (TikZ/PDF, zie §6)
 │   └── run_all.py            # regenereert de snapshot, draait dan alle checks + diagram
 ├── data/
+│   ├── source/                # gecommitte snapshots van externe bronvocabularia (VMM-woordenboek,
+│   │                          # OpenTaal-woordenlijst) — ververst door hun eigen fetch_*.py-script
+│   │                          # (niet via run_all.py, zie §4)
 │   ├── raw/                  # gitignored — losse .ttl-snapshots van individuele scripts
 │   ├── interim/               # gitignored — tussentijdse pandas-tabellen (.parquet)
 │   └── cache/{pubchem,qudt}/  # gitignored — API-cache (JSON per lookup)
 ├── output/
 │   ├── tables/                # gegenereerde CSV's — WEL gecommit (reproduceerbare resultaten)
-│   └── diagrams/              # gegenereerd TikZ/PDF/PNG-diagram — WEL gecommit
+│   ├── diagrams/              # gegenereerd TikZ/PDF/PNG-diagram — WEL gecommit
+│   └── reports/                # gegenereerde Plotly-HTML-rapporten per check-script — WEL
+│                                # gecommit (zie §10)
 └── reports/                  # Nederlandstalige Markdown-rapporten: de "wat vonden we"-laag
 ```
 
-**Wat wordt gecommit**: `sparql/`, `scripts/`, `output/tables/*.csv`, `output/diagrams/*.{tex,pdf,png}`,
+**Wat wordt gecommit**: `sparql/`, `scripts/`, `data/source/*` (externe-bronsnapshots — zie
+hieronder), `output/tables/*.csv`, `output/diagrams/*.{tex,pdf,png}`, `output/reports/*.html`,
 `reports/*.md`, en de gegenereerde diagram-sectie in `README.md` zelf.
 **Wat wordt gitignored**: `.venv/`, `analyse/`, `data/raw/`, `data/interim/`, `data/cache/`,
 `__pycache__/`. `analyse/csor_merged.ttl` is een volledige lokale samenvoeging van alle 10
 CSOR-graphs — bij elke `scripts/run_all.py`-run vers opgehaald en overschreven, dus net zo
 regenereerbaar als `data/raw/` en bewust niet gecommit (zie §4).
+
+`data/source/` is anders: geen CSOR-registerdata maar externe-bronvocabularia die
+`check_terminologie.py` gebruikt (zie §10-rapporttabel) — `vmm-woordenboek.ttl`/`.rdf` (SKOS-
+thesaurus van VMM's publieke milieu-/waterglossarium) en `opentaal-wordlist.txt`/
+`opentaal-corrections.tsv` (de officiële Nederlandse woordenlijst resp. curated
+foutief->correctie-lijst van Stichting OpenTaal). Elk bestand wordt ververst door zijn eigen
+`scripts/fetch_*.py`-script (`fetch_vmm_woordenboek.py`, `fetch_opentaal_wordlist.py`) —
+handmatig herdraaid, bewust **niet** onderdeel van `scripts/run_all.py` (dat betreft uitsluitend
+de CSOR-registerpijplijn zelf). Wél gecommit (i.t.t. `data/raw/`/`analyse/`), want het zijn
+kant-en-klare, direct bruikbare brondata-snapshots, geen tussentijdse/regenereerbare CSOR-data.
 
 ## 2. Venv en dependencies
 
@@ -60,8 +77,10 @@ geval expliciet `--index-url https://pypi.org/simple` (publieke PyPI is wel bere
 geen projectkeuze maar een omgevingsgebonden workaround — vermeld dit als het install-commando
 faalt met een DNS-fout naar `artifactory-*`.
 
-Bewust minimale dependency-set (`rdflib`, `requests`, `pandas`, `pyarrow` voor parquet) — geen
-tidyverse-equivalent zwaargewicht nodig voor ~2000 rijen.
+Bewust minimale dependency-set (`rdflib`, `requests`, `pandas`, `pyarrow` voor parquet, `plotly`
+voor de per-check-script HTML-rapporten, zie §10) — geen tidyverse-equivalent zwaargewicht nodig
+voor ~2000 rijen. `plotly` zelf breekt die ethos niet: geen Dash, geen Kaleido/orca — rendering
+gebeurt clientside in de browser via een CDN-`<script>`-tag, niet ingebonden of serverside.
 
 ## 3. Vast scriptheader-formaat
 
@@ -216,6 +235,9 @@ te verifiëren zijn zonder de CSV's te openen.
   KwantificeerbaarAspect) en een niet-geschaalde telling die verschillen zou samenklappen.
   Weergegeven als `(kant-A, kant-B)` tekst (bv. `(0..N, 1)`), niet als crow's-foot-symbolen —
   leesbaar zonder ER-notatiekennis.
+- Zie ook §10 (Rapportgeneratie) voor de analoge aanpak bij de per-check-script Plotly-HTML-
+  rapporten — zelfde principe (gegenereerd, niet handmatig), ander formaat en andere scope (per
+  check-script i.p.v. één centraal diagram).
 
 ## 7. PubChem-etiquette
 
@@ -246,3 +268,51 @@ Voor een check als voltooid wordt beschouwd:
 - [ ] Een tweede run met gevulde cache doet nul live externe calls en geeft identieke output.
 - [ ] De stdout-samenvatting is inhoudelijk plausibel (aantallen kloppen met eerdere/verwachte
       cijfers).
+- [ ] Het check-script genereert een geldig HTML-rapport (`output/reports/<naam>.html`) met
+      minstens 1 figuur en een niet-lege bespreking per sectie.
+
+## 10. Rapportgeneratie (Plotly/HTML)
+
+Naast de CSV's in `output/tables/` genereert elk `scripts/check_*.py`-script, aan het einde van
+zijn eigen `main()`, één zelfstandig HTML-rapport (`output/reports/<naam>.html`) met Plotly-
+figuren en een korte, data-gedreven "bespreking" per sectie — zodat resultaten visueel en
+tekstueel te scannen zijn zonder de CSV's te moeten openen. Dit is een aanvulling op, geen
+vervanging van, de bestaande handgeschreven Nederlandstalige rapporten in `reports/` — die
+bevatten beleidsmatige duiding (Aanleiding/Advies/Conclusies) die niet uit de data zelf valt af
+te leiden en blijven ongewijzigd.
+
+- **Per script, niet centraal.** In tegenstelling tot `generate_diagram.py` (§6, één gedeeld
+  diagram, enkel aangeroepen vanuit `run_all.py`) genereert elk check-script zijn eigen rapport
+  zelf, binnen zijn eigen `main()` — dit werkt zowel standalone (`python3 scripts/check_x.py`)
+  als via `scripts/run_all.py`, consistent met hoe elk script nu al zelf zijn CSV's wegschrijft.
+- **Gedeelde opbouwlogica**: `scripts/common/report.py` — geen templating-engine, een
+  handgebouwde HTML-string, in dezelfde geest als hoe `generate_diagram.py` zijn TikZ-string
+  handbouwt. Biedt een `Section`-dataclass (kop, bespreking, figuren, optionele tabel) en
+  `build_report()`.
+- **Plotly.js via CDN**, éénmaal per pagina (`include_plotlyjs="cdn"` op het eerste figuur,
+  `False` op de rest) — klein gecommit bestand; vereist internet bij bekijken, niet bij
+  genereren.
+- **Kleurregel**: één meetwaarde verdeeld over categorieën (bv. "aantal per flag_type") krijgt
+  één vlakke kleur (geen legende — de x-as-labels dragen de identiteit al). Twee of meer
+  meetwaarden naast elkaar per categorie (bv. "totaal" vs "metScheme" per klasse) krijgen een
+  vaste, hardgecodeerde kleurenkaart, mét legende. Bewust geen taartdiagrammen. Kleurwaarden
+  zijn verbatim overgenomen uit het gevalideerde categorische referentiepalet van de
+  `dataviz`-skill (light mode, `scripts/common/report.py::PALETTE`).
+- **Bespreking is data-gedreven**: tellingen/percentages/top-N, qua interpretatiekader
+  identiek aan de bestaande `INTERPRETATION`-alinea van elk scriptheader (§3), maar als
+  template die elke run herevalueert — geen vrije narratieve synthese.
+- **Geen determinisme-garantie** (in tegenstelling tot §6's `.tex`-determinisme): Plotly's
+  `fig.to_html()` genereert per aanroep een uniek div-id, dus twee identieke runs geven geen
+  byte-identieke HTML. Niet vereist voor dit rapporttype.
+- Vereist `plotly` in `requirements.txt` (§2), geen andere nieuwe dependency.
+
+De zes gegenereerde rapporten (bestandsnaam = scriptnaam zonder `check_`-prefix):
+
+| Rapport | Gegenereerd door |
+|---|---|
+| `output/reports/conceptschemas.html` | `scripts/check_conceptschemas.py` |
+| `output/reports/eenheden_qudt.html` | `scripts/check_eenheden_qudt.py` |
+| `output/reports/parameter_inhoud.html` | `scripts/check_parameter_inhoud.py` |
+| `output/reports/samenstellende_variabelen.html` | `scripts/check_samenstellende_variabelen.py` |
+| `output/reports/variabele_identity.html` | `scripts/check_variabele_identity.py` |
+| `output/reports/terminologie.html` | `scripts/check_terminologie.py` |

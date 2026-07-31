@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>CSOR — conceptschema's: structuur, volledigheid en kardinaliteit</title>
+<style>
+  body {
+    background: #f9f9f7;
+    color: #0b0b0b;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    line-height: 1.5;
+  }
+  h1 { margin-bottom: 0.25rem; }
+  .intro { color: #52514e; margin-top: 0; }
+  h2 {
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #e1e0d9;
+    padding-bottom: 0.4rem;
+  }
+  p { color: #0b0b0b; }
+  .table-wrap { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  th, td {
+    border-bottom: 1px solid #e1e0d9;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th { color: #898781; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>CSOR — conceptschema's: structuur, volledigheid en kardinaliteit</h1>
+<p class="intro">Welke conceptschema's zijn er en hoe verhouden hun klassen zich tot elkaar, behoort ieder element tot een conceptschema, en wat zijn de kardinaliteiten van de onderlinge relaties?</p>
+<h2>Conceptschema-dekking per klasse</h2><p>61.2% van alle csor:-instanties heeft een skos:inScheme-koppeling. Geen enkele klasse toont een afwijkende dekking — dit is het verwachte patroon (een klasse zonder scheme-lidmaatschap is op zich geen fout, maar een gedeeltelijke dekking binnen een codelijstklasse wel).</p><div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="a663af9a-1817-4aa8-b900-83a665a1a908" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a663af9a-1817-4aa8-b900-83a665a1a908")) {                    Plotly.newPlot(                        "a663af9a-1817-4aa8-b900-83a665a1a908",                        [{"marker":{"color":"#2a78d6"},"name":"totaal","x":["OrganisatieSpecifiekeReferentie","ParameterAspect","Parameter","Variabele","VeeltermParameterTerm","Eenheid","KwantificeerbaarAspect","ParameterAfleidingVeelterm","SoortWaardebepaling","NatuurkundigeDimensie","Drager","ParameterAspectOmzetting","ParameterTerm","ParameterAfleidingRWZIRendement","ParameterAfleidingVerhouding","Resultaattype","KwalificeerbaarAspect"],"y":{"dtype":"i2","bdata":"RCJjIRoT4Af\u002fBGUBiQCBAFAAMQAMAAoACAAFAAQABAADAA=="},"type":"bar"},{"marker":{"color":"#eb6834"},"name":"metScheme","x":["OrganisatieSpecifiekeReferentie","ParameterAspect","Parameter","Variabele","VeeltermParameterTerm","Eenheid","KwantificeerbaarAspect","ParameterAfleidingVeelterm","SoortWaardebepaling","NatuurkundigeDimensie","Drager","ParameterAspectOmzetting","ParameterTerm","ParameterAfleidingRWZIRendement","ParameterAfleidingVerhouding","Resultaattype","KwalificeerbaarAspect"],"y":{"dtype":"i2","bdata":"AABjIRoT4AcAAGUBiQAAAFAAMQAMAAAAAAAAAAAABAADAA=="},"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Instanties per klasse: totaal vs. met skos:inScheme"},"xaxis":{"title":{"text":"klasse"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"barmode":"group","font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>class</th>
+      <th>totaal</th>
+      <th>metScheme</th>
+      <th>isConcept</th>
+      <th>categorie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#OrganisatieSpecifiekeReferentie</td>
+      <td>8772</td>
+      <td>0</td>
+      <td>0</td>
+      <td>structureel-geen-scheme</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect</td>
+      <td>8547</td>
+      <td>8547</td>
+      <td>8547</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#Parameter</td>
+      <td>4890</td>
+      <td>4890</td>
+      <td>4890</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#Variabele</td>
+      <td>2016</td>
+      <td>2016</td>
+      <td>2016</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#VeeltermParameterTerm</td>
+      <td>1279</td>
+      <td>0</td>
+      <td>0</td>
+      <td>structureel-geen-scheme</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#Eenheid</td>
+      <td>357</td>
+      <td>357</td>
+      <td>357</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#KwantificeerbaarAspect</td>
+      <td>137</td>
+      <td>137</td>
+      <td>137</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#ParameterAfleidingVeelterm</td>
+      <td>129</td>
+      <td>0</td>
+      <td>0</td>
+      <td>structureel-geen-scheme</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#SoortWaardebepaling</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+      <td>codelijst-100pct</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/ns/csor#NatuurkundigeDimensie</td>
+      <td>49</td>
+      <td>49</td>
+      <td>49</td>
+      <td>codelijst-100pct</td>
+    </tr>
+  </tbody>
+</table></div><h2>Orphan-detectie</h2><p>87 orphan-record(en) gevonden — instanties die volgens het model een gerelateerd object zouden moeten hebben, maar dat niet hebben.</p><div style="height:100%; width:100%;">                            <div id="6772d6f1-e93a-422e-880b-db77d636ebb9" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("6772d6f1-e93a-422e-880b-db77d636ebb9")) {                    Plotly.newPlot(                        "6772d6f1-e93a-422e-880b-db77d636ebb9",                        [{"marker":{"color":"#2a78d6"},"x":["parameter_zonder_parameteraspect","eenheid_zonder_kwantificeerbaaraspect","drager_nooit_gebruikt"],"y":[71,15,1],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Orphans per type"},"xaxis":{"title":{"text":"orphan_type"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>notatie</th>
+      <th>label</th>
+      <th>orphan_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>P_4365</td>
+      <td>Polyaromatische KWS (10 OVAM) in lucht</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4582</td>
+      <td>Steekvastheid in vaste deel van de aarde</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_2301</td>
+      <td>Chloormethylbenzeen in water</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4436</td>
+      <td>Permanganaatindex in vaste deel van de aarde</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4220</td>
+      <td>Apolaire koolwaterstoffen, fractie C6-C16 in vaste deel van de aarde</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4051</td>
+      <td>Waterstofsulfide in vaste deel van de aarde</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4711</td>
+      <td>Tetrachlooretheen in biota</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_2303</td>
+      <td>Palladium opgelost in water</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_4685</td>
+      <td>Tetraline in lucht</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+    <tr>
+      <td>P_3774</td>
+      <td>Chloordeen in water</td>
+      <td>parameter_zonder_parameteraspect</td>
+    </tr>
+  </tbody>
+</table></div><h2>Inverse-paar-asymmetrieën</h2><p>Geen inverse-paar-asymmetrieën gevonden voor de twee getoetste paren (heeftParameterAspect<->heeftParameter, heeftKwantificeerbaarAspect<->toepasbareEenheid) — het verwachte patroon.</p><h2>Object-properties en kardinaliteiten</h2><p>33 relaties ontdekt — data-gedreven (elk predicaat dat minstens één csor:-klasse-instantie verbindt aan een resource, ongeacht namespace), niet beperkt tot csor:-eigen owl:ObjectProperty-declaraties. Hoogste max-kardinaliteiten: skos:hasTopConcept (forward, max 8547), skos:inScheme (backward, max 8547), skos:topConceptOf (backward, max 8547).</p><div style="height:100%; width:100%;">                            <div id="670b179e-9979-41be-a251-a9ad474caa07" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("670b179e-9979-41be-a251-a9ad474caa07")) {                    Plotly.newPlot(                        "670b179e-9979-41be-a251-a9ad474caa07",                        [{"marker":{"color":"#2a78d6"},"name":"forward max","x":["skos:topConceptOf","skos:inScheme","skos:hasTopConcept","csor:heeftSoortWaardebepaling","dcterms:creator","csor:heeftAspect","csor:heeftDrager","skos:member","csor:heeftResultaattype","csor:heeftNatuurkundigeDimensie","csor:heeftTerm","csor:heeftVariabele","dcterms:references","csor:toepasbareEenheid","csor:heeftKwantificeerbaarAspect"],"y":{"dtype":"i2","bdata":"AQABAGMhAQABAAEAAQDbBAEAAQAxAAEAAQASAAMA"},"type":"bar"},{"marker":{"color":"#eb6834"},"name":"backward max","x":["skos:topConceptOf","skos:inScheme","skos:hasTopConcept","csor:heeftSoortWaardebepaling","dcterms:creator","csor:heeftAspect","csor:heeftDrager","skos:member","csor:heeftResultaattype","csor:heeftNatuurkundigeDimensie","csor:heeftTerm","csor:heeftVariabele","dcterms:references","csor:toepasbareEenheid","csor:heeftKwantificeerbaarAspect"],"y":{"dtype":"i2","bdata":"YyFjIQEAeA9CDekLUwgBAIcAYAABABsAGgADABIA"},"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Top-15 relaties naar max-kardinaliteit (forward vs. backward)"},"xaxis":{"title":{"text":"relatie"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"max kardinaliteit"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"barmode":"group","font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>relatie</th>
+      <th>label</th>
+      <th>domain</th>
+      <th>range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dcterms:creator</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>dcterms:references</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:broadMatch</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:broader</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:exactMatch</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:hasTopConcept</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:inScheme</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:member</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:narrower</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>skos:topConceptOf</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>csor:heeftAfleiding</td>
+      <td>heeft afleiding</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>csor:heeftAspect</td>
+      <td>Heeft aspect</td>
+      <td>—</td>
+      <td>(blanke knoop)</td>
+    </tr>
+    <tr>
+      <td>csor:heeftBronEenheid</td>
+      <td>Eenheid van</td>
+      <td>—</td>
+      <td>Eenheid</td>
+    </tr>
+    <tr>
+      <td>csor:heeftBronParameter</td>
+      <td>heeft bronparameter</td>
+      <td>—</td>
+      <td>Parameter</td>
+    </tr>
+    <tr>
+      <td>csor:heeftBronParameterAspect</td>
+      <td>Parameteraspect van</td>
+      <td>—</td>
+      <td>ParameterAspect</td>
+    </tr>
+    <tr>
+      <td>csor:heeftDoelEenheid</td>
+      <td>Eenheid naar</td>
+      <td>—</td>
+      <td>Eenheid</td>
+    </tr>
+    <tr>
+      <td>csor:heeftDoelParameter</td>
+      <td>heeft doelparameter</td>
+      <td>—</td>
+      <td>Parameter</td>
+    </tr>
+    <tr>
+      <td>csor:heeftDoelParameterAspect</td>
+      <td>Parameteraspect naar</td>
+      <td>—</td>
+      <td>ParameterAspect</td>
+    </tr>
+    <tr>
+      <td>csor:heeftDrager</td>
+      <td>Drager</td>
+      <td>—</td>
+      <td>Drager</td>
+    </tr>
+    <tr>
+      <td>csor:heeftKwantificeerbaarAspect</td>
+      <td>heeft kwantificeerbaar aspect</td>
+      <td>—</td>
+      <td>KwantificeerbaarAspect</td>
+    </tr>
+    <tr>
+      <td>csor:heeftNatuurkundigeDimensie</td>
+      <td>Natuurkundige dimensie</td>
+      <td>—</td>
+      <td>NatuurkundigeDimensie</td>
+    </tr>
+    <tr>
+      <td>csor:heeftNoemer</td>
+      <td>noemer</td>
+      <td>—</td>
+      <td>ParameterTerm</td>
+    </tr>
+    <tr>
+      <td>csor:heeftParameter</td>
+      <td>Heeft parameter</td>
+      <td>—</td>
+      <td>Parameter</td>
+    </tr>
+    <tr>
+      <td>csor:heeftParameterAspect</td>
+      <td>heeft parameter aspect</td>
+      <td>—</td>
+      <td>ParameterAspect</td>
+    </tr>
+    <tr>
+      <td>csor:heeftResultaattype</td>
+      <td>Resultaattype</td>
+      <td>—</td>
+      <td>(blanke knoop)</td>
+    </tr>
+    <tr>
+      <td>csor:heeftSoortWaardebepaling</td>
+      <td>Soort waardebepaling</td>
+      <td>—</td>
+      <td>SoortWaardebepaling</td>
+    </tr>
+    <tr>
+      <td>csor:heeftTeller</td>
+      <td>teller</td>
+      <td>—</td>
+      <td>ParameterTerm</td>
+    </tr>
+    <tr>
+      <td>csor:heeftTerm</td>
+      <td>Term</td>
+      <td>—</td>
+      <td>VeeltermParameterTerm</td>
+    </tr>
+    <tr>
+      <td>csor:heeftVariabele</td>
+      <td>Variabele</td>
+      <td>—</td>
+      <td>Variabele</td>
+    </tr>
+    <tr>
+      <td>csor:referentieEenheid</td>
+      <td>Referentie-eenheid</td>
+      <td>—</td>
+      <td>Eenheid</td>
+    </tr>
+    <tr>
+      <td>csor:toepasbareEenheid</td>
+      <td>Toepasbare eenheid</td>
+      <td>—</td>
+      <td>Eenheid</td>
+    </tr>
+    <tr>
+      <td>csor:uitgedruktIn</td>
+      <td>Uitgedrukt in</td>
+      <td>—</td>
+      <td>Variabele</td>
+    </tr>
+    <tr>
+      <td>pubchem:compound</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table></div>
+</body>
+</html>

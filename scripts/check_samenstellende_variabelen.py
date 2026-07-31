@@ -4,10 +4,9 @@ check_samenstellende_variabelen.py — herhaalbare versie van de bestaande compo
 PURPOSE
 -------
 Voert de queries uit sparql/samenstellende_variabelen_check.sparql (1a, 1b, 1c, 2, 3, 4, 5)
-herhaalbaar uit tegen de live CSOR-endpoint, in plaats van de eenmalige, statische analyse van
-27 juli 2026 die vastligt in reports/rapport_samenstellende_variabelen.md. Vergelijkt de
-herproduceerde kerncijfers met de cijfers uit dat rapport, zodat het rapport niet stilzwijgend
-verouderd raakt als het register wijzigt.
+herhaalbaar uit: welke parameters delen variabelen (samenstellende-variabele-composities), en
+welke van die composities tonen een structureel datakwaliteitsprobleem (inconsistente
+composities, probleemgevallen, verschil-/eenterm-afleidingen)?
 
 DATA PROVENANCE
 ----------------
@@ -50,10 +49,12 @@ METHODOLOGY
 
 INTERPRETATION
 --------------
-Een REGRESSIE-melding (afwijkend van het bestaande rapport) is geen fout op zich — het kan
-betekenen dat het register intussen gewijzigd is (bv. het triazool-geval V_1533 is rechtgezet).
-Het is een signaal om het bestaande rapport te herlezen en eventueel bij te werken, niet om het
-script te "fixen".
+Een niet-nul telling bij 1c (inconsistente composities), 2 (probleemgevallen), 4
+(verschilafleidingen) of 5 (eenterm-afleidingen) is op zich geen fout — elke query toetst een
+specifiek structureel patroon in de compositie-logica en vergt inhoudelijke beoordeling per
+geval (zie de queryomschrijvingen in sparql/samenstellende_variabelen_check.sparql). Query 1b
+(gedeelde variabelen) is puur informatief: een hoge telling wijst op een veelgebruikte
+variabele, geen probleem.
 
 OUTPUTS
 -------
@@ -64,6 +65,7 @@ output/tables/samenstellende_2_probleemgevallen.csv
 output/tables/samenstellende_4_verschilafleidingen.csv
 output/tables/samenstellende_5_eenterm_afleidingen.csv
 data/raw/samenstellende_query3_construct-<datum>.ttl (query 3's CONSTRUCT-output, apart als .ttl)
+output/reports/samenstellende_variabelen.html
 """
 
 from __future__ import annotations
@@ -72,10 +74,12 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import pandas as pd
+import plotly.graph_objects as go
 import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import dataset, sparql_client as sc  # noqa: E402
+from common import dataset, report, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
@@ -248,16 +252,6 @@ ORDER BY ?doelLabel
 """
 )
 
-# Kerncijfers uit reports/rapport_samenstellende_variabelen.md (27 juli 2026), gebruikt als
-# regressiereferentie — geen harde assert, enkel een gerapporteerde afwijking.
-EXPECTED = {
-    "1a_rows": 0,
-    "1b_rows": 1046,
-    "2_rows": 2,
-    "4_rows": 7,
-    "5_rows": 7,
-}
-
 
 def run_and_save_local(name: str, query: str, graph: rdflib.Graph) -> "pd.DataFrame":  # noqa: F821
     df = sc.select_dataframe_local(query, graph)
@@ -273,6 +267,81 @@ def run_and_save_live(name: str, query: str) -> "pd.DataFrame":  # noqa: F821
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
     df.to_parquet(INTERIM_DIR / f"samenstellende_{name}.parquet")
     return df
+
+
+def build_html_report(
+    df_1b: pd.DataFrame,
+    actual: dict,
+) -> Path:
+    df_1b_sorted = df_1b.copy()
+    df_1b_sorted["aantalParameters"] = df_1b_sorted["aantalParameters"].astype(int)
+    df_1b_sorted = df_1b_sorted.sort_values("aantalParameters", ascending=False).head(15)
+    fig_top = go.Figure(
+        go.Bar(
+            x=df_1b_sorted["aantalParameters"][::-1],
+            y=df_1b_sorted["variabeleLabel"][::-1],
+            orientation="h",
+            marker_color=report.FLAT_COLOR,
+        )
+    )
+    fig_top.update_layout(
+        title="Top-15 variabelen gedeeld door de meeste parameters",
+        xaxis_title="aantal parameters",
+        yaxis_title="",
+    )
+    disc_top = (
+        f"{len(df_1b)} variabelen worden door meerdere parameters gedeeld, met als uitschieter "
+        f"{df_1b_sorted['variabeleLabel'].iloc[0]} ({int(df_1b_sorted['aantalParameters'].iloc[0])} "
+        "parameters)."
+    )
+
+    row_counts = pd.Series(
+        {
+            "1a": actual["1a_rows"],
+            "1c": actual["1c_rows"],
+            "2": actual["2_rows"],
+            "4": actual["4_rows"],
+            "5": actual["5_rows"],
+        }
+    )
+    fig_rows = report.bar_counts(
+        row_counts, title="Rijen per deelquery", xaxis_title="query"
+    )
+    nonzero = {k: v for k, v in row_counts.items() if v > 0}
+    disc_rows = (
+        "Geen van de deelquery's (1a, 1c, 2, 4, 5) toont momenteel een flag."
+        if not nonzero
+        else (
+            "Deelquery('s) met een niet-nul telling: "
+            + ", ".join(f"{k} ({v})" for k, v in nonzero.items())
+            + ". Elke query toetst een specifiek structureel patroon in de compositie-logica "
+            "(zie sparql/samenstellende_variabelen_check.sparql) en vergt inhoudelijke "
+            "beoordeling per geval, geen automatische correctie."
+        )
+    )
+
+    sections = [
+        report.Section(
+            heading="Query 1b — gedeelde variabelen",
+            discussion=disc_top,
+            figures=[fig_top],
+        ),
+        report.Section(
+            heading="Rijen per deelquery",
+            discussion=disc_rows,
+            figures=[fig_rows],
+        ),
+    ]
+    return report.build_report(
+        name="samenstellende_variabelen",
+        title="CSOR — samenstellende variabelen: reproductie van de compositie-analyse",
+        intro=(
+            "Welke parameters delen variabelen (samenstellende-variabele-composities), en "
+            "welke van die composities tonen een structureel datakwaliteitsprobleem "
+            "(inconsistente composities, probleemgevallen, verschil-/eenterm-afleidingen)?"
+        ),
+        sections=sections,
+    )
 
 
 def main(graph: rdflib.Graph | None = None) -> None:
@@ -307,12 +376,12 @@ def main(graph: rdflib.Graph | None = None) -> None:
     actual = {
         "1a_rows": len(df_1a),
         "1b_rows": len(df_1b),
+        "1c_rows": len(df_1c),
         "2_rows": len(df_2),
-        # Own addition: het rapport telt "7 verschil-afleidingen" als DISTINCTE afleidingen
-        # (AFL_62 + 6 PFAS-afleidingen); de rauwe SELECT geeft 8 RIJEN terug omdat AFL_62 twee
-        # termen met een negatieve factor heeft (nitriet én nitraat) en dus twee keer voorkomt.
-        # nunique() reproduceert exact wat het rapport bedoelt met "7"; len(df_4) zou hier
-        # 8 geven en een vals-positieve regressiemelding opleveren.
+        # Own addition: als één afleiding meerdere termen met een negatieve factor heeft (bv.
+        # AFL_62, nitriet én nitraat), levert de rauwe SELECT die afleiding twee keer op.
+        # nunique() telt het aantal DISTINCTE afleidingen i.p.v. rijen — dat is de eigenlijke
+        # vraag ("hoeveel afleidingen tonen dit patroon", niet "hoeveel term-rijen").
         "4_rows": df_4["afleiding"].nunique(),
         "5_rows": len(df_5),
     }
@@ -329,20 +398,8 @@ def main(graph: rdflib.Graph | None = None) -> None:
     )
     print(f"Query 5  (eenterm-afleidingen):           {actual['5_rows']} rijen")
 
-    print("\nRegressie t.o.v. reports/rapport_samenstellende_variabelen.md (27 juli 2026):")
-    regressions = 0
-    for key, expected_value in EXPECTED.items():
-        got = actual[key]
-        if got != expected_value:
-            regressions += 1
-            print(f"  AFWIJKEND — {key}: verwacht {expected_value}, nu {got}")
-    if regressions == 0:
-        print("  Geen afwijkingen — herproduceerde cijfers komen overeen met het rapport.")
-    else:
-        print(
-            f"  {regressions} afwijking(en) gevonden — controleer of het register gewijzigd is "
-            "en werk reports/rapport_samenstellende_variabelen.md bij indien nodig."
-        )
+    report_path = build_html_report(df_1b, actual)
+    print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

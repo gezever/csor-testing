@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>CSOR — QUDT-koppelingskwaliteit en spellingscontrole voor csor:Eenheid</title>
+<style>
+  body {
+    background: #f9f9f7;
+    color: #0b0b0b;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    line-height: 1.5;
+  }
+  h1 { margin-bottom: 0.25rem; }
+  .intro { color: #52514e; margin-top: 0; }
+  h2 {
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #e1e0d9;
+    padding-bottom: 0.4rem;
+  }
+  p { color: #0b0b0b; }
+  .table-wrap { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  th, td {
+    border-bottom: 1px solid #e1e0d9;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th { color: #898781; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>CSOR — QUDT-koppelingskwaliteit en spellingscontrole voor csor:Eenheid</h1>
+<p class="intro">In welke mate is csor:Eenheid aan QUDT gekoppeld en hoe goed is die koppeling, en zijn skos:prefLabel en csor:symbool intern consistent en vrij van tikfouten?</p>
+<h2>QUDT-koppelingsstatus</h2><p>162 van 357 actieve eenheden hebben een QUDT-koppeling (195 zonder koppeling). De individueel geverifieerde fouten E_105, E_113, E_323 komen nog voor als open vlag — directe aanbeveling.</p><div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="35c780b5-fcc1-4d82-bac7-15b1600653e8" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("35c780b5-fcc1-4d82-bac7-15b1600653e8")) {                    Plotly.newPlot(                        "35c780b5-fcc1-4d82-bac7-15b1600653e8",                        [{"marker":{"color":"#2a78d6"},"x":["broadMatch","exactMatch","geen koppeling"],"y":[112,50,195],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Koppelingsstatus per eenheid"},"xaxis":{"title":{"text":"matchType"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><h2>Semantische kwaliteit van gekoppelde eenheden</h2><p>114 van 162 koppelingen tonen een genormaliseerde afwijking tussen csor:symbool en qudt:symbol (edit-distance > 0) — een kandidaat voor handmatige review, geen automatische correctie.</p><div style="height:100%; width:100%;">                            <div id="3fa31e49-d459-4b2f-9f74-f8bb47482967" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("3fa31e49-d459-4b2f-9f74-f8bb47482967")) {                    Plotly.newPlot(                        "3fa31e49-d459-4b2f-9f74-f8bb47482967",                        [{"marker":{"color":"#2a78d6"},"x":{"dtype":"i1","bdata":"AgIAAAEAAwECAgABBQMBAAECAQEDAgEBAAABAQIBAgEABAEABAQBAAEAAwAAAAEBAAEFAQEAAwEBAQECBAEAAQEAAAIAAAEBBQUCAgMHAQABAQEAAgAEAAMDAgIDAAEDAgIBAAIDAgQAAQIEAAMAAQAAAgcDBAIAAgABAQABAgUCBgAABwEEAAAAAgEACAAFAgEBBAABAAEBAAIBAQAAAAEF"},"type":"histogram"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Genormaliseerde edit-distance (csor:symbool vs. qudt:symbol)"},"xaxis":{"title":{"text":"edit-distance"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>eenheid</th>
+      <th>label</th>
+      <th>csor_symbool</th>
+      <th>qudt_symbool</th>
+      <th>categorie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_128</td>
+      <td>milligram chloor per liter</td>
+      <td>mgCl/L</td>
+      <td>mg/L</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_319</td>
+      <td>nanogram chloor per liter</td>
+      <td>ngCl/L</td>
+      <td>ng/L</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_185</td>
+      <td>gram fluor per dag</td>
+      <td>gF/d</td>
+      <td>g/d</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_298</td>
+      <td>milligram Sulfaat per liter</td>
+      <td>mgSO4/L</td>
+      <td>mg/L</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_101</td>
+      <td>microgram koolstof per liter</td>
+      <td>µgC/L</td>
+      <td>μg/L</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_147</td>
+      <td>gram chloor per dag</td>
+      <td>gCl/d</td>
+      <td>g/d</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_320</td>
+      <td>gram chloor per liter</td>
+      <td>gCl/L</td>
+      <td>g/L</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_106</td>
+      <td>gram stikstof per dag</td>
+      <td>gN/d</td>
+      <td>g/d</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_127</td>
+      <td>milligram chloor per kilogram droge stof</td>
+      <td>mgCl/kg ds</td>
+      <td>mg/kg</td>
+      <td>afwijkend</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_301</td>
+      <td>gram per kilogram droge stof</td>
+      <td>g/kg ds</td>
+      <td>g/kg</td>
+      <td>afwijkend</td>
+    </tr>
+  </tbody>
+</table></div><h2>Interne spelling-/consistentiecontrole</h2><p>13 interne spelling-/consistentievlag(gen) gevonden, onafhankelijk van QUDT-beschikbaarheid.</p><div style="height:100%; width:100%;">                            <div id="c4132c82-79cc-4018-ad9b-100803b36981" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c4132c82-79cc-4018-ad9b-100803b36981")) {                    Plotly.newPlot(                        "c4132c82-79cc-4018-ad9b-100803b36981",                        [{"marker":{"color":"#2a78d6"},"x":["near_duplicate_labelwoord","label_symbool_stofmismatch"],"y":[12,1],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Spelling-\u002fconsistentievlaggen per type"},"xaxis":{"title":{"text":"flag_type"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>eenheid</th>
+      <th>label</th>
+      <th>symbool</th>
+      <th>flag_type</th>
+      <th>detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_203</td>
+      <td>arbitraire eenheid per kubieke meter lucht</td>
+      <td>AU/m3</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'eenheid' lijkt op vaker voorkomend 'eenheden'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_54</td>
+      <td>per 100 mL</td>
+      <td>/100mL</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'ml' lijkt op vaker voorkomend 'mol'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_130</td>
+      <td>millgram fosfor per kilogram droge stof</td>
+      <td>mgP/kg ds</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'millgram' lijkt op vaker voorkomend 'milligram'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_328</td>
+      <td>miligram koolstof per normaal kubieke meter</td>
+      <td>mgC/Nm³</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'miligram' lijkt op vaker voorkomend 'milligram'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_113</td>
+      <td>kilogram stifstof</td>
+      <td>kgN</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'stifstof' lijkt op vaker voorkomend 'stikstof'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_240</td>
+      <td>parts par million - methaanequivalenten</td>
+      <td>ppmC</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'methaanequivalenten' lijkt op vaker voorkomend 'equivalenten'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_105</td>
+      <td>kilogram stifkstof&nbsp;&nbsp;per dag</td>
+      <td>kgN/d</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'stifkstof' lijkt op vaker voorkomend 'stikstof'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_231</td>
+      <td>zuurequivalent per hectare</td>
+      <td>zeq/ha</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'zuurequivalent' lijkt op vaker voorkomend 'equivalent'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_235</td>
+      <td>zuurequivalent per hectare per jaar</td>
+      <td>zeq/ha.jr</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'zuurequivalent' lijkt op vaker voorkomend 'equivalent'</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_232</td>
+      <td>picogram toxiciteit equiv. per vierk. met. per dag</td>
+      <td>pgTEQ/m².d</td>
+      <td>near_duplicate_labelwoord</td>
+      <td>'met' lijkt op vaker voorkomend 'meter'</td>
+    </tr>
+  </tbody>
+</table></div>
+</body>
+</html>

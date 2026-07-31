@@ -5,13 +5,13 @@ PURPOSE
 -------
 Eén ingang om alle herhaalbare analyses (samenstellende variabelen, chemische identiteit,
 conceptschema-structuur/-volledigheid, QUDT-koppelingskwaliteit, inhoudelijke Parameter-/
-ParameterAspect-consistentie) na elkaar uit te voeren, met een korte samenvatting op stdout,
-en aansluitend het TikZ-datamodeldiagram te regenereren (README.md). Analoog aan run_all.R in
-het zusterproject A-Substance-Is-Not-Always-a-Substance.
+ParameterAspect-consistentie, terminologie-/VMM-woordenboekdekking) na elkaar uit te voeren, met
+een korte samenvatting op stdout, en aansluitend het TikZ-datamodeldiagram te regenereren
+(README.md). Analoog aan run_all.R in het zusterproject A-Substance-Is-Not-Always-a-Substance.
 
 DATA PROVENANCE
 ----------------
-Roept de vijf scripts/check_*.py en scripts/generate_diagram.py aan als submodules (geen
+Roept de zes scripts/check_*.py en scripts/generate_diagram.py aan als submodules (geen
 subprocess) zodat een gedeelde Python-sessie/venv volstaat. Regenereert vóór de checks de
 lokale volledige-registersnapshot (`analyse/csor_merged.ttl`, zie
 scripts/common/dataset.py::fetch_and_save()) en geeft die éénmalig opgehaalde graph door aan
@@ -44,6 +44,7 @@ import check_variabele_identity  # noqa: E402
 import check_conceptschemas  # noqa: E402
 import check_eenheden_qudt  # noqa: E402
 import check_parameter_inhoud  # noqa: E402
+import check_terminologie  # noqa: E402
 import generate_diagram  # noqa: E402
 
 CHECKS = [
@@ -52,6 +53,7 @@ CHECKS = [
     ("check_conceptschemas.py", check_conceptschemas),
     ("check_eenheden_qudt.py", check_eenheden_qudt),
     ("check_parameter_inhoud.py", check_parameter_inhoud),
+    ("check_terminologie.py", check_terminologie),
 ]
 
 
@@ -81,7 +83,7 @@ def main() -> None:
     print("=" * 78)
     print(
         f"Alle {len(CHECKS)} checks + diagramgeneratie voltooid in {elapsed:.0f}s. "
-        "Zie output/tables/ voor de resultaten."
+        "Zie output/tables/ voor de resultaten en output/reports/ voor de HTML-rapporten."
     )
     print("=" * 78)
 

@@ -1,0 +1,1915 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wb: <https://vmm.vlaanderen.be/woordenboek/> .
+
+wb:8-uurgemiddelde a skos:Concept ;
+    dct:source wb:8-uurgemiddelde ;
+    skos:definition "Voor het hoogste 8-uurgemiddelde van een dag berekenen we voor elke 8 uur het gemiddelde en nemen dan de hoogste waarde. Het eerste 8-urgemiddelde van een dag loopt van 17:00 uur op de dag daarvoor tot 1:00 uur op de dag zelf. Het laatste 8-uurgemiddelde van een dag wordt berekend van 16:00 uur tot 24:00 uur."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "8-uurgemiddelde"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:aanslagpeil a skos:Concept ;
+    dct:source wb:aanslagpeil ;
+    skos:definition "Het peil op grond waarvan het pompgemaal begint te werken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Aanslagpeilen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:aansluitingsgraad a skos:Concept ;
+    dct:source wb:aansluitingsgraad ;
+    skos:definition "De verhouding van het aantal huidig op een RWZI aangesloten inwoners t.o.v. het maximaal op RWZI aan te sluiten inwoners."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Aansluitingsgraad"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:achtergrondconcentratie a skos:Concept ;
+    dct:source wb:achtergrondconcentratie ;
+    skos:definition "De concentratie gemeten op een locatie die zich niet in de nabijheid van een belangrijke uitstootbron, zoals een drukke weg of industrie, bevindt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Achtergrondconcentratie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:aerosoldeeltje a skos:Concept ;
+    dct:source wb:aerosoldeeltje ;
+    skos:definition "Uiterst fijne vaste of vloeibare deeltjes in de atmosfeer of in een ander gas."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Aerosoldeeltjes"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:afkoppelen a skos:Concept ;
+    dct:source wb:afkoppelen ;
+    skos:definition "Ervoor zorgen dat er geen regenwater in de riool van het afvalwater terechtkomt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Afkoppelen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:alarmdrempel a skos:Concept ;
+    dct:source wb:alarmdrempel ;
+    skos:definition "De concentratie waarboven een kortstondige blootstelling een gezondheidsrisico voor de gehele bevolking inhoudt en waarbij maatregelen dienen genomen te worden om de risico’s te beperken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Alarmdrempel"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:anb a skos:Concept ;
+    dct:source wb:anb ;
+    skos:definition "Agentschap voor Natuur en Bos. Vlaamse overheidsinstelling die instaat voor het beleid, het duurzaam beheren en het versterken van natuur in Vlaanderen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ANB"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:antropogeen a skos:Concept ;
+    dct:source wb:antropogeen ;
+    skos:definition "Van menselijke oorsprong."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Antropogeen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:asset-management-vlaanderen a skos:Concept ;
+    dct:source wb:asset-management-vlaanderen ;
+    skos:definition "Het Asset Management Vlaanderen is de coördinerende taak van Aquafin om te komen tot een optimale afstemming van het asset management van de gemeentelijke en bovengemeentelijke rioleringsnetten, en tot een goed zicht op de staat waarin de rioleringsnetten zich bevinden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Asset Management Vlaanderen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:avg a skos:Concept ;
+    dct:source wb:avg ;
+    skos:definition "Algemene Verordening Gegevensbescherming / General Data Protection Regulation (in voege sinds 25 mei 2018)"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "AVG"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:awis a skos:Concept ;
+    dct:source wb:awis ;
+    skos:definition "A fval W ater I nformatie S ysteem. Dit systeem bevat alle relevante informatie over rioleringsinfrastructuur en vormt de basis voor de verdere uitbouw ervan."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "AWIS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:base-1 a skos:Concept ;
+    dct:source wb:base-1 ;
+    skos:definition "Een base is de tegenhanger van een zuur en heeft in oplossing een pH-waarde hoger dan 7. Zuren worden door basen geneutraliseerd onder vorming van een zout en water."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Base"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bbi a skos:Concept ;
+    dct:source wb:bbi ;
+    skos:definition "Belgische Biotische Index"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "BBI"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bbt a skos:Concept ;
+    dct:source wb:bbt ;
+    skos:definition "Technieken die, in vergelijking met alle gelijkaardige technieken, het best scoren op milieugebied én betaalbaar zijn én technisch uitvoerbaar zijn."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "BBT"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:belac a skos:Concept ;
+    dct:source wb:belac ;
+    skos:definition "Belgische Accreditatie-instelling"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "BELAC"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bemalingscascade a skos:Concept ;
+    dct:source wb:bemalingscascade ;
+    skos:definition "Een wettelijk verplichte volgorde van vier stappen om de impact van bemalingen bij bouwwerken te beperken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bemalingscascade"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bg a skos:Concept ;
+    dct:source wb:bg ;
+    skos:definition "Bepaalbaarheidsgrens"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "BG"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:binneninstallatie a skos:Concept ;
+    dct:source wb:binneninstallatie ;
+    skos:definition "Het huishoudelijk leidingnet met de hieraan verbonden systemen en toestellen, dat gevoed wordt met water bestemd voor menselijke consumptie afkomstig van het openbare waternet."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Binneninstallatie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bio-accumuleerbaar a skos:Concept ;
+    dct:source wb:bio-accumuleerbaar ;
+    skos:definition "Bioaccumulatie is de ophoping van chemische stoffen aanwezig in het milieu, in levende wezens (planten of dieren)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bio-accumuleerbaar"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bovengemeentelijke-saneringsbijdrage a skos:Concept ;
+    dct:source wb:bovengemeentelijke-saneringsbijdrage ;
+    skos:definition "De kost op je waterfactuur, voor de zuivering van het afvalwater in de zuiveringsstations."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bovengemeentelijke saneringsbijdrage"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bronmaatregelen a skos:Concept ;
+    dct:source wb:bronmaatregelen ;
+    skos:definition "Maatregelen m.b.t. regenwaterbeheer, waardoor problemen zoals wateroverlast en watertekort aan de bron worden aangepakt. Voorbeelden zijn hergebruik, infiltratie en buffering met vertraagde afvoer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bronmaatregelen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bruine-koolstof a skos:Concept ;
+    dct:source wb:bruine-koolstof ;
+    skos:definition "Deel van organisch koolstof (OC) dat chemisch aanleunt bij BC maar niet zwart is. Het heeft een gele, bruine kleur (zie bv. de gekleurde rookpluimen bij bosbranden). Polycyclische aromatische koolwaterstoffen zijn een typisch voorbeeld van brown carbon."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bruine koolstof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bulk a skos:Concept ;
+    dct:source wb:bulk ;
+    skos:definition "Verzamelnaam voor goederen die niet per stuk worden verpakt en geladen. Ze worden los in het ruim van een schip, vrachtwagen of wagon gestort. Wanneer de producten niet vloeibaar zijn gaat het om droge bulk."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Bulk"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:bzv a skos:Concept ;
+    dct:source wb:bzv ;
+    skos:definition "Biochemisch Zuurstofverbruik"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "BZV"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:captatieverbod a skos:Concept ;
+    dct:source wb:captatieverbod ;
+    skos:definition "Een tijdelijk of permanent verbod om water uit een waterloop te onttrekken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "captatieverbod"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:chemkar a skos:Concept ;
+    dct:source wb:chemkar ;
+    skos:definition "Chemische karakterisering van fijn stofdeeltjes."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Chemkar"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:chlooracne a skos:Concept ;
+    dct:source wb:chlooracne ;
+    skos:definition "Huidaandoening. Een vorm van acne, uitgelokt door blootstelling aan koolwaterstoffen die halogenen (zoals fluor, chloor, broom of jood) bevatten. Bekende veroorzakers zijn dioxines."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Chlooracne"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:circulair-afvalwater a skos:Concept ;
+    dct:source wb:circulair-afvalwater ;
+    skos:definition "Circulair afvalwater is afvalwater van een bedrijf dat hergebruikt kan worden door een ander bedrijf."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Circulair afvalwater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ciw a skos:Concept ;
+    dct:source wb:ciw ;
+    skos:definition "Coördinatiecommissie Integraal Waterbeleid"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "CIW"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:coliform a skos:Concept ;
+    dct:source wb:coliform ;
+    skos:definition "Groep bacteriën en typische indicator voor recente verontreiniging met fecaal materiaal."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Coliformen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:collector a skos:Concept ;
+    dct:source wb:collector ;
+    skos:definition "Een grote rioolbuis die het afvalwater van het gemeentelijke rioleringsstelsel opvangt en naar een rioolwaterzuiveringsinstallatie transporteert."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Collector"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:condensatiekernen a skos:Concept ;
+    dct:source wb:condensatiekernen ;
+    skos:definition "Een condensatiekern is een zeer fijn, in de lucht zwevend stofdeeltje waarop in vochtige koude lucht water zal condenseren, wat tot de vorming van wolken, nevel of mist leidt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Condensatiekern"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:conformiteitspercentage a skos:Concept ;
+    dct:source wb:conformiteitspercentage ;
+    skos:definition "Het totale aantal analyses die conform zijn (voldoen aan de wettelijke kwaliteitseisen) ten opzichte van het totaal aantal uitgevoerde analyses voor alle parameters samen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "conformiteitspercentage"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:constant-head a skos:Concept ;
+    dct:source wb:constant-head ;
+    skos:definition "De infiltratiesnelheid wordt gemeten door te registreren hoeveel water er moet bijgevoegd worden om het waterpeil in de boorput constant te houden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Constant head"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:cr a skos:Concept ;
+    dct:source wb:cr ;
+    skos:definition "Chroom"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Cr"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:cu a skos:Concept ;
+    dct:source wb:cu ;
+    skos:definition "Koper"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Cu"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:cyanobacterien a skos:Concept ;
+    dct:source wb:cyanobacterien ;
+    skos:definition "Bacteriën die zich gedragen als algen en in sommige omstandigheden gifstoffen produceren, waardoor ze gevaarlijk zijn voor mens en dier."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Cyanobacteriën"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:czv a skos:Concept ;
+    dct:source wb:czv ;
+    skos:definition "Chemisch Zuurstofverbruik"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "CZV"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:dampterugwinning a skos:Concept ;
+    dct:source wb:dampterugwinning ;
+    skos:definition "Dampterugwinningssystemen zijn uitrustingen voor het terugwinnen van benzinedampen, met inbegrip van de eventuele systemen met buffertanks."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Dampterugwinning"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:depositie a skos:Concept ;
+    dct:source wb:depositie ;
+    skos:definition "De aanvoer van gassen en deeltjes uit de atmosfeer naar oppervlakken zoals bodem, water, vegetatie, ... Dit gebeurt rechtstreeks vanuit de lucht (droge depositie) en via regen, sneeuw en hagel (natte depositie)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Depositie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:dpo a skos:Concept ;
+    dct:source wb:dpo ;
+    skos:definition "Data Protection Officer / Functionaris Gegevensbescherming"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "DPO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:dwarsdijk a skos:Concept ;
+    dct:source wb:dwarsdijk ;
+    skos:definition "Constructie die haaks op de waterloop wordt aangelegd. Dit zorgt voor een geleidelijke afvloeiing van water."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Dwarsdijken"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ecotoxicologisch a skos:Concept ;
+    dct:source wb:ecotoxicologisch ;
+    skos:definition "betreffende de toxische effecten op organismen of ecosystemen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ecotoxicologisch"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:efsa a skos:Concept ;
+    dct:source wb:efsa ;
+    skos:definition "Europese Autoriteit voor Voedselveiligheid - onafhankelijk wetenschappelijk advies over voedselgerelateerde risico's."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "EFSA"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ekc a skos:Concept ;
+    dct:source wb:ekc ;
+    skos:definition "Ecologische kwaliteitscoëfficiënt"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "EKC"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:elementaire-koolstof a skos:Concept ;
+    dct:source wb:elementaire-koolstof ;
+    skos:definition "Is een maat voor de roetconcentratie in de omgevingslucht. Deze deeltjes ontstaan bij onvolledige verbranding van fossiele brandstoffen, biomassa en biobrandstof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Elementair koolstof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:emissiemetingen a skos:Concept ;
+    dct:source wb:emissiemetingen ;
+    skos:definition "Metingen om te bepalen hoeveel vervuilende stoffen een installatie, voertuig of activiteit uitstoot in de lucht, het water of de bodem."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Emissiemetingen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:eox a skos:Concept ;
+    dct:source wb:eox ;
+    skos:definition "Extraheerbare organohalogeenverbindingen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "EOX"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:esco a skos:Concept ;
+    dct:source wb:esco ;
+    skos:definition "Energy Service Company. Een publieke of private organisatie die integrale energieoplossingen levert aan zijn klanten. Esco’s concentreren zich op het verbeteren van de energie-efficiëntie of energiebesparingen in bestaande gebouwen. Typisch voor esco’s is het aanbieden van prestatiecontracten, waarbij een contractuele garantie wordt gegeven aan de klant op de geraamde energiebesparing, maar ook comfort of energielevering kunnen gegarandeerd worden via een prestatiecontract."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ESCO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:esr a skos:Concept ;
+    dct:source wb:esr ;
+    skos:definition "Effort Sharing Regulation, omvat de uitstoot van broeikasgassen die niet onder ETS vallen: huishoudens, transport, handel & diensten en landbouw."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ESR"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ets a skos:Concept ;
+    dct:source wb:ets ;
+    skos:definition "Europees emissiehandelssysteem, omvat het gros van de emissies van broeikasgassen uit de sectoren energie en industrie, en ook luchtvaart."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ETS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:eu-grenswaarde a skos:Concept ;
+    dct:source wb:eu-grenswaarde ;
+    skos:definition "De Europese grenswaarde zijn het resultaat van een afweging tussen gezondheidseffecten en economische en technische haalbaarheid. De grenswaarden zijn wettelijk bindend."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "EU-grenswaarde"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:euronorm a skos:Concept ;
+    dct:source wb:euronorm ;
+    skos:definition "De euronorm is een Europese milieustandaard die de uitstootklasse van de auto weergeeft. Hoe hoger de euronorm van het voertuig (1 tot 6), hoe milieuvriendelijker."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Euronorm"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:eutrofiering a skos:Concept ;
+    dct:source wb:eutrofiering ;
+    skos:definition "Het overmatig aanwezig zijn van nutriënten zoals stikstof- en fosforverbindingen in een waterloop zodat het plantaardig leven in een waterloop (bv. waterplanten en voornamelijk microscopische wieren) zich explosief kan ontwikkelen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Eutrofiëring"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:falling-head a skos:Concept ;
+    dct:source wb:falling-head ;
+    skos:definition "De infiltratiesnelheid wordt gemeten door middel van de daling van het waterpeil in de boorput."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Falling head"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ferrometalen a skos:Concept ;
+    dct:source wb:ferrometalen ;
+    skos:definition "Tot de ferrometalen behoren de metalen ijzer, kobalt en nikkel. Ferrometalen zijn vaak magnetisch. Op die manier kunnen ze gescheiden worden van de andere metalen voor afvalverwerking."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Ferrometalen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ferrosector a skos:Concept ;
+    dct:source wb:ferrosector ;
+    skos:definition "Ferrosector: ijzerverwerkende industrie Non-ferrosector: vervaardigen van metaal of legering waarvan ijzer niet het hoofdbestanddeel is."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Ferrosector"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:freatisch-grondwater a skos:Concept ;
+    dct:source wb:freatisch-grondwater ;
+    skos:definition "Het freatische of vrije grondwater is bovenaan niet afgesloten door een slecht doorlatende laag en staat dus in contact met de atmosfeer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Freatisch grondwater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:fungiciden a skos:Concept ;
+    dct:source wb:fungiciden ;
+    skos:definition "chemische of biologische middelen die worden gebruikt om schimmelziekten bij planten, dieren en mensen te bestrijden"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "fungiciden"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gbi a skos:Concept ;
+    dct:source wb:gbi ;
+    skos:definition "gemiddelde blootstellingsindex = 3-jaarsgemiddelde PM ₂,₅ -concentratie op stedelijke achtergrondplaatsen over heel België"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GBI"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gebiedsdekkend-uitvoeringsplan a skos:Concept ;
+    dct:source wb:gebiedsdekkend-uitvoeringsplan ;
+    skos:definition "Dit plan omvat onder meer de geplande rioleringsprojecten en de prioritair te plaatsen IBA’s (Individuele behandelingsinstallatie voor afvalwater)"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Gebiedsdekkend uitvoeringsplan"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:geleide-emissie a skos:Concept ;
+    dct:source wb:geleide-emissie ;
+    skos:definition "Geleide emissie: Een emissie afkomstig van een schoorsteen waarvoor bepaalde fysische kenmerken bestaan (ligging, afmetingen) en waarvan het debiet kan worden bepaald. Niet-geleide emissie: voldoet niet aan één van deze kenmerken (ligging, afmetingen, debiet bepalen)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "geleide emissie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gemeentelijke-saneringsbijdrage a skos:Concept ;
+    dct:source wb:gemeentelijke-saneringsbijdrage ;
+    skos:definition "De kost voor het afvoeren en inzamelen van het afvalwater via de riolering, aangerekend door je waterbedrijf."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Gemeentelijke saneringsbijdrage"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gep a skos:Concept ;
+    dct:source wb:gep ;
+    skos:definition "Goed Ecologisch Potentieel"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GEP"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gescheiden-stelsel a skos:Concept ;
+    dct:source wb:gescheiden-stelsel ;
+    skos:definition "Een riolering met één buis waar je enkel je afvalwater in mag lozen, en geen regenwater. Soms is ook een aparte buis voor de afvoer van regenwater voorzien."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Gescheiden stelsel"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ggbi a skos:Concept ;
+    dct:source wb:ggbi ;
+    skos:definition "gewestelijke gemiddelde blootstellingsindex = 3-jaarsgemiddelde PM ₂,₅ -concentratie op stedelijke achtergrondplaatsen over heel Vlaanderen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GGBI"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gog a skos:Concept ;
+    dct:source wb:gog ;
+    skos:definition "Gecontroleerd overstromingsgebied"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GOG"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gpbv a skos:Concept ;
+    dct:source wb:gpbv ;
+    skos:definition "Geïntegreerde Preventie en Bestrijding van Verontreiniging"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GPBV"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:grondwaterlichaam a skos:Concept ;
+    dct:source wb:grondwaterlichaam ;
+    skos:definition "Een afzonderlijke watermassa in één of meer watervoerende lagen. De indeling van de ondergrond in verschillende grondwaterlichamen is voornamelijk gebaseerd op de fysische kenmerken van de grondwaterreservoirs en op de regionale grondwaterstroming. Per grondwaterlichaam worden milieudoelstellingen getoetst en indien nodig maatregelen opgelegd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Grondwaterlichaam"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:grondwatertafel a skos:Concept ;
+    dct:source wb:grondwatertafel ;
+    skos:definition "Het vlak waaronder alle grondporiën gevuld zijn met water. Als je een diepe put graaft kan die zich vullen tot aan dit vlak. In laag­gelegen gebieden zit de watertafel soms minder dan 1 meter diep, in hoger gelegen gebieden is dat vaak 10 meter of meer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Grondwatertafel"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:grootverbruiker a skos:Concept ;
+    dct:source wb:grootverbruiker ;
+    skos:definition "Als je minstens 500 m³ water per jaar verbruikt. Je bent daardoor verplicht om jaarlijks vóór 15 maart een aangifte in te dienen bij de VMM."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Grootverbruiker"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gwp a skos:Concept ;
+    dct:source wb:gwp ;
+    skos:definition "Global warming potential. Hierbij wordt de toename van het broeikaseffect ten gevolge van een eenheidsemissie van een broeikasgas becijferd en gerelateerd aan dit van een eenheidsemissie CO2."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GWP"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:gww a skos:Concept ;
+    dct:source wb:gww ;
+    skos:definition "gebiedsgerichte werking voor water"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "GWW"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hbcd a skos:Concept ;
+    dct:source wb:hbcd ;
+    skos:definition "Hexabromocyclododecaan is een chemische verbinding, behorende tot de gebromeerde vlamvertragers."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "HBCD"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hcbz a skos:Concept ;
+    dct:source wb:hcbz ;
+    skos:definition "Hexachloorbenzeen is een aromatische chemische verbinding."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "HCBz"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hoogwatergeul a skos:Concept ;
+    dct:source wb:hoogwatergeul ;
+    skos:definition "Een hoogwatergeul is een door mensen gemaakte aftakking van een rivier die in geval van een extreem hoge waterstand een deel van het water op een gecontroleerde manier afvoert."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Hoogwatergeul"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hotspot a skos:Concept ;
+    dct:source wb:hotspot ;
+    skos:definition "Een gebied waar de VMM verhoogde concentraties van verontreinigde stoffen in de omgevingslucht meet."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Hotspot"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hydrologie a skos:Concept ;
+    dct:source wb:hydrologie ;
+    skos:definition "De studie van water. Hydrologie onderzoekt de eigenschappen en het gedrag van water op en onder het aardoppervlak en in de atmosfeer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "hydrologie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hydromorfologie a skos:Concept ;
+    dct:source wb:hydromorfologie ;
+    skos:definition "Structuurkwaliteit waterloop."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Hydromorfologie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:hydronautstudies a skos:Concept ;
+    dct:source wb:hydronautstudies ;
+    skos:definition "Studies die de bestaande rioleringsinfrastructuur in kaart brengen en die inzicht geven in de hydraulische werking of het fysische gedrag van de infrastructuur."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "hydronautstudies"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:iba a skos:Concept ;
+    dct:source wb:iba ;
+    skos:definition "Individuele behandelingsinstallatie voor afvalwater"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "IBA"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:icp-ms a skos:Concept ;
+    dct:source wb:icp-ms ;
+    skos:definition "Inductively Coupled Plasma-Mass Spectrometer. Een ICP-MS is een koppeling van een inductief gekoppeld plasma met een massaspectrometer. Met deze techniek is het mogelijk om metalen en sommige niet-metalen met een grote gevoeligheid te bepalen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ICP-MS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ijsvogelwanden a skos:Concept ;
+    dct:source wb:ijsvogelwanden ;
+    skos:definition "Een aarden wand aan de waterloop waar de ijsvogel zich in kan nestelen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Ijsvogelwanden"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:imec a skos:Concept ;
+    dct:source wb:imec ;
+    skos:definition "Interuniversitair Micro-electronicacentrum"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "IMEC"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:imjv a skos:Concept ;
+    dct:source wb:imjv ;
+    skos:definition "Integraal milieujaarverslag"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "IMJV"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:inbo a skos:Concept ;
+    dct:source wb:inbo ;
+    skos:definition "Instituut voor Natuur- en Bosonderzoek"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "INBO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:informatiedrempel a skos:Concept ;
+    dct:source wb:informatiedrempel ;
+    skos:definition "De concentratie waarboven een kortstondige blootstelling een gezondheidsrisico voor bijzonder gevoelige bevolkingsgroepen inhoudt en waarbij actuele informatie over de concentraties aan de bevolking dient gegeven te worden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Informatiedrempel"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:interpolatie a skos:Concept ;
+    dct:source wb:interpolatie ;
+    skos:definition "Voor de punten waarover men geen meetgegevens beschikt wordt op grond van de beschikbare meetgegevens een inschatting gemaakt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Interpolatie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:invasieve-exoot a skos:Concept ;
+    dct:source wb:invasieve-exoot ;
+    skos:definition "Planten, dieren of organismen die van nature niet voorkomen in onze regio en schadelijk zijn voor de natuur"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Invasieve exoot"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ion a skos:Concept ;
+    dct:source wb:ion ;
+    skos:definition "Een elektrisch geladen atoom, molecuul of andere groep gebonden atomen. Een ion kan positief of negatief geladen zijn door respectievelijk een gebrek of een overschot aan een of meer elektronen. Een voorbeeld van een enkelvoudig ion is het chloride-ion (Cl - ). Voorbeelden van samengestelde ionen zijn het ammonium-ion (NH 4 + ) en het sulfaation (SO 4 2– )."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Ion"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ircel a skos:Concept ;
+    dct:source wb:ircel ;
+    skos:definition "Intergewestelijke cel voor het leefmilieu"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "IRCEL"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kleinverbruiker a skos:Concept ;
+    dct:source wb:kleinverbruiker ;
+    skos:definition "Als je minder dan 500 m³ water per jaar verbruikt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Kleinverbruiker"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:knijpconstructie a skos:Concept ;
+    dct:source wb:knijpconstructie ;
+    skos:definition "Constructie die de waterafvoer in een waterloop vertraagt en het water ophoudt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Knijpconstructie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kraanwagen a skos:Concept ;
+    dct:source wb:kraanwagen ;
+    skos:definition "Elk motorvoertuig van de categorie N gebouwd als of definitief omgebouwd tot kraan en uitsluitend als dusdanig aangewend. Onder definitief omgebouwd, verstaat men het plaatsen, op een chassiscabine, van een kraan met dergelijke afmetingen, dat er geen laadplatform meer beschikbaar is."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Kraanwagen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kraanwater a skos:Concept ;
+    dct:source wb:kraanwater ;
+    skos:definition "Drinkbaar water dat geleverd wordt door een waterbedrijf in Vlaanderen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Kraanwater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kritische-last a skos:Concept ;
+    dct:source wb:kritische-last ;
+    skos:definition "Maximaal toelaatbare depositie per eenheid van oppervlakte voor een bepaald ecosysteem zonder dat er (volgens huidige kennis) verandering in de biodiversiteit optreedt op lange termijn."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Kritische last"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:krlw a skos:Concept ;
+    dct:source wb:krlw ;
+    skos:definition "Europese kaderrichtlijn Water"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "KRLW"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kul a skos:Concept ;
+    dct:source wb:kul ;
+    skos:definition "Katholieke Universiteit Leuven"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "KUL"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kws-ap a skos:Concept ;
+    dct:source wb:kws-ap ;
+    skos:definition "Apolaire koolwaterstoffen (cfr. oliën)"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "KWS ap"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kwth a skos:Concept ;
+    dct:source wb:kwth ;
+    skos:definition "Thermische kilowatt"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "kWth"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:kwzi a skos:Concept ;
+    dct:source wb:kwzi ;
+    skos:definition "Kleinschalige waterzuiveringsinstallatie, waarin het afvalwater van 20 tot 2000 inwonersequivalenten wordt gezuiverd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "KWZI"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:lac-decreet a skos:Concept ;
+    dct:source wb:lac-decreet ;
+    skos:definition "Dit decreet legt de rol van de lokale adviescommissie vast, in het kader van het recht op minimumlevering van elektriciteit, gas en water."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "LAC-decreet"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ldt a skos:Concept ;
+    dct:source wb:ldt ;
+    skos:definition "Dit zijn virtuele 2D/3D voorstellingen van een gebied (bv. stad), gemaakt met behulp van modelleer- en simulatietechnologie, datasets en -modellen. Ze kunnen gebieden visualiseren, analyseren en simuleren door datasets van verschillende belanghebbenden zowel in 2D als 3D te tonen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "LDT"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:lez a skos:Concept ;
+    dct:source wb:lez ;
+    skos:definition "Een lage emissiezone is een afgebakend gebied waarin bepaalde voertuigen die te veel schadelijke stoffen uitstoten niet binnen mogen, of slechts onder bepaalde voorwaarden. In Vlaanderen is er een LEZ in Gent en in Antwerpen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "LEZ"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:lokaal-pact a skos:Concept ;
+    dct:source wb:lokaal-pact ;
+    skos:definition "Programma waarbij gemeentelijke investeringen in saneringsinfrastructuur door het Vlaamse Gewest ten laste worden genomen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Lokaal Pact"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:mac a skos:Concept ;
+    dct:source wb:mac ;
+    skos:definition "Maximum Allowable Concentration"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "MAC"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:macro-invertebraten a skos:Concept ;
+    dct:source wb:macro-invertebraten ;
+    skos:definition "Met het blote oog waarneembare ongewervelden zoals insectenlarven, weekdieren, kreeftachtigen, wormen, enz."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Macro-invertebraten"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:metalloide a skos:Concept ;
+    dct:source wb:metalloide ;
+    skos:definition "Scheikundig element zonder metaalglans en met een zwak geleidingsvermogen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Metalloïde"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:meteorologisch a skos:Concept ;
+    dct:source wb:meteorologisch ;
+    skos:definition "De weersomstandigheden nu, in het verleden en het voorspelde weer. De meteorologie of weerkunde is de studie van het weer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "meteorologisch"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:mg a skos:Concept ;
+    dct:source wb:mg ;
+    skos:definition "Milligram of één duizendste gram."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "mg"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:microgram a skos:Concept ;
+    dct:source wb:microgram ;
+    skos:definition "Een microgram is gelijk aan 10 -6 g, ofwel 0,000 001 gram. Het is één miljoenste gram."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "microgram"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:milieu-impacttoetskaart a skos:Concept ;
+    dct:source wb:milieu-impacttoetskaart ;
+    skos:definition "Om de impact van lozingen op basis van ecologische criteria te kunnen rangschikken, werden zogenaamde milieu-impacttoetskaarten opgesteld. Deze kaarten brengen verschillende milieuaspecten samen tot 1 globale score. De score houdt rekening met volgende aspecten: overstromingsgebieden; prioritair te onderzoeken waterbodems; ecologisch waardevolle gebieden en waterlopen; drinkwater & zwemwater; aanpak bovenlopen; advies van de bekkenbesturen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Milieu-impacttoetskaart"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:milieukwaliteitsnorm a skos:Concept ;
+    dct:source wb:milieukwaliteitsnorm ;
+    skos:definition "De concentratie van een bepaalde verontreinigende stof of groep van verontreinigende stoffen in water, in sediment of in levende organismen, die ter bescherming van de gezondheid van de mens en het milieu niet mag worden overschreden. Een waterkwaliteitsparameter moet voldoen aan de milieukwaliteitsnorm om de goede toestand te behalen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Milieukwaliteitsnorm"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:minafonds a skos:Concept ;
+    dct:source wb:minafonds ;
+    skos:definition "Fonds voor Preventie en Sanering inzake Leefmilieu en Natuur, gedeeltelijk gespijsd volgens het principe 'de vervuiler betaalt' met ontvangsten van milieuheffingen en -boetes."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Minafonds"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:mmif a skos:Concept ;
+    dct:source wb:mmif ;
+    skos:definition "Multimetrische Macro-invertebratenindex Vlaanderen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "MMIF"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:mn a skos:Concept ;
+    dct:source wb:mn ;
+    skos:definition "Mangaan"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Mn"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:modelberekening a skos:Concept ;
+    dct:source wb:modelberekening ;
+    skos:definition "Een computerprogramma waarmee je een wetenschappelijk of technisch verantwoord beeld van de werkelijkheid krijgt. De VMM gebruikt computermodellen onder meer om de actuele en toekomstige luchtkwaliteit in te schatten en om de kans op overstromingen in te schatten. Modelberekeningen of modelkaarten benaderen de realiteit, maar zijn niet perfect. Daarom worden ze ook periodiek afgetoetst aan meetresultaten of waarnemingen op het terrein."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Modelberekening"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:monster a skos:Concept ;
+    dct:source wb:monster ;
+    skos:definition "Kleine te onderzoeken hoeveelheid."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Monster"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:mps a skos:Concept ;
+    dct:source wb:mps ;
+    skos:definition "Multiparametersondes zijn toestellen die gebruikt worden om 24/24 verschillende waterkwaliteitsparameters op te volgen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "MPS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:n-t a skos:Concept ;
+    dct:source wb:n-t ;
+    skos:definition "Totaal stikstof"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "N t"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:n2o a skos:Concept ;
+    dct:source wb:n2o ;
+    skos:definition "Lachgas"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "N2O"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:nanogram a skos:Concept ;
+    dct:source wb:nanogram ;
+    skos:definition "Een nanogram is gelijk aan 10 −9 g, ofwel 0,000 000 001 gram. Het is één miljardste gram."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "nanogram"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:nature-based-solutions a skos:Concept ;
+    dct:source wb:nature-based-solutions ;
+    skos:definition "Oplossingen gebaseerd op en geïnspireerd door de natuur, die kosteneffectief zijn, ecologische, sociale en economische voordelen opleveren en bijdragen tot het opbouwen van veerkracht."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Nature-based Solutions"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:net60ppb-max8u a skos:Concept ;
+    dct:source wb:net60ppb-max8u ;
+    skos:definition "Number of Exceedances above Threshold of 60 ppb (parts per billion): aantal overschrijdingsdagen van de hoogste 8-uurgemiddelde ozonconcentratie boven de drempel van 120 µg/m³."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "NET60ppb-max8u"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ngbo a skos:Concept ;
+    dct:source wb:ngbo ;
+    skos:definition "Maatregelen waarin vegetatie (het groen) en water (het blauw) samenwerken om baten voor de mens te leveren."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "NGBO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:non-ferrometalen a skos:Concept ;
+    dct:source wb:non-ferrometalen ;
+    skos:definition "Non-ferrometalen: Metaal of legering waarvan het hoofdbestanddeel niet ijzer is (bijvoorbeeld koper, lood, aluminium, zink, brons en messing)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Non-ferrometalen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ocp a skos:Concept ;
+    dct:source wb:ocp ;
+    skos:definition "Organochloorpesticiden"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "OCP"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ocp-t a skos:Concept ;
+    dct:source wb:ocp-t ;
+    skos:definition "Som van de gemeten organochloorpesticiden"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "OCP t"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:oeverwal a skos:Concept ;
+    dct:source wb:oeverwal ;
+    skos:definition "Oeverwallen zijn afzettingen langsheen een rivier waardoor ze een soort dijkje vormen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Oeverwallen"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:organische-koolstof a skos:Concept ;
+    dct:source wb:organische-koolstof ;
+    skos:definition "Koolstof die voorkomt in organische materie."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Organische koolstof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:organische-massa a skos:Concept ;
+    dct:source wb:organische-massa ;
+    skos:definition "De massa van alle organische verbindingen in fijn stof, die bestaat naast de massa van koolstof ook uit die van waterstof en eventueel andere atomen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Organische massa"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:organotin a skos:Concept ;
+    dct:source wb:organotin ;
+    skos:definition "Organotinverbindingen zijn stoffen die milieuschade en gezondheidsproblemen kunnen veroorzaken. Ze worden voornamelijk gebruikt in pvc-producten, bestrijdingsmiddelen in de landbouw en als bescherming van hout."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "organotin"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ospm a skos:Concept ;
+    dct:source wb:ospm ;
+    skos:definition "Operational Street Pollution Model"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "OSPM"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ovam a skos:Concept ;
+    dct:source wb:ovam ;
+    skos:definition "Openbare Vlaamse Afvalstoffenmaatschappij. Vlaamse overheidsinstelling die werkt aan duurzaam afval- en materialenbeheer en een propere bodem in Vlaanderen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "OVAM"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:overgangswater a skos:Concept ;
+    dct:source wb:overgangswater ;
+    skos:definition "Een type water dat je vindt bij de monding van een rivier waar het water gedeeltelijk zout is door de nabijheid van de zee, maar ook nog zoet water bevat van de rivier."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Overgangswater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:overnamepunt a skos:Concept ;
+    dct:source wb:overnamepunt ;
+    skos:definition "De plaats waar de gemeentelijke taak van afvalwaterinzameling overgaat in de gewestelijke taak van afvalwatertransport."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Overnamepunten"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:overstort a skos:Concept ;
+    dct:source wb:overstort ;
+    skos:definition "Nooduitlaat in het rioolstelsel. Als bij hevige regenval de riolering capaciteit te kort komt om rioolwater te bergen, wordt het ongezuiverde rioolwater rechtstreeks op een beek of rivier geloosd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Overstort"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:oxidatie a skos:Concept ;
+    dct:source wb:oxidatie ;
+    skos:definition "Het vormen van een verbinding met zuurstof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Oxidatie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ozondosis a skos:Concept ;
+    dct:source wb:ozondosis ;
+    skos:definition "Inschatting van de hoeveelheid ozon die effectief door planten via de huidmondjes wordt opgenomen tijdens het groeiseizoen. Maat voor de ozonschade aan planten"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ozondosis"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:p-t a skos:Concept ;
+    dct:source wb:p-t ;
+    skos:definition "Totaal fosfor"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "P t"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pak6 a skos:Concept ;
+    dct:source wb:pak6 ;
+    skos:definition "Polycyclische aromatische koolwaterstoffen. Somparameter van de zes PAK’s van Borneff: benzo(a)pyreen, benzo(b) fluoranteen, benzo(ghi)peryleen, benzo(k)fluoranteen, fluoranteen en indeno(1,2,3-cd)pyreen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PAK6"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:paks a skos:Concept ;
+    dct:source wb:paks ;
+    skos:definition "Polycyclische aromatische koolwaterstoffen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PAK's"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pbde a skos:Concept ;
+    dct:source wb:pbde ;
+    skos:definition "Polygebromineerde difenylethers zijn een groep van chemische verbindingen, behorende tot de gebromeerde vlamvertragers."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PBDE"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pcb a skos:Concept ;
+    dct:source wb:pcb ;
+    skos:definition "Polychloorbifenylen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PCB"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pcb-t a skos:Concept ;
+    dct:source wb:pcb-t ;
+    skos:definition "Som van de gemeten polychloorbifenylen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PCB t"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:peilbeheer a skos:Concept ;
+    dct:source wb:peilbeheer ;
+    skos:definition "Met peilbeheer beïnvloeden we het oppervlaktewater en onrechtstreeks ook de grondwaterstanden in een afgebakend gebied. Dat gebeurt via regelbare constructies, zoals pompen en stuwen, op onbevaarbare waterlopen en grachten. Peilbeheer is vooral belangrijk in vlakke gebieden waar pompgemalen en stuwen het peil in een gebied bepalen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Peilbeheer"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:peilbesluit a skos:Concept ;
+    dct:source wb:peilbesluit ;
+    skos:definition "In heel wat gebieden werken waterbeheerders aan peilbesluiten. Het zijn juridisch verankerde afspraken voor beter peilbeheer op onbevaarbare waterlopen en grachten. Zo pakken we verdroging aan en houden we het water zoveel mogelijk vast volgens de noden in een gebied."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Peilbesluit"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:percentiel a skos:Concept ;
+    dct:source wb:percentiel ;
+    skos:definition "De waarde waarbij P % van het totaal aantal meetwaarden lager zijn en (100- P %) van de waarden hoger zijn. Het 98 ste percentiel bijvoorbeeld is die waarde waarbij 98% van de meetwaarden lager zijn en 2 % van de waarden hoger zijn. Percentielen worden meestal berekend over relatief langere perioden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Percentiel"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:persistent a skos:Concept ;
+    dct:source wb:persistent ;
+    skos:definition "Een niet-afbreekbare stof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Persistent"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pesticiden a skos:Concept ;
+    dct:source wb:pesticiden ;
+    skos:definition "gewasbeschermingsmiddelen, biociden en hun relevante metabolieten, degradatie- en afbraakproducten."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Pesticiden"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pfas a skos:Concept ;
+    dct:source wb:pfas ;
+    skos:definition "Poly- en perfluoralkylstoffen zijn chemische stoffen die door de mens zijn gemaakt. Zij komen van nature niet in het milieu voor. Ze worden in vele industriële toepassingen en consumentenproducten gebruikt. Denk aan de teflon anti-aanbaklaag in pannen, cosmetica, textiel, brandblusschuim, schoonmaakmiddelen of smeermiddelen . PFAS kunnen schadelijke effecten hebben op de gezondheid van mensen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PFAS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pfos a skos:Concept ;
+    dct:source wb:pfos ;
+    skos:definition "Perfluoroctaansulfonaat is een chemische verbinding die deel uitmaakt van de persistente organische verontreinigende stoffen (POP's)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PFOS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pfos-1 a skos:Concept ;
+    dct:source wb:pfos-1 ;
+    skos:definition "PFOS is een perfluoroctaansulfonzuur of een perfluorverbinding, een chemische stof om producten water-, vet- en vuilafstotend te maken. Bovendien is PFOS bestand tegen hoge temperaturen . Deze synthetische chemische stof behoort tot de PFAS-familie: het komt niet van nature voor in het milieu en is niet afbreekbaar."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PFOS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:picogram a skos:Concept ;
+    dct:source wb:picogram ;
+    skos:definition "Een miljoenste van een miljoenste gram, ofwel 10 -12 gram."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Picogram"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pio a skos:Concept ;
+    dct:source wb:pio ;
+    skos:definition "Prati-index voor zuurstofverzadiging"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PIO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pisiad a skos:Concept ;
+    dct:source wb:pisiad ;
+    skos:definition "Proportions of Impact-Sensitive and Impact-Associated Diatoms"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PISIAD"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pm10 a skos:Concept ;
+    dct:source wb:pm10 ;
+    skos:definition "Stofdeeltjes kleiner dan 10 µm (micrometer). PM is de afkorting van P articulate M atter ofwel de Engelstalige term voor fijn stof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PM₁₀"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pm2-5 a skos:Concept ;
+    dct:source wb:pm2-5 ;
+    skos:definition "Stofdeeltjes kleiner dan 2,5 µm (micrometer). PM is de afkorting van P articulate M atter ofwel de Engelstalige term voor fijn stof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PM₂,₅"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pnec a skos:Concept ;
+    dct:source wb:pnec ;
+    skos:definition "Predicted No Effect Concentration"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "PNEC"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:polluent a skos:Concept ;
+    dct:source wb:polluent ;
+    skos:definition "Vervuilende stof"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Polluent"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:polymeer a skos:Concept ;
+    dct:source wb:polymeer ;
+    skos:definition "Lange ketting die bestaat uit identieke molecule (monomeren). Vooral in de kunststoffabrieken worden polymeren gemaakt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Polymeer"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pompboezem a skos:Concept ;
+    dct:source wb:pompboezem ;
+    skos:definition "Een waterbuffer juist opwaarts van een pompgemaal. Door de buffer is de stabiele werking van het pompgemaal verzekerd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Pompboezem"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:pop2019s a skos:Concept ;
+    dct:source wb:pop2019s ;
+    skos:definition "Persistente organische polluenten. Organische stoffen met een hoge resistentie tegen biologische afbraak. Ze zijn bijzonder schadelijk voor de volksgezondheid en het milieu."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "POP’s"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ppb a skos:Concept ;
+    dct:source wb:ppb ;
+    skos:definition "Parts per billion. Delen per miljard."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ppb"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:prati-index a skos:Concept ;
+    dct:source wb:prati-index ;
+    skos:definition "Deze index geeft de kwaliteitsklasse van de zuurstofhuishouding in oppervlaktewater weer. Prati is een Italiaanse onderzoeker die in 1971 een methode publiceerde om meerdere waterkwaliteitsparameters om te rekenen naar een eenvoudige, onderling vergelijkbare kwaliteitsindex en -klasse."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Prati-index"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:precursor a skos:Concept ;
+    dct:source wb:precursor ;
+    skos:definition "Voorloperstof. Stof die door chemische reacties andere stoffen kan vormen, bv. ammoniak, zwaveldioxide of stikstofoxiden kunnen reageren tot fijn stof."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Precursor"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:predatie a skos:Concept ;
+    dct:source wb:predatie ;
+    skos:definition "Een prooi actief bejagen om die te doden en als voedsel te gebruiken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Predatie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:primair-fijn-stof a skos:Concept ;
+    dct:source wb:primair-fijn-stof ;
+    skos:definition "Stofdeeltjes die rechtstreeks als fijn stof uitgestoten worden in de atmosfeer, bv. roet."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Primair fijn stof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:primaire-stofemissie a skos:Concept ;
+    dct:source wb:primaire-stofemissie ;
+    skos:definition "Primaire stofdeeltjes worden direct in de atmosfeer uitgestoten."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Primaire stofemissie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:prioritaire-stof a skos:Concept ;
+    dct:source wb:prioritaire-stof ;
+    skos:definition "Prioritaire stoffen vormen een groot risico voor het watermilieu. De meest risicovolle stoffen uit Bijlage X bij de Europese kaderrichtlijn Water zijn aangemerkt als prioritair gevaarlijk. De lidstaten moeten beheersmaatregelen treffen, gericht op het verminderen van het vrijkomen van prioritaire stoffen en het stoppen van het vrijkomen van de prioritair gevaarlijke stoffen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Prioritaire stof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:private-waterleverancier a skos:Concept ;
+    dct:source wb:private-waterleverancier ;
+    skos:definition "Private waterleveranciers voorzien gebruikers van drinkwater, zonder een openbaar waterleidingnet te gebruiken. Meestal hebben zij een eigen grondwaterwinning. Dit grondwater wordt verdeeld en gebruikt, bv. verhuurder woning of eigenaar openbaar gebouw. Natuurlijk mineraalwater dat wettelijk erkend is en water als geneesmiddel, vallen hier buiten."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Private waterleverancier"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:prive-waterafvoer a skos:Concept ;
+    dct:source wb:prive-waterafvoer ;
+    skos:definition "De afvoerbuizen voor regenwater en afvalwater op je eigen (privé) terrein."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Privé-waterafvoer"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:putwater a skos:Concept ;
+    dct:source wb:putwater ;
+    skos:definition "Water dat niet afkomstig is uit het openbare waternet en als bron ondiep of diep grondwater heeft."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Putwater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:raffinaderij a skos:Concept ;
+    dct:source wb:raffinaderij ;
+    skos:definition "Fabriek waarin aardolie gezuiverd of verwerkt wordt tot andere stoffen zoals brandstoffen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Raffinaderij"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:retributie a skos:Concept ;
+    dct:source wb:retributie ;
+    skos:definition "Een kostendekkende vergoeding voor een prestatie of dienst geleverd door de overheid."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Retributie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:rioleringsgraad a skos:Concept ;
+    dct:source wb:rioleringsgraad ;
+    skos:definition "Het percentage inwoners van een gemeente waarvan het afvalwater is aangesloten op riolering ."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Rioleringsgraad"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:rivm a skos:Concept ;
+    dct:source wb:rivm ;
+    skos:definition "Rijksinstituut voor Volksgezondheid en Milieu, een zelfstandig onderdeel (agentschap) van het ministerie van Volksgezondheid, Welzijn en Sport in Nederland."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "RIVM"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:roll-on-roll-off a skos:Concept ;
+    dct:source wb:roll-on-roll-off ;
+    skos:definition "Een roll-on-roll-off schip heeft horizontale open dekken of dekken die met een klep gesloten kunnen worden. Zo kan rollende lading zoals bijvoorbeeld vrachtwagens en auto's gemakkelijk geladen worden zonder dat er kranen nodig zijn."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Roll-on-roll-off"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:ruwwater a skos:Concept ;
+    dct:source wb:ruwwater ;
+    skos:definition "Grondwater of oppervlaktewater dat door de waterbedrijven gebruikt wordt als bron voor de productie van kraanwater."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Ruwwater"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:rwzi a skos:Concept ;
+    dct:source wb:rwzi ;
+    skos:definition "Rioolwaterzuiveringsinstallatie"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "RWZI"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:saneringsinfrastructuur a skos:Concept ;
+    dct:source wb:saneringsinfrastructuur ;
+    skos:definition "Het geheel van voorzieningen om het afvalwater te transporteren, te zuiveren en finaal te lozen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "saneringsinfrastructuur"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:sb a skos:Concept ;
+    dct:source wb:sb ;
+    skos:definition "Antimoon"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Sb"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:sck-cen a skos:Concept ;
+    dct:source wb:sck-cen ;
+    skos:definition "Studiecentrum voor Kernenergie (Centre d’Etude de l’Energie Nucléaire)"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "SCK-CEN"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:secundair-fijn-stof a skos:Concept ;
+    dct:source wb:secundair-fijn-stof ;
+    skos:definition "Deeltjes die als gas worden uitgestoten en die door chemische of fysische reacties worden omgezet in fijn stof, bv. ammonium, nitraat en sulfaat zijn afkomstig uit ammoniak, stikstofdioxiden en zwaveldioxide."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Secundair fijn stof"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:secundaire-stofemissie a skos:Concept ;
+    dct:source wb:secundaire-stofemissie ;
+    skos:definition "Secundaire deeltjes ontstaan in de atmosfeer door chemische reacties uit gasvormige componenten zoals SO 2 , NH 3 en NO x ."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Secundaire stofemissie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:signaalgebieden a skos:Concept ;
+    dct:source wb:signaalgebieden ;
+    skos:definition "Nog niet ontwikkelde gebieden met een harde gewestplanbestemming (woongebied, industriegebied,...) die ook een functie kunnen vervullen in de aanpak van wateroverlast omdat ze kunnen overstromen of omdat ze omwille van specifieke bodemeigenschappen als een natuurlijke spons fungeren."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Signaalgebieden"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:slibvang a skos:Concept ;
+    dct:source wb:slibvang ;
+    skos:definition "Goed bereikbare plaatsen waar we de waterloop aanpassen zodat slib en zand er bezinkt. Hierdoor beperken we de ecologische impact en de kosten van slibruimingen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Slibvang"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:smog a skos:Concept ;
+    dct:source wb:smog ;
+    skos:definition "Het woord smog komt oorspronkelijk van de woorden smoke en fog, of rook en mist. Tegenwoordig spreken we van smog als de lucht sterk verontreinigd is door minstens één van de volgende stoffen: ozon (O 3 ), fijn stof (PM 10 ), zwaveldioxide (SO 2 ) en stikstofdioxide (NO 2 ). Zomersmog treedt op wanneer er op warme en zonnige dagen te veel ozon in de lucht hangt. Wintersmog ontstaat als stoffen afkomstig van verkeer en industrie (fijn stof, roet, stikstofoxiden en zwaveloxiden) blijven hangen tijdens de winterperiode."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Smog"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:sponsstad a skos:Concept ;
+    dct:source wb:sponsstad ;
+    skos:definition "Een stad die regenwater absorbeert en vasthoudt zoals een spons, en er – bijvoorbeeld in periodes van droogte – gebruik van maakt. In plaats van regenwater af te voeren via rioleringssystemen en straatgoten, proberen sponssteden het regenwater te benutten op een manier die het milieu en de gemeenschap ten goede komt. Ze passen daarvoor de infrastructuur aan met onder andere bovengrondse en ondergrondse grachten, groene ruimtes en overstromingsbekkens. Kopenhagen is een bekend voorbeeld van een stad die de principes van een sponsstad toepast."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "sponsstad"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:steg a skos:Concept ;
+    dct:source wb:steg ;
+    skos:definition "Stoom- en gascentrale, een elektriciteitscentrale waarbij twee turbines worden aangedreven. De eerste turbine is een gasturbine en wordt aangedreven door het verbranden van aardgas of door vergassing van steenkool en/of biomassa. De tweede turbine, de stoomturbine, wordt aangedreven door stoom die wordt verhit door de warmte van de gassen van de gasturbine."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "STEG"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:street-canyon a skos:Concept ;
+    dct:source wb:street-canyon ;
+    skos:definition "Smalle straten met hoge bebouwing. In deze straten worden de uitlaatgassen slechter verdund en kan de luchtvervuiling opstapelen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "street canyon"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:stroomdeflectoren a skos:Concept ;
+    dct:source wb:stroomdeflectoren ;
+    skos:definition "Kleine aanpassingen in de waterloop (bv. kleine eilandjes, boomstronken…) die zorgen voor meer variatie in stroomsnelheid. Hierdoor krijgt het waterleven (vissen, planten, insecten) meer kansen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Stroomdeflectoren"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:stroomgebiedbeheerplan a skos:Concept ;
+    dct:source wb:stroomgebiedbeheerplan ;
+    skos:definition "Deze plannen bevatten maatregelen om de toestand van de waterlopen en het grondwater te verbeteren en om het overstromingsrisico te verminderen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Stroomgebiedbeheerplan"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:targetmethoden a skos:Concept ;
+    dct:source wb:targetmethoden ;
+    skos:definition "Target of doelstofanalyse is een kwantitatieve analysemethode waarbij gericht gezocht wordt naar specifieke stoffen waarvan de stofkarakteristieken, zoals retentietijd en massaspectrum, gekend zijn."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "targetmethoden"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:telemetrisch a skos:Concept ;
+    dct:source wb:telemetrisch ;
+    skos:definition "Meetapparatuur die beheersbaar en bestuurbaar is van op afstand."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Telemetrisch"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:temperatuursinversie a skos:Concept ;
+    dct:source wb:temperatuursinversie ;
+    skos:definition "Weersomstandigheid met weinig wind waarbij een warme luchtlaag boven koudere lucht dichter bij de grond ligt. Dat zorgt ervoor dat luchtverontreiniging niet weg kan en de concentraties verontreinigende stoffen oplopen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Temperatuursinversie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:toxisch a skos:Concept ;
+    dct:source wb:toxisch ;
+    skos:definition "giftig"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Toxisch"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:toxische-equivalenten a skos:Concept ;
+    dct:source wb:toxische-equivalenten ;
+    skos:definition "Eenheid waarin de giftigheid van dioxineachtige verbindingen wordt uitgedrukt. Hiertoe wordt de giftigheid van elke dioxine vergeleken met de giftigste dioxine (2,3,7,8-TCDD) met behulp van toxicologische equivalentiefactoren (TEF). De concentratie van elke dioxine wordt dan vermenigvuldigd met deze relatieve giftigheid om ze bij elkaar te kunnen optellen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Toxische equivalenten"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:toxische-equivalentie a skos:Concept ;
+    dct:source wb:toxische-equivalentie ;
+    skos:definition "Totale toxiciteit van een mengsel van dioxines en PCB’s."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Toxische equivalentie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:toxische-equivalentiefactor a skos:Concept ;
+    dct:source wb:toxische-equivalentiefactor ;
+    skos:definition "Eenheid waarmee verschillende dioxines en PCB's qua giftigheid met elkaar kunnen vergeleken worden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Toxische equivalentiefactor"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:troposfeer a skos:Concept ;
+    dct:source wb:troposfeer ;
+    skos:definition "Atmosfeerlaag gelegen tussen het grondniveau en ongeveer 6 tot 16 km hoogte (afhankelijk van de meteorologische omstandigheden)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Troposfeer"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:tsp a skos:Concept ;
+    dct:source wb:tsp ;
+    skos:definition "Totaal stof. Een mengsel van deeltjes van uiteenlopende samenstelling en afmetingen in de lucht. De deeltjes worden ingedeeld in fracties op basis van hun grootte, namelijk PM10, PM2,5, PM1 en PM0,1."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "TSP"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:typegebied a skos:Concept ;
+    dct:source wb:typegebied ;
+    skos:definition "Naargelang hun ligging worden de meetplaatsen ingedeeld in 5 typegebieden: landelijk, voorstedelijk, stedelijk, verkeersgericht of industrieel. Per typegebied wordt er een gemiddelde berekend."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Typegebied"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:uitvoeringsgraad a skos:Concept ;
+    dct:source wb:uitvoeringsgraad ;
+    skos:definition "De verhouding van het totaal aantal huidige gerioleerde inwoners t.o.v. het aantal maximaal gerioleerde inwoners (als uitdrukking van de vordering van de uitbouw van het rioleringsstelsel binnen de gemeente)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Uitvoeringsgraad"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:uitwateringsconstructie a skos:Concept ;
+    dct:source wb:uitwateringsconstructie ;
+    skos:definition "Een uitwateringsconstructie is een waterbouwkundig kunstwerk dat ervoor zorgt dat overtollig water uit een polder, kanaal of rivier veilig kan worden afgevoerd naar een groter watersysteem (zoals de zee, een rivier of een meer). Het functioneert vaak als een 'afsluitbare monding' om te voorkomen dat het hoge water van buitenaf terugstroomt."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Uitwateringsconstructie"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:um a skos:Concept ;
+    dct:source wb:um ;
+    skos:definition "Micrometer ofwel een miljoenste deel van een meter, of een duizendste deel van een millimeter (0,001 mm)."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "µm"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vastrecht a skos:Concept ;
+    dct:source wb:vastrecht ;
+    skos:definition "Een vast bedrag op je waterfactuur, dat losstaat van je verbruik. Het wordt aangerekend per wooneenheid of per watermeter. In totaal betaal je daarvoor 100 euro per jaar excl. btw."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "vastrecht"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:veka a skos:Concept ;
+    dct:source wb:veka ;
+    skos:definition "Vlaams Energie- en Klimaatagentschap"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VEKA"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:verhang a skos:Concept ;
+    dct:source wb:verhang ;
+    skos:definition "Het verhang is het relatieve hoogteverschil over een traject binnen de waterloop. Dit wordt uitgedrukt in m/km. Bv. op een afstand van 1km is er een hoogteverschil van 4,5m."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Verhang"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:verkeersgericht a skos:Concept ;
+    dct:source wb:verkeersgericht ;
+    skos:definition "Typegebied gelegen nabij een locatie die gericht is op verkeer."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Verkeersgericht"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vito a skos:Concept ;
+    dct:source wb:vito ;
+    skos:definition "Vlaamse Instelling Technologisch Onderzoek"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VITO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vlaamse-veerkracht a skos:Concept ;
+    dct:source wb:vlaamse-veerkracht ;
+    skos:definition "De Vlaamse Veerkracht is een ambitieus investeringsplan van de Vlaamse Regering om het economische en maatschappelijke weefsel in Vlaanderen te herstellen en te versterken. Het plan zet onder meer in op het efficiënter maken van de overheid, digitale transformatie, verduurzamen en overheidsinvesteringen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Vlaamse Veerkracht"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vlagg a skos:Concept ;
+    dct:source wb:vlagg ;
+    skos:definition "Vlaamse afstromingsgevoelige gebieden"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VLAGG"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vlarel a skos:Concept ;
+    dct:source wb:vlarel ;
+    skos:definition "Vlaams reglement inzake erkenningen met betrekking tot het leefmilieu"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VLAREL"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vlarem a skos:Concept ;
+    dct:source wb:vlarem ;
+    skos:definition "Vlaams Reglement betreffende de milieuvergunning"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VLAREM"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vlm a skos:Concept ;
+    dct:source wb:vlm ;
+    skos:definition "Vlaamse Landmaatschappij www.vlm.be"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VLM"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:voorzorgswaarde a skos:Concept ;
+    dct:source wb:voorzorgswaarde ;
+    skos:definition "Een veilige referentiewaarde, die aangeeft - op basis van de structuurkenmerken van de stof - vanaf wanneer een stof een gezondheidskundige impact zou kunnen hebben."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Voorzorgswaarde"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vos a skos:Concept ;
+    dct:source wb:vos ;
+    skos:definition "vluchtige organische stoffen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "VOS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:vulkaniseren a skos:Concept ;
+    dct:source wb:vulkaniseren ;
+    skos:definition "Het behandelen van rubber door het te verhitten samen met zwavel om het vormvaster en elastischer te maken."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Vulkaniseren"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:wadi a skos:Concept ;
+    dct:source wb:wadi ;
+    skos:definition "Een ondiepe kuil of greppel in een tuin of in het openbaar domein waarin regenwater zich kan verzamelen en in de bodem kan infiltreren. Wadi wordt ook als letterwoord gebruikt voor 'waterafvoer door infiltratie'."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "wadi"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:warmte-krachtkoppeling-wkk a skos:Concept ;
+    dct:source wb:warmte-krachtkoppeling-wkk ;
+    skos:definition "gelijktijdige omzetting van een energiestroom in kracht (mechanische energie) en warmte (thermische energie) met nuttige bestemming. Afhankelijk van het proces en de bestemming wordt de warmte op verschillende temperatuur geleverd. De kracht drijft doorgaans een generator aan om elektriciteit op te wekken of soms rechtstreeks een machine (pomp, compressor ...). De gelijktijdige omzetting van een primaire energiebron (vaak aardgas) in een WKK naar kracht en warmte gebeurt aan een hogere energie-efficiëntie dan wanneer kracht en warmte in afzonderlijke installaties worden geproduceerd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Warmte-krachtkoppeling (WKK)"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:waterinfo a skos:Concept ;
+    dct:source wb:waterinfo ;
+    skos:definition "Een portaalwebsite die alle waterstanden en overstromingsvoorpellingen van vijf Vlaamse waterbeheerders toont. De website biedt je ook informatie over neerslag en droogte, getijden en risicokaarten voor overstromingen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Waterinfo"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:watertoets-1 a skos:Concept ;
+    dct:source wb:watertoets-1 ;
+    skos:definition "De watertoets is een onderzoek naar schadelijke effecten op het watersysteem. Die kunnen veroorzaakt worden door bijvoorbeeld de bouw van een woning, een bedrijfsgebouw of een infrastructuurproject. Ook plannen die een impact kunnen hebben op het watersysteem zoals ruimtelijke uitvoeringsplannen worden onderworpen aan de watertoets."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Watertoets"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:wateruitvoeringsprogramma a skos:Concept ;
+    dct:source wb:wateruitvoeringsprogramma ;
+    skos:definition "Het wateruitvoeringsprogramma rapporteert jaarlijks over de uitvoering van de stroomgebiedbeheerplannen en blikt vooruit op de uitvoering van de volgende jaren. Net zoals de stroomgebiedbeheerplannen, bestaat het WUP uit verschillende delen: een deel op stroomgebiedniveau, 11 bekkenspecifieke delen, een deel op grondwatersysteemniveau en een deel over de zoneringsplannen en de gebiedsdekkende uitvoeringsplannen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Wateruitvoeringsprogramma"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:weiss a skos:Concept ;
+    dct:source wb:weiss ;
+    skos:definition "Water Emissions Inventory Support System. Een model om significante bronnen en hun bijdrage aan de waterverontreiniging in kaart te brengen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "WEISS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:wetlands a skos:Concept ;
+    dct:source wb:wetlands ;
+    skos:definition "Een gebied dat zich bevindt op de grens tussen land en water. Vaak zijn het gebieden die af en toe onder water staan en dan weer droogvallen of drassig worden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "wetlands"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:wgo a skos:Concept ;
+    dct:source wb:wgo ;
+    skos:definition "Wereldgezondheidsorganisatie"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "WGO"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:wgo-advieswaarde a skos:Concept ;
+    dct:source wb:wgo-advieswaarde ;
+    skos:definition "De advieswaarden van de Wereldgezondheidsorganisatie zijn gebaseerd op gezondheidseffecten van het polluent"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "WGO-advieswaarde"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:winterbed a skos:Concept ;
+    dct:source wb:winterbed ;
+    skos:definition "Een winterbed is een verbreding van de waterloop zodat bij hoge waterstand deze winterbedding zal overstromen en als tijdelijke buffer functioneren."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Winterbed"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:woelkom a skos:Concept ;
+    dct:source wb:woelkom ;
+    skos:definition "Een woelkelder (ook wel woelbak , woelkom ) is een betonnen kelder met schotten, in het bovenhoofd van een schutsluis die voorkomt dat het water dat tijdens het schutten aan de hoge zijde wordt ingelaten met grote kracht naar binnen stroomt, waardoor de schepen in de kolk in de richting van de lage zijde van de schutsluis worden geduwd. De bedoeling is dat het water in de woelkelder zijn snelheid verliest, om gelijkmatig in de sluis te stromen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Woelkom"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:xrf a skos:Concept ;
+    dct:source wb:xrf ;
+    skos:definition "X-stralenfluorescentiespectrometrie is een analysetechniek waarbij men gebruik maakt van X-stralen om atomen in aangeslagen toestand te brengen. Hierdoor gaan de aangeslagen atomen een karakteristieke fluorescentiestraling met een bepaalde golflengte en energie uitzenden."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "XRF"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zn a skos:Concept ;
+    dct:source wb:zn ;
+    skos:definition "Zink"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Zn"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zoneringsplan a skos:Concept ;
+    dct:source wb:zoneringsplan ;
+    skos:definition "Aansluiten op de riolering of zelf zuiveren? Die keuze is vastgelegd op het zoneringsplan van je gemeente. Het zoneringsplan geeft tot op huisniveau weer wat de maatregelen zijn die burger en gemeente moeten treffen."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Zoneringsplan"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zuiveringsgebied a skos:Concept ;
+    dct:source wb:zuiveringsgebied ;
+    skos:definition "Het gebied waarbinnen alle riolen naar één zelfde rioolwaterzuiveringsinstallatie afvoeren."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Zuiveringsgebied"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zuiveringsgraad a skos:Concept ;
+    dct:source wb:zuiveringsgraad ;
+    skos:definition "Het percentage inwoners van een gemeente waarvan het afvalwater in een rioolwaterzuiveringsinstallatie of kleinschalige waterzuiveringsinstallatie wordt gezuiverd."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Zuiveringsgraad"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zuurequivalent a skos:Concept ;
+    dct:source wb:zuurequivalent ;
+    skos:definition "Een maat voor de hoeveelheid zuur die kan ontstaan in bodem of water. 1 mol H + is 1 zuurequivalent. Zeq wordt gebruikt als eenheid om de verzuringsgraad van verontreinigende stoffen te meten. Eén zuurequivalent komt overeen met 32 gram zwaveldioxide, 46 gram stikstofoxiden of 17 gram ammoniak."@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "Zuurequivalent"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+wb:zzs a skos:Concept ;
+    dct:source wb:zzs ;
+    skos:definition "Zeer zorgwekkende stoffen"@nl ;
+    skos:inScheme <https://vmm.vlaanderen.be/woordenboek> ;
+    skos:prefLabel "ZZS"@nl ;
+    skos:topConceptOf <https://vmm.vlaanderen.be/woordenboek> .
+
+<https://vmm.vlaanderen.be/woordenboek> a skos:ConceptScheme ;
+    rdfs:label "VMM Woordenboek"@nl ;
+    dct:publisher "Vlaamse Milieumaatschappij (VMM)"@nl ;
+    dct:source <https://vmm.vlaanderen.be/woordenboek> ;
+    dct:title "VMM Woordenboek"@nl ;
+    skos:hasTopConcept wb:8-uurgemiddelde,
+        wb:aanslagpeil,
+        wb:aansluitingsgraad,
+        wb:achtergrondconcentratie,
+        wb:aerosoldeeltje,
+        wb:afkoppelen,
+        wb:alarmdrempel,
+        wb:anb,
+        wb:antropogeen,
+        wb:asset-management-vlaanderen,
+        wb:avg,
+        wb:awis,
+        wb:base-1,
+        wb:bbi,
+        wb:bbt,
+        wb:belac,
+        wb:bemalingscascade,
+        wb:bg,
+        wb:binneninstallatie,
+        wb:bio-accumuleerbaar,
+        wb:bovengemeentelijke-saneringsbijdrage,
+        wb:bronmaatregelen,
+        wb:bruine-koolstof,
+        wb:bulk,
+        wb:bzv,
+        wb:captatieverbod,
+        wb:chemkar,
+        wb:chlooracne,
+        wb:circulair-afvalwater,
+        wb:ciw,
+        wb:coliform,
+        wb:collector,
+        wb:condensatiekernen,
+        wb:conformiteitspercentage,
+        wb:constant-head,
+        wb:cr,
+        wb:cu,
+        wb:cyanobacterien,
+        wb:czv,
+        wb:dampterugwinning,
+        wb:depositie,
+        wb:dpo,
+        wb:dwarsdijk,
+        wb:ecotoxicologisch,
+        wb:efsa,
+        wb:ekc,
+        wb:elementaire-koolstof,
+        wb:emissiemetingen,
+        wb:eox,
+        wb:esco,
+        wb:esr,
+        wb:ets,
+        wb:eu-grenswaarde,
+        wb:euronorm,
+        wb:eutrofiering,
+        wb:falling-head,
+        wb:ferrometalen,
+        wb:ferrosector,
+        wb:freatisch-grondwater,
+        wb:fungiciden,
+        wb:gbi,
+        wb:gebiedsdekkend-uitvoeringsplan,
+        wb:geleide-emissie,
+        wb:gemeentelijke-saneringsbijdrage,
+        wb:gep,
+        wb:gescheiden-stelsel,
+        wb:ggbi,
+        wb:gog,
+        wb:gpbv,
+        wb:grondwaterlichaam,
+        wb:grondwatertafel,
+        wb:grootverbruiker,
+        wb:gwp,
+        wb:gww,
+        wb:hbcd,
+        wb:hcbz,
+        wb:hoogwatergeul,
+        wb:hotspot,
+        wb:hydrologie,
+        wb:hydromorfologie,
+        wb:hydronautstudies,
+        wb:iba,
+        wb:icp-ms,
+        wb:ijsvogelwanden,
+        wb:imec,
+        wb:imjv,
+        wb:inbo,
+        wb:informatiedrempel,
+        wb:interpolatie,
+        wb:invasieve-exoot,
+        wb:ion,
+        wb:ircel,
+        wb:kleinverbruiker,
+        wb:knijpconstructie,
+        wb:kraanwagen,
+        wb:kraanwater,
+        wb:kritische-last,
+        wb:krlw,
+        wb:kul,
+        wb:kws-ap,
+        wb:kwth,
+        wb:kwzi,
+        wb:lac-decreet,
+        wb:ldt,
+        wb:lez,
+        wb:lokaal-pact,
+        wb:mac,
+        wb:macro-invertebraten,
+        wb:metalloide,
+        wb:meteorologisch,
+        wb:mg,
+        wb:microgram,
+        wb:milieu-impacttoetskaart,
+        wb:milieukwaliteitsnorm,
+        wb:minafonds,
+        wb:mmif,
+        wb:mn,
+        wb:modelberekening,
+        wb:monster,
+        wb:mps,
+        wb:n-t,
+        wb:n2o,
+        wb:nanogram,
+        wb:nature-based-solutions,
+        wb:net60ppb-max8u,
+        wb:ngbo,
+        wb:non-ferrometalen,
+        wb:ocp,
+        wb:ocp-t,
+        wb:oeverwal,
+        wb:organische-koolstof,
+        wb:organische-massa,
+        wb:organotin,
+        wb:ospm,
+        wb:ovam,
+        wb:overgangswater,
+        wb:overnamepunt,
+        wb:overstort,
+        wb:oxidatie,
+        wb:ozondosis,
+        wb:p-t,
+        wb:pak6,
+        wb:paks,
+        wb:pbde,
+        wb:pcb,
+        wb:pcb-t,
+        wb:peilbeheer,
+        wb:peilbesluit,
+        wb:percentiel,
+        wb:persistent,
+        wb:pesticiden,
+        wb:pfas,
+        wb:pfos,
+        wb:pfos-1,
+        wb:picogram,
+        wb:pio,
+        wb:pisiad,
+        wb:pm10,
+        wb:pm2-5,
+        wb:pnec,
+        wb:polluent,
+        wb:polymeer,
+        wb:pompboezem,
+        wb:pop2019s,
+        wb:ppb,
+        wb:prati-index,
+        wb:precursor,
+        wb:predatie,
+        wb:primair-fijn-stof,
+        wb:primaire-stofemissie,
+        wb:prioritaire-stof,
+        wb:private-waterleverancier,
+        wb:prive-waterafvoer,
+        wb:putwater,
+        wb:raffinaderij,
+        wb:retributie,
+        wb:rioleringsgraad,
+        wb:rivm,
+        wb:roll-on-roll-off,
+        wb:ruwwater,
+        wb:rwzi,
+        wb:saneringsinfrastructuur,
+        wb:sb,
+        wb:sck-cen,
+        wb:secundair-fijn-stof,
+        wb:secundaire-stofemissie,
+        wb:signaalgebieden,
+        wb:slibvang,
+        wb:smog,
+        wb:sponsstad,
+        wb:steg,
+        wb:street-canyon,
+        wb:stroomdeflectoren,
+        wb:stroomgebiedbeheerplan,
+        wb:targetmethoden,
+        wb:telemetrisch,
+        wb:temperatuursinversie,
+        wb:toxisch,
+        wb:toxische-equivalenten,
+        wb:toxische-equivalentie,
+        wb:toxische-equivalentiefactor,
+        wb:troposfeer,
+        wb:tsp,
+        wb:typegebied,
+        wb:uitvoeringsgraad,
+        wb:uitwateringsconstructie,
+        wb:um,
+        wb:vastrecht,
+        wb:veka,
+        wb:verhang,
+        wb:verkeersgericht,
+        wb:vito,
+        wb:vlaamse-veerkracht,
+        wb:vlagg,
+        wb:vlarel,
+        wb:vlarem,
+        wb:vlm,
+        wb:voorzorgswaarde,
+        wb:vos,
+        wb:vulkaniseren,
+        wb:wadi,
+        wb:warmte-krachtkoppeling-wkk,
+        wb:waterinfo,
+        wb:watertoets-1,
+        wb:wateruitvoeringsprogramma,
+        wb:weiss,
+        wb:wetlands,
+        wb:wgo,
+        wb:wgo-advieswaarde,
+        wb:winterbed,
+        wb:woelkom,
+        wb:xrf,
+        wb:zn,
+        wb:zoneringsplan,
+        wb:zuiveringsgebied,
+        wb:zuiveringsgraad,
+        wb:zuurequivalent,
+        wb:zzs .
+

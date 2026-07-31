@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>CSOR — spellingscontrole en VMM-woordenboekdekking</title>
+<style>
+  body {
+    background: #f9f9f7;
+    color: #0b0b0b;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    line-height: 1.5;
+  }
+  h1 { margin-bottom: 0.25rem; }
+  .intro { color: #52514e; margin-top: 0; }
+  h2 {
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #e1e0d9;
+    padding-bottom: 0.4rem;
+  }
+  p { color: #0b0b0b; }
+  .table-wrap { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  th, td {
+    border-bottom: 1px solid #e1e0d9;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th { color: #898781; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>CSOR — spellingscontrole en VMM-woordenboekdekking</h1>
+<p class="intro">Bevat de Nederlandstalige tekst in het register (alle @nl-literals, elk predicaat) door OpenTaal bevestigde spelfouten, en welk deel dekt al een officiële VMM-definitie?</p>
+<h2>Spellingcontrole (OpenTaal)</h2><p>1000 vlaggen: near_duplicate_labelwoord (924), gekende_fout (76).</p><div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="33dfb430-3977-42a0-a5cb-d3a46e8a96bf" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("33dfb430-3977-42a0-a5cb-d3a46e8a96bf")) {                    Plotly.newPlot(                        "33dfb430-3977-42a0-a5cb-d3a46e8a96bf",                        [{"marker":{"color":"#2a78d6"},"x":["near_duplicate_labelwoord","gekende_fout"],"y":[924,76],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Spellingvlaggen per type"},"xaxis":{"title":{"text":"flag_type"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>subject</th>
+      <th>predicaat</th>
+      <th>klasse</th>
+      <th>tekst</th>
+      <th>flag_type</th>
+      <th>detail</th>
+      <th>suggestie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2684</td>
+      <td>prefLabel</td>
+      <td>Parameter</td>
+      <td>Ijzer in regen</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2682</td>
+      <td>altLabel</td>
+      <td>Parameter</td>
+      <td>Ijzer</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_956</td>
+      <td>verkorteNotatie</td>
+      <td>Parameter</td>
+      <td>Ijzer, tweewaardig</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1926</td>
+      <td>verkorteNotatie</td>
+      <td>Parameter</td>
+      <td>Ijzer multi opgelost</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2687</td>
+      <td>verkorteNotatie</td>
+      <td>Parameter</td>
+      <td>Ijzer</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2683</td>
+      <td>verkorteNotatie</td>
+      <td>Parameter</td>
+      <td>Ijzer</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/variabele/V_816</td>
+      <td>prefLabel</td>
+      <td>Variabele</td>
+      <td>Caffeïne</td>
+      <td>gekende_fout</td>
+      <td>'Caffeïne' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>cafeïne</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1986</td>
+      <td>prefLabel</td>
+      <td>Parameter</td>
+      <td>Ijzer MUC project totaal in water</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2683</td>
+      <td>altLabel</td>
+      <td>Parameter</td>
+      <td>Ijzer</td>
+      <td>gekende_fout</td>
+      <td>'Ijzer' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>IJzer</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1259</td>
+      <td>prefLabel</td>
+      <td>Parameter</td>
+      <td>Caffeïne in water</td>
+      <td>gekende_fout</td>
+      <td>'Caffeïne' komt voor als foutieve vorm in opentaal-corrections.tsv</td>
+      <td>cafeïne</td>
+    </tr>
+  </tbody>
+</table></div><h2>VMM-woordenboekdekking</h2><p>35127 literals: geen (32998), bevat_vmm_term (2119), exact_tekst (10).</p><div style="height:100%; width:100%;">                            <div id="213e723c-43db-4fe9-910b-61305b147ebf" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("213e723c-43db-4fe9-910b-61305b147ebf")) {                    Plotly.newPlot(                        "213e723c-43db-4fe9-910b-61305b147ebf",                        [{"marker":{"color":"#2a78d6"},"x":["geen","bevat_vmm_term","exact_tekst"],"y":[32998,2119,10],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"VMM-woordenboekdekking per match_type"},"xaxis":{"title":{"text":"match_type"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>subject</th>
+      <th>predicaat</th>
+      <th>klasse</th>
+      <th>tekst</th>
+      <th>match_type</th>
+      <th>vmm_term</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2965</td>
+      <td>prefLabel</td>
+      <td>Parameter</td>
+      <td>Totaal perfluoroctaanzuur (lineair + vertakt) in TSP</td>
+      <td>bevat_vmm_term</td>
+      <td>tsp</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_4694</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>Na (standaard in bulk depositie (precip)): massaconcentratie</td>
+      <td>bevat_vmm_term</td>
+      <td>bulk</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_4708</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>Naft (standaard in bulk depositie (precip)): massa per oppervlakte per tijd</td>
+      <td>bevat_vmm_term</td>
+      <td>bulk</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_39</td>
+      <td>prefLabel</td>
+      <td>Eenheid</td>
+      <td>microgram</td>
+      <td>exact_tekst</td>
+      <td>microgram</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_3241</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>Mg mt (multi totaal in water): vracht</td>
+      <td>bevat_vmm_term</td>
+      <td>mg</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_5014</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>SO4= (standaard in bulk depositie (precip)): mol per oppervlakte</td>
+      <td>bevat_vmm_term</td>
+      <td>bulk</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_4648</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>NH4+ (standaard in bulk depositie (precip)): mol per oppervlakte</td>
+      <td>bevat_vmm_term</td>
+      <td>bulk</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_2919</td>
+      <td>prefLabel</td>
+      <td>Parameter</td>
+      <td>Perfluordodecaanzuur (PFDoDA) in TSP</td>
+      <td>bevat_vmm_term</td>
+      <td>tsp</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameteraspect/PAS_4578</td>
+      <td>prefLabel</td>
+      <td>ParameterAspect</td>
+      <td>Mg2+ (standaard in wet-only depositie (prec)): massa per oppervlakte per tijd</td>
+      <td>bevat_vmm_term</td>
+      <td>depositie</td>
+    </tr>
+    <tr>
+      <td>https://data.omgeving.vlaanderen.be/id/concept/csor/parameter/P_1718</td>
+      <td>altLabel</td>
+      <td>Parameter</td>
+      <td>som van 5 metalen t Cu,Ni,Cd,Cr,Pb</td>
+      <td>bevat_vmm_term</td>
+      <td>cr</td>
+    </tr>
+  </tbody>
+</table></div>
+</body>
+</html>

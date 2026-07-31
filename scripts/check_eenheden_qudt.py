@@ -53,6 +53,7 @@ OUTPUTS
 output/tables/eenheid_qudt_koppeling.csv
 output/tables/eenheid_qudt_ontbrekend.csv
 output/tables/eenheid_spelling_vlaggen.csv
+output/reports/eenheden_qudt.html
 data/interim/eenheid_*.parquet (tussentijds)
 """
 
@@ -60,15 +61,18 @@ from __future__ import annotations
 
 import re
 import sys
-from collections import Counter
-from difflib import get_close_matches
 from pathlib import Path
 
 import pandas as pd
+import plotly.graph_objects as go
 import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import dataset, qudt, sparql_client as sc  # noqa: E402
+from common import dataset, qudt, report, spelling, sparql_client as sc  # noqa: E402
+from common.spelling import levenshtein  # noqa: E402
+
+# Individueel geverifieerde fouten die als directe aanbeveling gelden (zie INTERPRETATION).
+KNOWN_VERIFIED_ERRORS = {"E_105", "E_113", "E_323"}
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
@@ -96,19 +100,6 @@ SUBSTANCE_CODES = {
 KNOWN_CODES = set(SUBSTANCE_CODES.values())
 
 QUALIFIER_RE = re.compile(r"^[mµkn]?g\s*([A-Za-z][A-Za-z0-9]{0,4})?(?:/|$)")
-
-
-def levenshtein(a: str, b: str) -> int:
-    a, b = a or "", b or ""
-    if len(a) < len(b):
-        a, b = b, a
-    prev = list(range(len(b) + 1))
-    for i, ca in enumerate(a, 1):
-        cur = [i] + [0] * len(b)
-        for j, cb in enumerate(b, 1):
-            cur[j] = min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb))
-        prev = cur
-    return prev[-1]
 
 
 def normalize_symbol(s: str) -> str:
@@ -198,29 +189,12 @@ def qudt_crosscheck(linked_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def spelling_flags(all_df: pd.DataFrame) -> pd.DataFrame:
-    flags = []
-
-    # Near-duplicate labelwoorden (generiek, geen stof-woordenboek).
-    word_counts = Counter()
-    for label in all_df["label"].dropna():
-        for w in re.findall(r"[a-zA-Zàâäéèêëïîôöùûüç]+", label.lower()):
-            word_counts[w] += 1
-    frequent_words = [w for w, c in word_counts.items() if c >= 5]
-    rare_words = [w for w, c in word_counts.items() if c <= 2]
-    for w in rare_words:
-        close = get_close_matches(w, frequent_words, n=1, cutoff=0.75)
-        if close:
-            hits = all_df[all_df["label"].str.contains(rf"\b{re.escape(w)}\b", case=False, na=False)]
-            for _, r in hits.iterrows():
-                flags.append(
-                    {
-                        "eenheid": r["eenheid"],
-                        "label": r["label"],
-                        "symbool": r["symbool"],
-                        "flag_type": "near_duplicate_labelwoord",
-                        "detail": f"'{w}' lijkt op vaker voorkomend '{close[0]}'",
-                    }
-                )
+    # Near-duplicate labelwoorden (generiek, geen stof-woordenboek) — gedeelde implementatie,
+    # zie scripts/common/spelling.py::near_duplicate_flags().
+    near_dup_df = spelling.near_duplicate_flags(
+        all_df, id_col="eenheid", label_col="label", extra_cols=["symbool"]
+    )
+    flags = near_dup_df.to_dict("records")
 
     # Label/symbool-stofconsistentie (woordgrens-bewust, enkel g-gebaseerde symbolen).
     for _, r in all_df.iterrows():
@@ -243,6 +217,93 @@ def spelling_flags(all_df: pd.DataFrame) -> pd.DataFrame:
             )
 
     return pd.DataFrame(flags, columns=["eenheid", "label", "symbool", "flag_type", "detail"])
+
+
+def build_html_report(
+    cross_df: pd.DataFrame, missing_df: pd.DataFrame, flags_df: pd.DataFrame
+) -> Path:
+    linkage_counts = cross_df["matchType"].value_counts()
+    linkage_counts["geen koppeling"] = len(missing_df)
+    fig_linkage = report.bar_counts(
+        linkage_counts,
+        title="Koppelingsstatus per eenheid",
+        xaxis_title="matchType",
+    )
+    notaties = set(cross_df["eenheid"].str.rsplit("/", n=1).str[-1]) | set(
+        missing_df["eenheid"].str.rsplit("/", n=1).str[-1]
+    )
+    open_known_errors = KNOWN_VERIFIED_ERRORS & notaties
+    disc_linkage = (
+        f"{len(cross_df)} van {len(cross_df) + len(missing_df)} actieve eenheden hebben een "
+        f"QUDT-koppeling ({len(missing_df)} zonder koppeling). "
+        + (
+            f"De individueel geverifieerde fouten {', '.join(sorted(open_known_errors))} komen "
+            "nog voor als open vlag — directe aanbeveling."
+            if open_known_errors
+            else "Geen van de individueel geverifieerde fouten (E_105, E_113, E_323) komt nog "
+            "voor als open vlag."
+        )
+    )
+
+    fig_edit = go.Figure(
+        go.Histogram(x=cross_df["edit_distance_genormaliseerd"], marker_color=report.FLAT_COLOR)
+    )
+    fig_edit.update_layout(
+        title="Genormaliseerde edit-distance (csor:symbool vs. qudt:symbol)",
+        xaxis_title="edit-distance",
+        yaxis_title="aantal",
+    )
+    n_afwijkend = int((cross_df["edit_distance_genormaliseerd"] > 0).sum())
+    disc_edit = (
+        f"{n_afwijkend} van {len(cross_df)} koppelingen tonen een genormaliseerde afwijking "
+        "tussen csor:symbool en qudt:symbol (edit-distance > 0) — een kandidaat voor "
+        "handmatige review, geen automatische correctie."
+        if n_afwijkend
+        else f"Alle {len(cross_df)} koppelingen komen genormaliseerd exact overeen — het "
+        "verwachte patroon."
+    )
+
+    fig_spelling = report.bar_counts(
+        flags_df["flag_type"].value_counts(),
+        title="Spelling-/consistentievlaggen per type",
+        xaxis_title="flag_type",
+    )
+    disc_spelling = (
+        f"{len(flags_df)} interne spelling-/consistentievlag(gen) gevonden, onafhankelijk van "
+        "QUDT-beschikbaarheid."
+        if len(flags_df)
+        else "Geen interne spelling-/consistentievlaggen gevonden."
+    )
+
+    sections = [
+        report.Section(
+            heading="QUDT-koppelingsstatus",
+            discussion=disc_linkage,
+            figures=[fig_linkage],
+        ),
+        report.Section(
+            heading="Semantische kwaliteit van gekoppelde eenheden",
+            discussion=disc_edit,
+            figures=[fig_edit],
+            table_df=cross_df[cross_df["categorie"] == "afwijkend"] if n_afwijkend else None,
+            table_columns=["eenheid", "label", "csor_symbool", "qudt_symbool", "categorie"],
+        ),
+        report.Section(
+            heading="Interne spelling-/consistentiecontrole",
+            discussion=disc_spelling,
+            figures=[fig_spelling] if len(flags_df) else [],
+            table_df=flags_df if len(flags_df) else None,
+        ),
+    ]
+    return report.build_report(
+        name="eenheden_qudt",
+        title="CSOR — QUDT-koppelingskwaliteit en spellingscontrole voor csor:Eenheid",
+        intro=(
+            "In welke mate is csor:Eenheid aan QUDT gekoppeld en hoe goed is die koppeling, en "
+            "zijn skos:prefLabel en csor:symbool intern consistent en vrij van tikfouten?"
+        ),
+        sections=sections,
+    )
 
 
 def main(graph: rdflib.Graph | None = None) -> None:
@@ -299,6 +360,9 @@ def main(graph: rdflib.Graph | None = None) -> None:
         print(flags_df[["label", "symbool", "flag_type", "detail"]].to_string())
 
     print(f"\nlive QUDT-calls deze run: {qudt.live_call_count}")
+
+    report_path = build_html_report(cross_df, missing_df, flags_df)
+    print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

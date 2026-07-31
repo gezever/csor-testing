@@ -49,6 +49,7 @@ OUTPUTS
 output/tables/parameter_inhoud_vlaggen.csv
 output/tables/parameter_cas_verrijking.csv
 output/tables/parameter_eea_mismatch.csv
+output/reports/parameter_inhoud.html
 """
 
 from __future__ import annotations
@@ -60,7 +61,7 @@ import pandas as pd
 import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import dataset, sparql_client as sc  # noqa: E402
+from common import dataset, report, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
@@ -205,6 +206,71 @@ def self_test(df: pd.DataFrame) -> None:
     print(f"Self-test OK: {SELF_TEST['notatie']} = {actual!r}")
 
 
+def build_html_report(
+    flags_df: pd.DataFrame, cas_df: pd.DataFrame, eea_mismatch_df: pd.DataFrame, n_label_niet_herleidbaar: int
+) -> Path:
+    fig_flags = report.bar_counts(
+        flags_df["vlag_type"].value_counts(),
+        title="Vlaggen per type",
+        xaxis_title="vlag_type",
+    )
+    disc_flags = (
+        f"{len(flags_df)} vlag(gen) in totaal — kandidaten voor handmatige review, geen "
+        "automatisch teruggeschreven correcties."
+        if len(flags_df)
+        else "Geen vlaggen gevonden."
+    )
+    if n_label_niet_herleidbaar:
+        disc_flags += (
+            f" Let op: {n_label_niet_herleidbaar} ParameterAspect-labelmismatch(es) — dit is "
+            "vooral regressiebewaking en wijst op een verouderd label na een latere "
+            "hernoeming (basislijn tijdens verkenning was 0)."
+        )
+    else:
+        disc_flags += (
+            " De ParameterAspect-labelcheck (regressiebewaking) toont 0 mismatches — "
+            "consistent met de basislijn."
+        )
+
+    row_counts = pd.Series(
+        {
+            "vlaggen": len(flags_df),
+            "cas_verrijking": len(cas_df),
+            "eea_mismatch": len(eea_mismatch_df),
+        }
+    )
+    fig_outputs = report.bar_counts(
+        row_counts, title="Rijen per output-CSV", xaxis_title="output-CSV"
+    )
+    disc_outputs = (
+        f"{len(cas_df)} CAS-verrijkingskans(en) en {len(eea_mismatch_df)} Parameter-vs-"
+        "Variabele EEA-mismatch(es) — beide zijn suggesties voor handmatige review, geen "
+        "automatisch teruggeschreven correcties."
+    )
+
+    sections = [
+        report.Section(
+            heading="Vlaggen per type", discussion=disc_flags, figures=[fig_flags],
+            table_df=flags_df if len(flags_df) else None,
+        ),
+        report.Section(
+            heading="CAS-verrijking en EEA-mismatch",
+            discussion=disc_outputs,
+            figures=[fig_outputs],
+        ),
+    ]
+    return report.build_report(
+        name="parameter_inhoud",
+        title="CSOR — inhoudelijke consistentiechecks op Parameter en ParameterAspect",
+        intro=(
+            "Zijn de waarden van velden zelf onderling consistent en correct — altLabel/"
+            "verkorteNotatie, verlopen geldigTot, CAS-verrijking, EEA-codeformaat, en de "
+            "herleidbaarheid van het ParameterAspect-label?"
+        ),
+        sections=sections,
+    )
+
+
 def main(graph: rdflib.Graph | None = None) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
@@ -254,6 +320,9 @@ def main(graph: rdflib.Graph | None = None) -> None:
     print(f"Parameter-vs-Variabele EEA-mismatches: {len(eea_mismatch_df)}")
     print(f"ParameterAspect-labelmismatches: {len(pas_mismatches)} (van {len(pas_df)} getoetst)")
     print(f"\nTotaal vlaggen: {len(flags_df)}")
+
+    report_path = build_html_report(flags_df, cas_df, eea_mismatch_df, len(pas_mismatches))
+    print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":
