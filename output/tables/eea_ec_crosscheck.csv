@@ -1,0 +1,121 @@
+notatie,label,cas,csor_eea,echa_ec_kandidaten,echa_match,pubchem_ec_kandidaten,pubchem_match,resultaat
+V_357,Benzeen,71-43-2,200-753-7,200-753-7,True,200-753-7,True,bevestigd
+V_1393,Metconazool,125116-23-6,603-031-3,,False,603-031-3,True,bevestigd
+V_1278,Oxacilline,66-79-5,200-635-5,,False,200-635-5,True,bevestigd
+V_1395,N-ethylperfluoroctaan-1-sulfonamide (EtPFOSA),4151-50-2,223-980-3,,False,223-980-3,True,bevestigd
+V_1239,Amoxicilline,26787-78-0,248-003-8,,False,248-003-8,True,bevestigd
+V_1280,Sulfaquinoxaline,59-40-5,200-423-2,,False,200-423-2,True,bevestigd
+V_1,alfa+beta Endosulfan,115-29-7,204-079-4,204-079-4,True,204-079-4,True,bevestigd
+V_1263,Chloortetracycline,57-62-5,200-341-7,,False,,False,onbekend
+V_344,Nikkel,7440-02-0,231-111-4,231-111-4,True,231-111-4; 445-070-7; 935-135-2,True,bevestigd
+V_607,Trifenyltinchloride,639-58-7,211-358-4,,False,211-358-4,True,bevestigd
+V_1336,"2,3,3,3-tetrafluor-2(heptafluorpropoxy)propionzuur",13252-13-6,236-236-8,,False,236-236-8,True,bevestigd
+V_1254,Benzylpenicilline,61-33-6,200-506-3,,False,200-506-3,True,bevestigd
+V_1521,"N-1,3-Dimethylbutyl-N’-fenyl-p-fenylenediamine",793-24-8,212-344-0,212-344-0,True,212-344-0,True,bevestigd
+V_1388,Famoxadone,131807-57-3,603-520-1,,False,603-520-1,True,bevestigd
+V_1365,8:2 fluortelomeerfosfaat diester (8:2 diPAP),678-41-1,211-649-6,,False,,False,onbekend
+V_116,Anthraceen,120-12-7,204-371-1,204-371-1,True,204-371-1,True,bevestigd
+V_162,Prochloraz,67747-09-5,266-994-5,266-994-5,True,266-994-5,True,bevestigd
+V_1258,Sulfathiazole,72-14-0,200-771-5,,False,200-771-5,True,bevestigd
+V_121,Benzo(k)fluorantheen,207-08-9,205-916-6,205-916-6,True,205-916-6,True,bevestigd
+V_1245,Tylosine,1401-69-0,215-754-8,,False,215-754-8,True,bevestigd
+V_1240,Perfluortridecaanzuur (PFTrDA),72629-94-8,276-745-2,276-745-2,True,276-745-2,True,bevestigd
+V_125,Fluorantheen,206-44-0,205-912-4,205-912-4,True,205-912-4,True,bevestigd
+V_810,bis-(2-ethylhexyl)-ftalaat,117-81-7,204-211-0,204-211-0,True,204-211-0; 617-060-4,True,bevestigd
+V_1252,Sulfamethoxypyridazine,80-35-3,201-272-5,,False,201-272-5,True,bevestigd
+V_402,pp'Dichloordifenyldichlooretheen,72-55-9,200-784-6,,False,,False,onbekend
+V_1253,Doxycycline,564-25-0,607-368-7,,False,,False,onbekend
+V_1289,Nalidixinezuur,389-08-2,206-864-7,,False,206-864-7,True,bevestigd
+V_386,Hexachloorbutadieen,87-68-3,201-765-5,201-765-5,True,201-765-5,True,bevestigd
+V_1277,Dapsone,80-08-0,201-248-4,201-248-4,True,201-248-4,True,bevestigd
+V_451,"3,5-Dichloornitrobenzeen",618-62-2,210-557-3,,False,210-557-3,True,bevestigd
+V_1248,Sulfadoxine,2447-57-6,219-504-9,,False,219-504-9,True,bevestigd
+V_1404,N-methylperfluorbutaansulfonamide (MePFBSA),68298-12-4,614-396-3,,False,614-396-3,True,bevestigd
+V_989,Cypermethrin,52315-07-8,257-842-9,257-842-9,True,257-842-9; 619-306-6,True,bevestigd
+V_1267,Cefalonium,5575-21-3,226-948-7,,False,226-948-7,True,bevestigd
+V_206,Bifenox,42576-02-3,255-894-7,255-894-7,True,642-906-4,False,bevestigd
+V_128,Naftaleen,91-20-3,202-049-5,202-049-5,True,202-049-5,True,bevestigd
+V_207,Aclonifen,74070-46-5,277-704-1,277-704-1,True,277-704-1,True,bevestigd
+V_1364,N-methylperfluoroctaan-1-sulfonamide (MePFOSA),31506-32-8,250-665-8,,False,,False,onbekend
+V_491,4-n-Nonylfenol,104-40-5,203-199-4,,False,203-199-4,True,bevestigd
+V_408,Atrazine,1912-24-9,217-617-8,217-617-8,True,217-617-8,True,bevestigd
+V_1283,Dicloxacilline,1173-88-2,221-488-3,,False,,False,onbekend
+V_154,Dicofol,115-32-2,204-082-0,204-082-0,True,204-082-0,True,bevestigd
+V_1360,8:2 fluortelomeersulfonzuur (8:2 FTS),39108-34-4,254-295-8,,False,254-295-8,True,bevestigd
+V_783,Terbutryn,886-50-0,212-950-5,212-950-5,True,212-950-5,True,bevestigd
+V_1261,Cefapirine,21593-23-7,244-466-5,,False,244-466-5,True,bevestigd
+V_1266,Danofloxacine,112398-08-0,918-378-9,,False,,False,onbekend
+V_1250,Sulfadimethoxine,122-11-2,204-523-7,,False,204-523-7,True,bevestigd
+V_1292,Nafcilline,147-52-4,205-690-9,,False,205-690-9,True,bevestigd
+V_1386,O-desmethylvenlafaxine,93413-62-8,700-516-2,,False,700-516-2,True,bevestigd
+V_802,Simazine,122-34-9,204-535-2,204-535-2,True,204-535-2,True,bevestigd
+V_567,Dichloorvos,62-73-7,200-547-7,200-547-7,True,200-547-7,True,bevestigd
+V_1265,Cefalexine,15686-71-2,239-773-6,,False,239-773-6,True,bevestigd
+V_1374,Arsenobetaïne,64436-13-1,634-697-3,,False,,False,onbekend
+V_119,Benzo(b)fluorantheen,205-99-2,205-911-9,205-911-9,True,205-911-9,True,bevestigd
+V_1282,Tetracycline,60-54-8,200-481-9,,False,,False,onbekend
+V_1394,Tetraconazool,112281-77-3,407-760-6,407-760-6,True,407-760-6,True,bevestigd
+V_120,"Benzo(g,h,i)peryleen",191-24-2,205-883-8,205-883-8,True,205-883-8,True,bevestigd
+V_333,Cadmium,7440-43-9,231-152-8,231-152-8,True,231-152-8,True,bevestigd
+V_1363,N-ethylperfluoroctaansulfonamidoazijnzuur,2991-50-6,221-061-1,,False,,False,onbekend
+V_504,"1,2-Dichloorethaan",107-06-2,203-458-1,203-458-1,True,203-458-1,True,bevestigd
+V_565,Trichloormethaan,67-66-3,200-663-8,200-663-8,True,200-663-8,True,bevestigd
+V_1276,Chlooramfenicol,56-75-7,200-287-4,,False,200-287-4,True,bevestigd
+V_341,Lood,7439-92-1,231-100-4,231-100-4,True,231-100-4,True,bevestigd
+V_26,Tebuconazole,107534-96-3,403-640-2,403-640-2,True,403-640-2,True,bevestigd
+V_399,Pentachloorfenol,87-86-5,201-778-6,201-778-6,True,201-778-6,True,bevestigd
+V_1381,Perfluordodecaansulfonzuur (PFDoDS),79780-39-5,279-259-9,,False,279-259-9,True,bevestigd
+V_1270,Cinoxacine,28657-80-9,249-133-8,,False,249-133-8,True,bevestigd
+V_1522,6PPD-Quinone,2754428-18-5,893-269-6,,False,893-269-6,True,bevestigd
+V_1080,Miconazol,22916-47-8,245-324-5,,False,245-324-5,True,bevestigd
+V_1272,Thiamuline,55297-95-5,259-580-0,,False,259-580-0,True,bevestigd
+V_1271,Spiramycine I,8025-81-8,232-429-6,,False,,False,onbekend
+V_385,Hexachloorbenzeen,118-74-1,204-273-9,204-273-9,True,204-273-9,True,bevestigd
+V_340,Kwik,7439-97-6,231-106-7,231-106-7,True,231-106-7,True,bevestigd
+V_1238,Ciprofloxacine,85721-33-1,617-751-0,,False,617-751-0,True,bevestigd
+V_1390,Fluconazol,86386-73-4,627-806-0,,False,627-806-0,True,bevestigd
+V_1391,Ipconazool,125225-28-7,603-038-1,603-038-1,True,603-038-1,True,bevestigd
+V_1256,Norfloxacine,70458-96-7,274-614-4,,False,274-614-4,True,bevestigd
+V_118,Benzo(a)pyreen,50-32-8,200-028-5,200-028-5,True,200-028-5,True,bevestigd
+V_1279,Cefobid,62893-19-0,263-749-4,,False,263-749-4,True,bevestigd
+V_236,Trichloorbenzenen,12002-48-1,234-413-4,,False,201-757-1,False,afwijkend
+V_1354,Perfluorpentaansulfonzuur (PFPeS),2706-91-4,220-301-2,,False,220-301-2,True,bevestigd
+V_401,pp'Dichloordifenyldichloorethaan,72-54-8,200-783-0,,False,200-783-0,True,bevestigd
+V_768,Alachloor,15972-60-8,240-110-8,240-110-8,True,240-110-8,True,bevestigd
+V_1389,Clotrimazol,23593-75-1,245-764-8,,False,245-764-8,True,bevestigd
+V_1251,Oxytetracycline,79-57-2,218-161-2,,False,103-115-5,False,afwijkend
+V_718,Chloorfenvinfos,470-90-6,207-432-0,207-432-0,True,207-432-0,True,bevestigd
+V_1352,Perfluorhexadecaanzuur (PFHxDA),67905-19-5,267-638-1,,False,267-638-1,True,bevestigd
+V_1273,Sulfaclozine,102-65-8,203-044-0,,False,203-044-0,True,bevestigd
+V_414,Isoproturon,34123-59-6,251-835-4,251-835-4,True,251-835-4,True,bevestigd
+V_608,Trifenyltinhydroxide,76-87-9,200-990-6,200-990-6,True,200-990-6,True,bevestigd
+V_716,Chloorpyrifos-ethyl,2921-88-2,220-864-4,220-864-4,True,220-864-4,True,bevestigd
+V_948,Penconazole,66246-88-6,266-275-6,266-275-6,True,266-275-6,True,bevestigd
+V_194,Cybutrine,28159-98-0,248-872-3,,False,248-872-3,True,bevestigd
+V_412,Desisopropylatrazine,1007-28-9,206-354-4,,False,,False,onbekend
+V_1355,Perfluorheptaansulfonzuur (PFHpS),375-92-8,206-800-8,,False,206-800-8,True,bevestigd
+V_1392,Imazalil,35554-44-0,252-615-0,252-615-0,True,252-615-0,True,bevestigd
+V_1237,Metaflumizone,139968-49-3,604-167-6,604-167-6,True,604-167-6,True,bevestigd
+V_879,"Alkanen, gechloreerde",85535-84-8,287-476-5,287-476-5,True,,False,bevestigd
+V_398,op'Dichloordifenyltrichloorethaan,789-02-6,212-332-5,,False,212-332-5,True,bevestigd
+V_490,4-n-Octylfenol,1806-26-4,217-302-5,,False,217-302-5,True,bevestigd
+V_1242,Flumequine,42835-25-6,255-962-6,,False,255-962-6,True,bevestigd
+V_1287,Penicilline V,87-08-1,201-722-0,,False,201-722-0,True,bevestigd
+V_962,Perfluoroctaansulfonzuur (PFOS),1763-23-1,217-179-8,217-179-8,True,217-179-8,True,bevestigd
+V_1387,Dimoxystrobine,149961-52-4,604-712-8,604-712-8,True,604-712-8,True,bevestigd
+V_1284,Oxolinezuur,14698-29-4,238-750-8,,False,238-750-8,True,bevestigd
+V_609,Trifluralin,1582-09-8,216-428-8,216-428-8,True,216-428-8,True,bevestigd
+V_48,Stikstofdioxide,10102-44-0,233-272-6,233-272-6,True,233-272-6,True,bevestigd
+V_493,4-tert-Octylfenol,140-66-9,205-426-2,205-426-2,True,205-426-2,True,bevestigd
+V_1247,Sulfapyridine,144-83-2,205-642-7,,False,205-642-7,True,bevestigd
+V_855,Nonylfenol,84852-15-3,284-325-5,284-325-5,True,,False,bevestigd
+V_1275,Cloxacilline,61-72-3,200-514-7,,False,200-514-7,True,bevestigd
+V_773,Pentachloorbenzeen,608-93-5,210-172-0,210-172-0,True,210-172-0,True,bevestigd
+V_1260,Cefazoline,25953-19-9,247-362-8,,False,247-362-8,True,bevestigd
+V_127,"Indeno(1,2,3-cd)pyreen",193-39-5,205-893-2,,False,205-893-2,True,bevestigd
+V_2,alfa+beta+gamma+delta Hexachloorcyclohexaan,608-73-1,210-168-9,,False,,False,onbekend
+V_1244,Sulfadiazine,68-35-9,200-685-8,,False,200-685-8,True,bevestigd
+V_1243,Sulfamethazine,57-68-1,200-346-4,,False,200-346-4,True,bevestigd
+V_413,Diuron,330-54-1,206-354-4,206-354-4,True,206-354-4,True,bevestigd
+V_1249,Sulfamerazine,127-79-7,204-866-2,,False,204-866-2,True,bevestigd
+V_1255,Sulfachloropyridazine,80-32-0,201-269-9,,False,201-269-9,True,bevestigd

@@ -54,15 +54,20 @@ hieronder), `output/tables/*.csv`, `output/diagrams/*.{tex,pdf,png}`, `output/re
 CSOR-graphs — bij elke `scripts/run_all.py`-run vers opgehaald en overschreven, dus net zo
 regenereerbaar als `data/raw/` en bewust niet gecommit (zie §4).
 
-`data/source/` is anders: geen CSOR-registerdata maar externe-bronvocabularia die
-`check_terminologie.py` gebruikt (zie §10-rapporttabel) — `vmm-woordenboek.ttl`/`.rdf` (SKOS-
-thesaurus van VMM's publieke milieu-/waterglossarium) en `opentaal-wordlist.txt`/
-`opentaal-corrections.tsv` (de officiële Nederlandse woordenlijst resp. curated
-foutief->correctie-lijst van Stichting OpenTaal). Elk bestand wordt ververst door zijn eigen
-`scripts/fetch_*.py`-script (`fetch_vmm_woordenboek.py`, `fetch_opentaal_wordlist.py`) —
-handmatig herdraaid, bewust **niet** onderdeel van `scripts/run_all.py` (dat betreft uitsluitend
-de CSOR-registerpijplijn zelf). Wél gecommit (i.t.t. `data/raw/`/`analyse/`), want het zijn
-kant-en-klare, direct bruikbare brondata-snapshots, geen tussentijdse/regenereerbare CSOR-data.
+`data/source/` is anders: geen CSOR-registerdata maar externe-bronvocabularia — `vmm-
+woordenboek.ttl`/`.rdf` (SKOS-thesaurus van VMM's publieke milieu-/waterglossarium) en
+`opentaal-wordlist.txt`/`opentaal-corrections.tsv` (de officiële Nederlandse woordenlijst resp.
+curated foutief->correctie-lijst van Stichting OpenTaal), gebruikt door `check_terminologie.py`
+(zie §10-rapporttabel); en `echa_lijsten_ec_cas.csv` (een combinatie van 14 publieke
+ECHA-regelgevingslijsten — SVHC-kandidatenlijst, restricties, POPs, geharmoniseerde
+classificatie, en de bijhorende procesluik-lijsten — tot één CAS↔EC-nummertabel), gebruikt door
+`check_variabele_identity.py::eea_ec_crosscheck()` om `csor:eea` (voor individuele stoffen
+empirisch vaak het EC/EINECS-nummer) te toetsen. Elk bestand wordt ververst door zijn eigen
+`scripts/fetch_*.py`-script (`fetch_vmm_woordenboek.py`, `fetch_opentaal_wordlist.py`,
+`fetch_echa_lists.py`) — handmatig herdraaid, bewust **niet** onderdeel van `scripts/run_all.py`
+(dat betreft uitsluitend de CSOR-registerpijplijn zelf). Wél gecommit (i.t.t.
+`data/raw/`/`analyse/`), want het zijn kant-en-klare, direct bruikbare brondata-snapshots, geen
+tussentijdse/regenereerbare CSOR-data.
 
 ## 2. Venv en dependencies
 
@@ -81,6 +86,9 @@ Bewust minimale dependency-set (`rdflib`, `requests`, `pandas`, `pyarrow` voor p
 voor de per-check-script HTML-rapporten, zie §10) — geen tidyverse-equivalent zwaargewicht nodig
 voor ~2000 rijen. `plotly` zelf breekt die ethos niet: geen Dash, geen Kaleido/orca — rendering
 gebeurt clientside in de browser via een CDN-`<script>`-tag, niet ingebonden of serverside.
+`openpyxl` is de enige bewuste uitzondering: `scripts/fetch_echa_lists.py` moet `.xlsx`-exports
+van ECHA parsen (geen alternatief zonder een volledige Excel-parser) — enkel gebruikt door dat
+ene fetch-script, niet door de CSOR-registerpijplijn zelf.
 
 ## 3. Vast scriptheader-formaat
 

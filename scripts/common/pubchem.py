@@ -6,8 +6,9 @@ PURPOSE
 Haalt substance-eigenschappen (InChIKey, IUPAC-naam, molecuulformule, SMILES) op bij PubChem,
 by CID (ondubbelzinnig), by CAS-nummer, by naam (fuzzy, "name"-lookup — PubChem accepteert
 CAS-nummers als naam) of by InChIKey (omgekeerde lookup, zie METHODOLOGY). Biedt daarnaast
-`get_synonyms()` om de PubChem-synoniemenlijst van een CID op te vragen (bevat doorgaans ook
-CAS-nummers en alternatieve namen). Wordt gebruikt door scripts/check_variabele_identity.py.
+`get_synonyms()` (PubChem-synoniemenlijst van een CID — bevat doorgaans ook CAS-nummers en
+alternatieve namen) en `get_xrefs_rn()` (PubChem's eigen "Registry Number"-kruisverwijzingen,
+een gemengde CAS-/EC-nummerlijst). Wordt gebruikt door scripts/check_variabele_identity.py.
 
 DATA PROVENANCE
 ----------------
@@ -29,6 +30,13 @@ cache nul live calls doet.
 andere JSON-vorm dan de property-lookups hierboven (`InformationList.Information[0].Synonym`,
 een lijst strings, i.p.v. `PropertyTable.Properties[0]`) — vereist daarom een eigen
 fetch-helper (`_fetch_synonyms()`) i.p.v. hergebruik van `_fetch_properties()`.
+
+`get_xrefs_rn()` gebruikt `.../cid/{cid}/xrefs/RN/JSON` (zelfde `InformationList`-vorm als
+synonyms, maar sleutel `RN` i.p.v. `Synonym`) — PubChem's "Registry Number"-kruisverwijzingen
+bevatten CAS- én EC/EINECS-nummers door elkaar (bv. voor fluorantheen: `["205-912-4", "206-44-0",
+"76774-50-0"]` — het eerste is het EC-nummer). De aanroeper filtert zelf op patroon
+(EC: `\\d{3}-\\d{3}-\\d`, middelste groep exact 3 cijfers; CAS: middelste groep exact 2 cijfers)
+— deze module doet zelf geen classificatie, enkel de ruwe lijst teruggeven.
 
 OUTPUTS
 -------
@@ -181,5 +189,36 @@ def get_synonyms(cid: str | int, cache_root: Path) -> dict:
     if cached is not None:
         return cached
     result = _fetch_synonyms(cid)
+    _write_cache(path, result)
+    return result
+
+
+def _fetch_xrefs_rn(cid: str) -> dict:
+    """Live PUG-REST-call naar het xrefs/RN-endpoint (zie METHODOLOGY)."""
+    global live_call_count
+    url = f"{PUG_BASE}/cid/{cid}/xrefs/RN/JSON"
+    live_call_count += 1
+    try:
+        resp = requests.get(url, timeout=30)
+        time.sleep(RATE_LIMIT_SECONDS)
+        if resp.status_code == 404:
+            return {"found": False, "rn": []}
+        resp.raise_for_status()
+        data = resp.json()
+        info = data.get("InformationList", {}).get("Information", [])
+        rn = info[0].get("RN", []) if info else []
+        return {"found": bool(rn), "rn": rn}
+    except requests.RequestException as exc:
+        time.sleep(RATE_LIMIT_SECONDS)
+        return {"found": False, "rn": [], "error": str(exc)}
+
+
+def get_xrefs_rn(cid: str | int, cache_root: Path) -> dict:
+    cid = str(cid)
+    path = _cache_path(cache_root, "by_cid_xrefs_rn", cid)
+    cached = _read_cache(path)
+    if cached is not None:
+        return cached
+    result = _fetch_xrefs_rn(cid)
     _write_cache(path, result)
     return result

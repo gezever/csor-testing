@@ -1,57 +1,57 @@
 eenheid,label,symbool,match_tier,aantal_kandidaten,qudt_uri,qudt_symbool
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_261,kilogram per kilogram,kg/kg,exact,1,http://qudt.org/vocab/unit/KiloGM-PER-KiloGM,kg/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_256,nanometer,nm,exact,1,http://qudt.org/vocab/unit/NanoM,nm
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_284,centiStokes,cSt,exact,1,http://qudt.org/vocab/unit/CentiST,cSt
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_245,vierkante millimeter per seconde,mm²/s,exact,1,http://qudt.org/vocab/unit/MilliM2-PER-SEC,mm²/s
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_292,nanogram per microliter,ng/µL,genormaliseerd,1,http://qudt.org/vocab/unit/NanoGM-PER-MicroL,ng/μL
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_15,ton per jaar,t/jr,genormaliseerd,1,http://qudt.org/vocab/unit/TONNE-PER-YR,t/a
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_56,per milliliter,/mL,exact,1,http://qudt.org/vocab/unit/PER-MilliL,/mL
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_277,siemens per centimeter,S/cm,exact,1,http://qudt.org/vocab/unit/S-PER-CentiM,S/cm
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_254,nanogram per kilogram,ng/kg,exact,1,http://qudt.org/vocab/unit/NanoGM-PER-KiloGM,ng/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_186,petajoule,PJ,exact,1,http://qudt.org/vocab/unit/PetaJ,PJ
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_91,gigajoule per uur,GJ/u,genormaliseerd,1,http://qudt.org/vocab/unit/GigaJ-PER-HR,GJ/h
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_92,megawatt,MW,exact,1,http://qudt.org/vocab/unit/MegaW,MW
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_252,ton per kubieke meter,t/m³,exact,2,http://qudt.org/vocab/unit/TONNE-PER-M3,t/m³
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_252,ton per kubieke meter,t/m³,exact,2,http://qudt.org/vocab/unit/TON_Metric-PER-M3,t/m³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_206,parts per million,ppm,genormaliseerd,1,http://qudt.org/vocab/unit/PPM,PPM
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_218,picogram,pg,exact,1,http://qudt.org/vocab/unit/PicoGM,pg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_254,nanogram per kilogram,ng/kg,exact,1,http://qudt.org/vocab/unit/NanoGM-PER-KiloGM,ng/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_229,mol per liter,mol/L,exact,1,http://qudt.org/vocab/unit/MOL-PER-L,mol/L
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_24,kiloton per jaar,kt/jr,genormaliseerd,1,http://qudt.org/vocab/unit/KiloTONNE-PER-YR,kt/a
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_250,Volt,V,exact,1,http://qudt.org/vocab/unit/V,V
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_67,milli-equivalent per liter,meq/L,genormaliseerd,1,http://qudt.org/vocab/unit/MilliEQ-PER-L,mEq/L
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_269,gram per milliliter,g/mL,exact,1,http://qudt.org/vocab/unit/GM-PER-MilliL,g/mL
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_245,vierkante millimeter per seconde,mm²/s,exact,1,http://qudt.org/vocab/unit/MilliM2-PER-SEC,mm²/s
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_8,milligram per kubieke meter,mg/m³,exact,1,http://qudt.org/vocab/unit/MilliGM-PER-M3,mg/m³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_292,nanogram per microliter,ng/µL,genormaliseerd,1,http://qudt.org/vocab/unit/NanoGM-PER-MicroL,ng/μL
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_90,terajoule,TJ,exact,1,http://qudt.org/vocab/unit/TeraJ,TJ
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_214,meter per seconde,m/s,exact,1,http://qudt.org/vocab/unit/M-PER-SEC,m/s
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_91,gigajoule per uur,GJ/u,genormaliseerd,1,http://qudt.org/vocab/unit/GigaJ-PER-HR,GJ/h
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_278,microliter per liter,µL/L,genormaliseerd,1,http://qudt.org/vocab/unit/MicroL-PER-L,μL/L
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_68,equivalent per liter,eq/L,genormaliseerd,1,http://qudt.org/vocab/unit/EQ-PER-L,Eq/L
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_204,nanogram per kubieke meter,ng/m³,exact,1,http://qudt.org/vocab/unit/NanoGM-PER-M3,ng/m³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_258,kubieke meter per kubieke meter,m³/m³,exact,1,http://qudt.org/vocab/unit/M3-PER-M3,m³/m³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_75,Franse hardheidsgraden,°F,exact,1,http://qudt.org/vocab/unit/DEG_F,°F
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_92,megawatt,MW,exact,1,http://qudt.org/vocab/unit/MegaW,MW
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_94,uur,u,exact,1,http://qudt.org/vocab/unit/U,u
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_256,nanometer,nm,exact,1,http://qudt.org/vocab/unit/NanoM,nm
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_261,kilogram per kilogram,kg/kg,exact,1,http://qudt.org/vocab/unit/KiloGM-PER-KiloGM,kg/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_209,hectopascal,hPa,exact,1,http://qudt.org/vocab/unit/HectoPA,hPa
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_277,siemens per centimeter,S/cm,exact,1,http://qudt.org/vocab/unit/S-PER-CentiM,S/cm
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_56,per milliliter,/mL,exact,1,http://qudt.org/vocab/unit/PER-MilliL,/mL
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_199,kilogram per hectare,kg/ha,exact,1,http://qudt.org/vocab/unit/KiloGM-PER-HA,kg/ha
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_244,kiloJoule per kilogram,kJ/kg,exact,1,http://qudt.org/vocab/unit/KiloJ-PER-KiloGM,kJ/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_9,picogram per liter,pg/L,exact,1,http://qudt.org/vocab/unit/PicoGM-PER-L,pg/L
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_288,kiloNewton per vierkante meter,kN/m²,exact,1,http://qudt.org/vocab/unit/KiloN-PER-M2,kN/m²
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_255,micrometer,µm,genormaliseerd,1,http://qudt.org/vocab/unit/MicroM,μm
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_201,Watt per vierkante meter,W/m²,exact,1,http://qudt.org/vocab/unit/W-PER-M2,W/m²
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_276,decimeter,dm,exact,1,http://qudt.org/vocab/unit/DeciM,dm
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_283,millimol per kilogram,mmol/kg,exact,1,http://qudt.org/vocab/unit/MilliMOL-PER-KiloGM,mmol/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_293,microgram per gram,µg/g,genormaliseerd,1,http://qudt.org/vocab/unit/MicroGM-PER-GM,μg/g
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_259,ton per hectare,t/ha,exact,2,http://qudt.org/vocab/unit/TONNE-PER-HA,t/ha
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_259,ton per hectare,t/ha,exact,2,http://qudt.org/vocab/unit/TON_Metric-PER-HA,t/ha
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_249,per gram,/g,exact,1,http://qudt.org/vocab/unit/PER-GM,/g
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_201,Watt per vierkante meter,W/m²,exact,1,http://qudt.org/vocab/unit/W-PER-M2,W/m²
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_193,Pascal,Pa,exact,1,http://qudt.org/vocab/unit/PA,Pa
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_9,picogram per liter,pg/L,exact,1,http://qudt.org/vocab/unit/PicoGM-PER-L,pg/L
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_94,uur,u,exact,1,http://qudt.org/vocab/unit/U,u
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_229,mol per liter,mol/L,exact,1,http://qudt.org/vocab/unit/MOL-PER-L,mol/L
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_244,kiloJoule per kilogram,kJ/kg,exact,1,http://qudt.org/vocab/unit/KiloJ-PER-KiloGM,kJ/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_278,microliter per liter,µL/L,genormaliseerd,1,http://qudt.org/vocab/unit/MicroL-PER-L,μL/L
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_251,gram per kubieke centimeter,g/cm³,exact,1,http://qudt.org/vocab/unit/GM-PER-CentiM3,g/cm³
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_283,millimol per kilogram,mmol/kg,exact,1,http://qudt.org/vocab/unit/MilliMOL-PER-KiloGM,mmol/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_255,micrometer,µm,genormaliseerd,1,http://qudt.org/vocab/unit/MicroM,μm
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_286,centimol per kilogram,cmol/kg,exact,1,http://qudt.org/vocab/unit/CentiMOL-PER-KiloGM,cmol/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_218,picogram,pg,exact,1,http://qudt.org/vocab/unit/PicoGM,pg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_289,bar,bar,exact,1,http://qudt.org/vocab/unit/BAR,bar
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_250,Volt,V,exact,1,http://qudt.org/vocab/unit/V,V
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_269,gram per milliliter,g/mL,exact,1,http://qudt.org/vocab/unit/GM-PER-MilliL,g/mL
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_209,hectopascal,hPa,exact,1,http://qudt.org/vocab/unit/HectoPA,hPa
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_95,vierkante meter,m²,exact,1,http://qudt.org/vocab/unit/M2,m²
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_276,decimeter,dm,exact,1,http://qudt.org/vocab/unit/DeciM,dm
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_68,equivalent per liter,eq/L,genormaliseerd,1,http://qudt.org/vocab/unit/EQ-PER-L,Eq/L
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_248,mol per kilogram,mol/kg,exact,1,http://qudt.org/vocab/unit/MOL-PER-KiloGM,mol/kg
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_262,gram per vierkante meter,g/m²,exact,1,http://qudt.org/vocab/unit/GM-PER-M2,g/m²
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_24,kiloton per jaar,kt/jr,genormaliseerd,1,http://qudt.org/vocab/unit/KiloTONNE-PER-YR,kt/a
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_207,parts per billion,ppb,genormaliseerd,1,http://qudt.org/vocab/unit/PPB,PPB
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_205,microgram per kubieke meter,µg/m³,genormaliseerd,1,http://qudt.org/vocab/unit/MicroGM-PER-M3,μg/m³
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_214,meter per seconde,m/s,exact,1,http://qudt.org/vocab/unit/M-PER-SEC,m/s
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_8,milligram per kubieke meter,mg/m³,exact,1,http://qudt.org/vocab/unit/MilliGM-PER-M3,mg/m³
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_199,kilogram per hectare,kg/ha,exact,1,http://qudt.org/vocab/unit/KiloGM-PER-HA,kg/ha
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_258,kubieke meter per kubieke meter,m³/m³,exact,1,http://qudt.org/vocab/unit/M3-PER-M3,m³/m³
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_204,nanogram per kubieke meter,ng/m³,exact,1,http://qudt.org/vocab/unit/NanoGM-PER-M3,ng/m³
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_293,microgram per gram,µg/g,genormaliseerd,1,http://qudt.org/vocab/unit/MicroGM-PER-GM,μg/g
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_25,milligram per uur,mg/u,genormaliseerd,1,http://qudt.org/vocab/unit/MilliGM-PER-HR,mg/h
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_89,gigajoule,GJ,exact,1,http://qudt.org/vocab/unit/GigaJ,GJ
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_288,kiloNewton per vierkante meter,kN/m²,exact,1,http://qudt.org/vocab/unit/KiloN-PER-M2,kN/m²
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_75,Franse hardheidsgraden,°F,exact,1,http://qudt.org/vocab/unit/DEG_F,°F
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_206,parts per million,ppm,genormaliseerd,1,http://qudt.org/vocab/unit/PPM,PPM
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_90,terajoule,TJ,exact,1,http://qudt.org/vocab/unit/TeraJ,TJ
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_230,kelvin,K,exact,2,http://qudt.org/vocab/unit/K,K
 https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_230,kelvin,K,exact,2,http://qudt.org/vocab/unit/KY,K
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_95,vierkante meter,m²,exact,1,http://qudt.org/vocab/unit/M2,m²
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_286,centimol per kilogram,cmol/kg,exact,1,http://qudt.org/vocab/unit/CentiMOL-PER-KiloGM,cmol/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_89,gigajoule,GJ,exact,1,http://qudt.org/vocab/unit/GigaJ,GJ
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_25,milligram per uur,mg/u,genormaliseerd,1,http://qudt.org/vocab/unit/MilliGM-PER-HR,mg/h
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_249,per gram,/g,exact,1,http://qudt.org/vocab/unit/PER-GM,/g
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_262,gram per vierkante meter,g/m²,exact,1,http://qudt.org/vocab/unit/GM-PER-M2,g/m²
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_15,ton per jaar,t/jr,genormaliseerd,1,http://qudt.org/vocab/unit/TONNE-PER-YR,t/a
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_205,microgram per kubieke meter,µg/m³,genormaliseerd,1,http://qudt.org/vocab/unit/MicroGM-PER-M3,μg/m³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_248,mol per kilogram,mol/kg,exact,1,http://qudt.org/vocab/unit/MOL-PER-KiloGM,mol/kg
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_207,parts per billion,ppb,genormaliseerd,1,http://qudt.org/vocab/unit/PPB,PPB
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_289,bar,bar,exact,1,http://qudt.org/vocab/unit/BAR,bar
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_251,gram per kubieke centimeter,g/cm³,exact,1,http://qudt.org/vocab/unit/GM-PER-CentiM3,g/cm³
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_186,petajoule,PJ,exact,1,http://qudt.org/vocab/unit/PetaJ,PJ
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_193,Pascal,Pa,exact,1,http://qudt.org/vocab/unit/PA,Pa
-https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_284,centiStokes,cSt,exact,1,http://qudt.org/vocab/unit/CentiST,cSt
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_67,milli-equivalent per liter,meq/L,genormaliseerd,1,http://qudt.org/vocab/unit/MilliEQ-PER-L,mEq/L

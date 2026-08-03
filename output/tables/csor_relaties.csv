@@ -10,7 +10,7 @@ http://www.w3.org/2004/02/skos/core#member,,,
 http://www.w3.org/2004/02/skos/core#narrower,,,
 http://www.w3.org/2004/02/skos/core#topConceptOf,,,
 https://data.omgeving.vlaanderen.be/ns/csor#heeftAfleiding,heeft afleiding,,
-https://data.omgeving.vlaanderen.be/ns/csor#heeftAspect,Heeft aspect,,nafe1a0c891534da4b3d8238f1c8fd648b2
+https://data.omgeving.vlaanderen.be/ns/csor#heeftAspect,Heeft aspect,,n1b2725676d9742cbb64c3d7816ccd342b2
 https://data.omgeving.vlaanderen.be/ns/csor#heeftBronEenheid,Eenheid van,,https://data.omgeving.vlaanderen.be/ns/csor#Eenheid
 https://data.omgeving.vlaanderen.be/ns/csor#heeftBronParameter,heeft bronparameter,,https://data.omgeving.vlaanderen.be/ns/csor#Parameter
 https://data.omgeving.vlaanderen.be/ns/csor#heeftBronParameterAspect,Parameteraspect van,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect
@@ -23,7 +23,7 @@ https://data.omgeving.vlaanderen.be/ns/csor#heeftNatuurkundigeDimensie,Natuurkun
 https://data.omgeving.vlaanderen.be/ns/csor#heeftNoemer,noemer,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterTerm
 https://data.omgeving.vlaanderen.be/ns/csor#heeftParameter,Heeft parameter,,https://data.omgeving.vlaanderen.be/ns/csor#Parameter
 https://data.omgeving.vlaanderen.be/ns/csor#heeftParameterAspect,heeft parameter aspect,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterAspect
-https://data.omgeving.vlaanderen.be/ns/csor#heeftResultaattype,Resultaattype,,nafe1a0c891534da4b3d8238f1c8fd648b1
+https://data.omgeving.vlaanderen.be/ns/csor#heeftResultaattype,Resultaattype,,n1b2725676d9742cbb64c3d7816ccd342b1
 https://data.omgeving.vlaanderen.be/ns/csor#heeftSoortWaardebepaling,Soort waardebepaling,,https://data.omgeving.vlaanderen.be/ns/csor#SoortWaardebepaling
 https://data.omgeving.vlaanderen.be/ns/csor#heeftTeller,teller,,https://data.omgeving.vlaanderen.be/ns/csor#ParameterTerm
 https://data.omgeving.vlaanderen.be/ns/csor#heeftTerm,Term,,https://data.omgeving.vlaanderen.be/ns/csor#VeeltermParameterTerm
