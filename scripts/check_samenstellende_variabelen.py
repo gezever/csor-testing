@@ -10,39 +10,46 @@ composities, probleemgevallen, verschil-/eenterm-afleidingen)?
 
 DATA PROVENANCE
 ----------------
-Gemengd, met opzet — zie de gedocumenteerde valkuil in METHODOLOGY:
-- Queries 1a/1b: de lokale volledige-registersnapshot (`analyse/csor_merged.ttl`, bij elke
-  `scripts/run_all.py`-run vers geregenereerd door `scripts/common/dataset.py::fetch_and_save()`),
-  via `sparql_client.select_dataframe_local()`.
-- Queries 1c/2/3/4/5: BLIJVEN live tegen https://data-ontwikkel.omgeving.vlaanderen.be/sparql
-  (default/union-graph) — zie METHODOLOGY voor de reden (blanke-knoop-identiteit).
+Grotendeels de lokale volledige-registersnapshot (`analyse/csor_merged.ttl`, bij elke
+`scripts/run_all.py`-run vers geregenereerd door `scripts/common/dataset.py::fetch_and_save()`),
+via `sparql_client.select_dataframe_local()` — queries 1a, 1b, 1c, 2, 4, 5. Enkel query 3 blijft
+live tegen https://data-ontwikkel.omgeving.vlaanderen.be/sparql (default/union-graph) — zie
+METHODOLOGY voor de reden (performantie, niet langer correctheid).
 Queries: sparql/samenstellende_variabelen_check.sparql (bron van waarheid; dit script bevat
 dezelfde queryteksten inline om ze programmatisch te kunnen uitvoeren).
 
 METHODOLOGY
 -----------
-- **Gedocumenteerde valkuil — blanke-knoop-identiteit gaat verloren over gepagineerde CONSTRUCT-
-  pagina's heen.** Queries 1c, 2, 3, 4 en 5 navigeren via `csor:heeftTerm`/`csor:heeftBronParameter`
-  naar `csor:ParameterTerm`-tussenobjecten — dit zijn RDF-**blanke knopen** (geen URI's). RDF/
-  Turtle-blanke-knoopscoping is per document: elke gepagineerde CONSTRUCT-pagina wordt apart
-  geparset (`common/sparql_client.py::fetch_construct`), dus een blanke knoop wiens
-  samenhorende triples (bv. `?afleiding heeftTerm ?term` op pagina k, `?term heeftBronParameter
-  ?p` op pagina k+1) over twee pagina's verspreid raken, wordt na het samenvoegen tot TWEE
-  losse, niet-gerelateerde blanke knopen — de join breekt stil (0 resultaten in plaats van een
-  foutmelding). Empirisch geverifieerd: het `parameter`-graph (155.530 triples, 16 pagina's)
-  bevat de ~1279 `heeftTerm`-triples die dit raken; lokaal joinen gaf stelselmatig 0/1279 in
-  plaats van 1279/1279 live. Dit treft **geen** van de andere vier check-scripts of
-  generate_diagram.py — die navigeren uitsluitend URI-getypeerde entiteiten (Parameter,
-  Variabele, Eenheid, ...), nooit de anonieme Term/Afleiding-machinerie. Zie ook CLAUDE.md §4.
-- Queries 1a, 1b (geen blanke knopen, enkel `csor:heeftVariabele` tussen URI-entiteiten) zijn
-  daarom wél naar de lokale snapshot gemigreerd -> `sparql_client.select_dataframe_local()`.
-- Queries 1c, 2, 4, 5 blijven SELECT-queries rechtstreeks naar een DataFrame
-  (common.sparql_client.select_dataframe, live).
-- Query 3 is een CONSTRUCT (genereert csor:heeftSamenstellendeVariabele-relaties) -> gepagineerd
-  via common.sparql_client.fetch_construct (dezelfde 10k-cap-veiligheid als bij graph-fetches;
-  het eindresultaat van déze CONSTRUCT bevat zelf geen blanke knopen, enkel de WHERE-clausule
-  navigeert ze — dus geen paginatie-identiteitsprobleem in de output, wel in de evaluatie als
-  het lokaal zou draaien, vandaar ook hier live).
+- **Voormalige valkuil — blanke-knoop-identiteit ging verloren over gepagineerde CONSTRUCT-
+  pagina's heen — inmiddels opgelost.** Queries 1c, 2, 4 en 5 navigeren via
+  `csor:heeftTerm`/`csor:heeftBronParameter` naar `csor:ParameterTerm`-tussenobjecten — dit zijn
+  RDF-**blanke knopen** (geen URI's). Toen `dataset.py::fetch_and_save()` de lokale snapshot nog
+  via gepagineerde live CONSTRUCT's ophaalde (`common/sparql_client.py::fetch_graph()`), werd
+  elke pagina apart geparset — RDF/Turtle-blanke-knoopscoping is per document, dus een blanke
+  knoop wiens samenhorende triples over twee pagina's verspreid raakten, werd na het samenvoegen
+  tot TWEE losse, niet-gerelateerde blanke knopen (join brak stil, 0 i.p.v. 1279 resultaten).
+  Own addition, sinds de migratie naar GitHub-broncode als snapshotbron (zie `dataset.py` DATA
+  PROVENANCE): elke graph wordt nu in één stuk gedownload en in één `g.parse()`-aanroep
+  geparset, dus geen paginagrens meer die een blanke knoop kan splitsen. Geverifieerd: de join
+  `csor:heeftTerm/csor:heeftBronParameter` geeft nu lokaal 1287/1287 (voorheen 0/1279 vóór de
+  GitHub-migratie; het huidige totaal wijkt af van de oude 1279 omdat de brondata ondertussen
+  gegroeid is, niet omdat er nog steeds knopen verloren gaan). Queries 1c, 2, 4 en 5 zijn
+  daarom naar `sparql_client.select_dataframe_local()` gemigreerd, met identieke resultaten aan
+  de vroegere live-uitvoering (geverifieerd rij per rij; enige verschil was cosmetisch — rdflib
+  toont `xsd:decimal`-literalen met hun volledige brondata-precisie, bv. `-1.00000000000000000000`
+  i.p.v. de live-endpoint-JSON-notatie `-1` voor dezelfde waarde).
+- **Query 3 blijft live — niet langer om correctheidsredenen, wel om performantie.** Query 3 is
+  een CONSTRUCT (genereert `csor:heeftSamenstellendeVariabele`-relaties) met dezelfde
+  blanke-knoop-navigatie plus twee `FILTER NOT EXISTS`-subclausules. Lokaal via
+  `sparql_client.construct_local()` uitgevoerd op de 262k-triple snapshot bleek dit **niet
+  binnen een redelijke tijd** te voltooien (>3 minuten, manueel afgebroken) — zelfde soort
+  rdflib-pure-Python-engine-traagheid als de reeds gedocumenteerde geneste-subquery-valkuil (zie
+  CLAUDE.md §4), ook al is dit geen aggregaat. Query 3 blijft daarom via
+  `common.sparql_client.fetch_construct()` (live, gepagineerd) draaien — dat betekent dat deze
+  ene query wél nog blootstaat aan de gedocumenteerde paginatie-fabricatiebug (zie `dataset.py`
+  DATA PROVENANCE); het resultaat wordt enkel als ruwe `.ttl`-snapshot bewaard in `data/raw/`
+  (niet als output/tables/-CSV), dus de blootstelling is beperkt tot die ene ruwe snapshot, niet
+  tot een gerapporteerde bevinding.
 - Own addition: elke query wordt afzonderlijk als tussentijdse parquet bewaard onder
   data/interim/, zodat een volgende stap (of handmatige inspectie) niet opnieuw hoeft te
   bevragen.
@@ -260,15 +267,6 @@ def run_and_save_local(name: str, query: str, graph: rdflib.Graph) -> "pd.DataFr
     return df
 
 
-def run_and_save_live(name: str, query: str) -> "pd.DataFrame":  # noqa: F821
-    # Blijft live — zie METHODOLOGY (blanke-knoop-identiteit gaat verloren over gepagineerde
-    # CONSTRUCT-pagina's van de lokale snapshot heen).
-    df = sc.select_dataframe(query)
-    INTERIM_DIR.mkdir(parents=True, exist_ok=True)
-    df.to_parquet(INTERIM_DIR / f"samenstellende_{name}.parquet")
-    return df
-
-
 def build_html_report(
     df_1b: pd.DataFrame,
     actual: dict,
@@ -356,16 +354,16 @@ def main(graph: rdflib.Graph | None = None) -> None:
     df_1b = run_and_save_local("1b", QUERY_1B, graph)
     df_1b.to_csv(OUTPUT_DIR / "samenstellende_1b_gedeelde_variabelen.csv", index=False)
 
-    df_1c = run_and_save_live("1c", QUERY_1C)
+    df_1c = run_and_save_local("1c", QUERY_1C, graph)
     df_1c.to_csv(OUTPUT_DIR / "samenstellende_1c_inconsistente_composities.csv", index=False)
 
-    df_2 = run_and_save_live("2", QUERY_2)
+    df_2 = run_and_save_local("2", QUERY_2, graph)
     df_2.to_csv(OUTPUT_DIR / "samenstellende_2_probleemgevallen.csv", index=False)
 
-    df_4 = run_and_save_live("4", QUERY_4)
+    df_4 = run_and_save_local("4", QUERY_4, graph)
     df_4.to_csv(OUTPUT_DIR / "samenstellende_4_verschilafleidingen.csv", index=False)
 
-    df_5 = run_and_save_live("5", QUERY_5)
+    df_5 = run_and_save_local("5", QUERY_5, graph)
     df_5.to_csv(OUTPUT_DIR / "samenstellende_5_eenterm_afleidingen.csv", index=False)
 
     g3, pages3 = sc.fetch_construct(QUERY_3_BODY)

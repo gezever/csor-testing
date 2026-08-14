@@ -133,16 +133,27 @@ te verifiëren zijn zonder de CSV's te openen.
   (zie `sparql/samenstellende_variabelen_check.sparql` als referentiestijl) — dit blijft de
   **bron van waarheid** voor elke querytekst, ook al draait de uitvoering nu lokaal (zie
   hieronder).
-- **Architectuur: één live fetch per run, daarna uitsluitend lokale queries.** Elke
+- **Architectuur: één snapshot per run, daarna uitsluitend lokale queries.** Elke
   `scripts/check_*.py` en `scripts/generate_diagram.py` bevragen niet langer individueel de
   live endpoint. In plaats daarvan regenereert `scripts/run_all.py` bij elke run eerst
   `analyse/csor_merged.ttl` (alle 10 CSOR-graphs, samengevoegd) via
   `scripts/common/dataset.py::fetch_and_save()`, en geeft die ene `rdflib.Graph` door aan elk
   script (`main(graph)`). Elk script blijft ook standalone draaibaar (`python3
   scripts/check_x.py`) — zonder meegegeven graph haalt het dan zelf een verse snapshot op.
-  Reden: sneller (één fetch i.p.v. tientallen HTTP-rondritten per run) en consistent (alle
-  checks in dezelfde run zien exact dezelfde snapshot). Externe bronnen (PubChem, QUDT) blijven
-  per definitie live.
+  **Alle 10 graphs komen sinds een latere iteratie van GitHub** (de publieke
+  `codelijst-csor-<naam>`-broncoderepo's onder `github.com/milieuinfo/`, via
+  `dataset.py::fetch_graph_from_github()`, één ongepagineerde download per graph — zie de
+  volgende twee bullets voor de reden). `drager`'s GitHub-bestand mist ~821 triples t.o.v. live
+  (build-time gegenereerde DCAT-catalogusmetadata + ontologie-declaraties via een propriëtaire
+  reasoner in `codelijst-csor-drager/src/99_deploy_latest.js`, niet reproduceerbaar zonder dat
+  interne tool te draaien) — **bevestigd onschadelijk**: getest dat `check_conceptschemas.py`
+  en `generate_diagram.py` met enkel de 90 GitHub-triples exact dezelfde tellingen geven als met
+  de volledige 911-triple live-fetch, dus geen reden om voor dit ene graph terug op de live
+  endpoint te leunen. Elke GitHub-fetch wordt ter info afgetoetst tegen een live `COUNT`-query
+  (geen harde faalvoorwaarde — GitHub-publicatie kan tot enkele dagen achterlopen op live,
+  normaal en geen datafout; `drager`'s kloof krijgt een aparte, geruststellende boodschap i.p.v.
+  de generieke achterstand-tekst — zie `dataset.py` METHODOLOGY). Externe bronnen (PubChem,
+  QUDT) blijven per definitie live.
 - **Lokale queryuitvoering**: `sparql_client.select_dataframe_local(query, graph)` en
   `construct_local(query, graph)` voeren dezelfde SPARQL-querytekst uit tegen een reeds geladen
   `rdflib.Graph` (rdflib's eigen SPARQL-engine i.p.v. een HTTP-call) — bestaande querydefinities
@@ -170,8 +181,30 @@ te verifiëren zijn zonder de CSV's te openen.
   `CONSTRUCT {?s ?p ?o} WHERE { GRAPH <...> {?s ?p ?o} } LIMIT 10000 OFFSET n`, ophogen tot een
   pagina < 10.000 triples teruggeeft, en het totaal verifiëren tegen een losse `COUNT`-query.
   **Voeg geen `ORDER BY` toe** aan de gepagineerde CONSTRUCT — dat gaf een HTTP 500 op deze
-  endpoint. Zie `scripts/common/sparql_client.py::fetch_graph()`, aangeroepen door
-  `scripts/common/dataset.py::fetch_and_save()` voor elk van de 10 graphs.
+  endpoint. Zie `scripts/common/sparql_client.py::fetch_graph()` — sinds de GitHub-migratie
+  hierboven niet meer aangeroepen door `dataset.py::fetch_and_save()` (alle 10 graphs komen nu
+  van GitHub, zie architectuur-bullet), maar behouden voor eventueel toekomstig live gebruik
+  (bv. een nieuwe graph zonder GitHub-broncoderepo) — dan gelden deze en de volgende valkuil
+  opnieuw.
+- **Gedocumenteerde valkuil — gepagineerde CONSTRUCT kan triples verzinnen (reden voor de
+  GitHub-migratie hierboven).** Los van de 10.000-cap: een gepagineerde CONSTRUCT
+  (`LIMIT/OFFSET` over een ongefilterde `?s ?p ?o` binnen één `GRAPH`) kan op grote graphs
+  triples toeschrijven aan het VERKEERDE subject, met een ongewijzigd totaal — de bestaande
+  COUNT-verificatie merkt het dus niet op. Concreet gereproduceerd op `parameter`
+  (156k triples/32 pagina's à page_size=5000): `parameter/P_3870`'s structurele/relationele
+  triples (`heeftDrager`, `heeftParameterAspect`, ...) kwamen correct terug, maar zijn
+  literal-waarde-triples (`prefLabel`/`altLabel`/`symbool`/`verkorteNotatie`/`heeftVariabele`)
+  waren die van een ANDER subject verderop in de paginavolgorde (ijzer-parameter P_3870 kreeg
+  zo het label/symbool van Diflubenzuron) — bevestigd fout t.o.v. vier onafhankelijke bronnen
+  (live `/doc`-resource-endpoint, een ongepagineerde gefilterde `/sparql`-query, de publieke
+  GitHub-broncode, een lokale git-checkout ervan). Dit trof `check_parameter_inhoud.py`'s
+  `label_niet_herleidbaar`-check: 1811 valse-positieve vlaggen (0 na de GitHub-migratie).
+  **Verplichte aanpak**: geen gepagineerde CONSTRUCT meer gebruiken voor de reguliere snapshot-
+  fetch — alle 10 graphs komen van GitHub (zie architectuur-bullet hierboven). Enkel relevant
+  als een toekomstige graph (nog) geen GitHub-broncoderepo heeft: dan is een live-gepagineerde
+  fetch ongevaarlijk zolang die single-page blijft (< 10.000 triples, geen `OFFSET`-boundary
+  tussen requests) — groeit zo'n graph daaroverheen, dan moet hij eerst een GitHub-broncoderepo
+  krijgen of een andere fabricatiebug-vrije fetchstrategie.
 - **Gedocumenteerde valkuil — blanke-knoop-identiteit gaat verloren over gepagineerde CONSTRUCT-
   pagina's heen.** Elke pagina van `fetch_construct()`/`fetch_graph()` wordt apart geparset
   (`g.parse(data=page, format="turtle")`) — RDF/Turtle-blanke-knoopscoping is per document, dus

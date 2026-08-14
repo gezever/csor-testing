@@ -113,30 +113,46 @@ def fetch_graph(
     page_size: int = PAGE_SIZE,
     verify: bool = True,
 ) -> FetchResult:
-    """Haalt een volledige named graph op via gepagineerde CONSTRUCT-queries (zie fetch_construct)."""
+    """Haalt een volledige named graph op via gepagineerde CONSTRUCT-queries (zie fetch_construct).
+
+    Bij een mislukte verificatie wordt éénmalig herprobeerd met een gehalveerde page_size
+    (tot een ondergrens) i.p.v. meteen te falen: empirisch bevestigd op het 'parameter'-graph
+    (156.318 triples) dat deze endpoint bij een OFFSET rond ~140.000 in combinatie met
+    page_size=10.000 stil rijen laat wegvallen (deterministisch, dus geen netwerk-flakiness) —
+    een kleinere page_size (5.000) omzeilt dit volledig. Zie CLAUDE.md §4.
+    """
     uri = graph_uri(graph_name)
     query_body = f"CONSTRUCT {{?s ?p ?o}} WHERE {{ GRAPH <{uri}> {{?s ?p ?o}} }}"
-    g, pages = fetch_construct(query_body, endpoint, page_size)
 
-    parsed_count = len(g)
-    expected_count = count_graph_triples(graph_name, endpoint) if verify else parsed_count
-    result = FetchResult(
-        graph=g,
-        graph_name=graph_name,
-        endpoint=endpoint,
-        expected_count=expected_count,
-        parsed_count=parsed_count,
-        pages=pages,
-        fetched_at=datetime.now(timezone.utc).isoformat(),
-    )
-    if verify and not result.verified:
-        raise RuntimeError(
-            f"Fetch-verificatie mislukt voor graph '{graph_name}': "
-            f"COUNT-query zegt {expected_count}, geparseerd {parsed_count} triples. "
-            "Mogelijk is de 10.000-triple-cap toch geraakt, of is de paginatie niet stabiel "
-            "gebleken tussen de losse requests — zie CLAUDE.md §4."
+    expected_count = count_graph_triples(graph_name, endpoint) if verify else None
+    attempt_page_size = page_size
+    last_result: FetchResult | None = None
+    while True:
+        g, pages = fetch_construct(query_body, endpoint, attempt_page_size)
+        parsed_count = len(g)
+        result = FetchResult(
+            graph=g,
+            graph_name=graph_name,
+            endpoint=endpoint,
+            expected_count=expected_count if verify else parsed_count,
+            parsed_count=parsed_count,
+            pages=pages,
+            fetched_at=datetime.now(timezone.utc).isoformat(),
         )
-    return result
+        if not verify or result.verified:
+            return result
+        last_result = result
+        if attempt_page_size <= 1000:
+            break
+        attempt_page_size //= 2
+
+    raise RuntimeError(
+        f"Fetch-verificatie mislukt voor graph '{graph_name}' (ook na herpogingen met kleinere "
+        f"page_size, laatst geprobeerd: {attempt_page_size * 2}): "
+        f"COUNT-query zegt {last_result.expected_count}, geparseerd {last_result.parsed_count} "
+        "triples. Mogelijk is de 10.000-triple-cap toch geraakt, of is de paginatie niet stabiel "
+        "gebleken tussen de losse requests — zie CLAUDE.md §4."
+    )
 
 
 def save_snapshot(result: FetchResult, raw_dir: Path, name: str) -> tuple[Path, Path]:
