@@ -1,0 +1,1919 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>VLAREM-rubriekeneenheden in het CSO-register</title>
+<style>
+  body {
+    background: #f9f9f7;
+    color: #0b0b0b;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    line-height: 1.5;
+  }
+  h1 { margin-bottom: 0.25rem; }
+  .intro { color: #52514e; margin-top: 0; }
+  h2 {
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #e1e0d9;
+    padding-bottom: 0.4rem;
+  }
+  p { color: #0b0b0b; }
+  .table-wrap { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  th, td {
+    border-bottom: 1px solid #e1e0d9;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th { color: #898781; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>VLAREM-rubriekeneenheden in het CSO-register</h1>
+<p class="intro">Hoe passen de eenheden uit de VLAREM-rubriekenlijst in CSOR? Voorstel op basis van een handmatige triage van 133 unieke strings, getoetst tegen de registersnapshot en QUDT 3.5.0.</p>
+<h2>Samenvatting</h2><p>Van de <b>133</b> strings in de VLAREM-rubriekenlijst is er <b>35</b> alleen een schrijfwijze van een van de 20 bestaande CSOR-eenheden (bv. <code>m3</code>, <code>m³</code>, <code>meter</code>). <b>33</b> strings vragen een nieuwe eenheid (23 verschillende, want meerdere strings delen er één). <b>74</b> strings zijn geen eenheid maar een eenheid <i>plus</i> iets anders: een telbaar object, een rubriekvoorwaarde of een meetvoorschrift; enkele daarvan hebben bovendien een nieuwe eenheid nodig (bv. <code>dieren/dag</code>).</p><p>Lees de Sankey van links naar rechts: links de grootheid waar de string over gaat, rechts wat er in CSOR mee moet gebeuren. Elke string stroomt naar precies één categorie, dus de categorieën A–H tellen op tot 133; de aantallen 'nieuwe eenheid' hierboven overlappen daarmee gedeeltelijk.</p><div style="height:620px; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="83550eec-8563-46ac-9e93-7afd8835dec2" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("83550eec-8563-46ac-9e93-7afd8835dec2")) {                    Plotly.newPlot(                        "83550eec-8563-46ac-9e93-7afd8835dec2",                        [{"arrangement":"snap","link":{"color":["rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(0,131,0,0.45)","rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(0,131,0,0.45)","rgba(235,104,52,0.45)","rgba(0,131,0,0.45)","rgba(237,161,0,0.45)","rgba(42,120,214,0.45)","rgba(235,104,52,0.45)","rgba(42,120,214,0.45)","rgba(235,104,52,0.45)","rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(235,104,52,0.45)","rgba(227,73,72,0.45)","rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(42,120,214,0.45)","rgba(74,58,167,0.45)","rgba(232,123,164,0.45)","rgba(42,120,214,0.45)","rgba(235,104,52,0.45)","rgba(27,175,122,0.45)","rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(235,104,52,0.45)","rgba(42,120,214,0.45)","rgba(27,175,122,0.45)","rgba(235,104,52,0.45)"],"source":[6,6,6,5,5,5,5,8,8,7,7,2,2,1,1,1,12,9,9,0,0,0,10,10,11,4,4,4,3,3,3],"target":[13,14,15,13,14,15,16,15,19,13,16,13,16,13,14,16,20,13,14,13,17,18,13,16,14,13,14,16,13,14,16],"value":[3,1,1,1,6,2,1,2,2,2,2,3,10,9,2,7,1,2,1,1,38,6,1,2,3,4,3,4,9,3,1]},"node":{"color":["#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#b8b7ae","#2a78d6","#1baf7a","#008300","#eb6834","#4a3aa7","#e87ba4","#eda100","#e34948"],"label":["telling (45)","massastroom (18)","massa (13)","volumestroom (13)","volume (11)","energie, vermogen, kracht (10)","conventionele eenheid (5)","lengte (4)","geluid (4)","oppervlakte (3)","temperatuur, %, dichtheid (3)","tijd (3)","onduidelijk (1)","A \u00b7 alias van bestaande eenheid (35)","B \u00b7 nieuwe eenheid, bestaande dimensie (19)","C \u00b7 nieuwe eenheid + nieuwe dimensie (5)","D \u00b7 eenheid + context afsplitsen (27)","E \u00b7 telling van een object (38)","F \u00b7 telling per tijd (6)","G \u00b7 meetvoorschrift (2)","H \u00b7 onduidelijk \u2014 nakijken (1)"],"line":{"width":0},"pad":14,"thickness":16},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"133 VLAREM-strings: grootheid (links) \u2192 wat er in CSOR mee moet gebeuren (rechts)"},"height":620,"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb","xaxis":{"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"}},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><h2>Bestaande eenheden: vooral spellingsvarianten</h2><p>Geen nieuwe concepten nodig voor de 35 categorie-A-strings: de varianten worden <code>skos:altLabel</code> (legitieme schrijfwijze, bv. <code>ton per dag</code>) of <code>skos:hiddenLabel</code> (louter typografisch, bv. <code>m3</code>, <code>KW</code>) op het bestaande concept, zodat de VLAREM-tekst doorzoekbaar wordt zonder de codelijst te vervuilen. Eenheid <b>E_83 aantal</b> valt op: daar landen alle 38 telbare objecten (categorie E) — zie de openstaande beslissingen.</p><div style="height:712px; width:100%;">                            <div id="ec204856-2210-4ee1-ab42-505bbb5e47a4" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ec204856-2210-4ee1-ab42-505bbb5e47a4")) {                    Plotly.newPlot(                        "ec204856-2210-4ee1-ab42-505bbb5e47a4",                        [{"marker":{"color":"#2a78d6"},"name":"alias (schrijfwijze)","orientation":"h","x":{"dtype":"i1","bdata":"AQEAAQEAAQECAgICAgICAgMCAgMCAQ=="},"y":["E_11 \u00b7 kilogram per dag (kg\u002fd)","E_20 \u00b7 kg per maand (kg\u002fmnd)","E_43 \u00b7 procent (%)","E_38 \u00b7 kilogram (kg)","E_47 \u00b7 liter per dag (L\u002fd)","E_5 \u00b7 kilogram per kubieke meter (kg\u002fm\u00b3)","E_92 \u00b7 megawatt (MW)","E_62 \u00b7 graden Celsius (\u00b0C)","E_46 \u00b7 kubieke meter per uur (m\u00b3\u002fu)","E_45 \u00b7 kubieke meter per dag (m\u00b3\u002fd)","E_50 \u00b7 kubieke meter per jaar (m\u00b3\u002fjr)","E_13 \u00b7 kilogram per uur (kg\u002fu)","E_33 \u00b7 liter (L)","E_95 \u00b7 vierkante meter (m\u00b2)","E_15 \u00b7 ton per jaar (t\u002fjr)","E_175 \u00b7 normaal kubieke meter per uur (Nm\u00b3\u002fu)","E_78 \u00b7 Inwoner equivalent (IE)","E_59 \u00b7 meter (m)","E_32 \u00b7 kubieke meter (m\u00b3)","E_23 \u00b7 ton per dag (t\u002fd)","E_41 \u00b7 ton (ton)","E_83 \u00b7 aantal (#)"],"type":"bar"},{"marker":{"color":"#eb6834"},"name":"met afgesplitste context","orientation":"h","x":{"dtype":"i1","bdata":"AAABAAABAAAAAAAAAAABAQACBAYKAA=="},"y":["E_11 \u00b7 kilogram per dag (kg\u002fd)","E_20 \u00b7 kg per maand (kg\u002fmnd)","E_43 \u00b7 procent (%)","E_38 \u00b7 kilogram (kg)","E_47 \u00b7 liter per dag (L\u002fd)","E_5 \u00b7 kilogram per kubieke meter (kg\u002fm\u00b3)","E_92 \u00b7 megawatt (MW)","E_62 \u00b7 graden Celsius (\u00b0C)","E_46 \u00b7 kubieke meter per uur (m\u00b3\u002fu)","E_45 \u00b7 kubieke meter per dag (m\u00b3\u002fd)","E_50 \u00b7 kubieke meter per jaar (m\u00b3\u002fjr)","E_13 \u00b7 kilogram per uur (kg\u002fu)","E_33 \u00b7 liter (L)","E_95 \u00b7 vierkante meter (m\u00b2)","E_15 \u00b7 ton per jaar (t\u002fjr)","E_175 \u00b7 normaal kubieke meter per uur (Nm\u00b3\u002fu)","E_78 \u00b7 Inwoner equivalent (IE)","E_59 \u00b7 meter (m)","E_32 \u00b7 kubieke meter (m\u00b3)","E_23 \u00b7 ton per dag (t\u002fd)","E_41 \u00b7 ton (ton)","E_83 \u00b7 aantal (#)"],"type":"bar"},{"marker":{"color":"#4a3aa7"},"name":"telling van een object","orientation":"h","x":{"dtype":"i1","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAJg=="},"y":["E_11 \u00b7 kilogram per dag (kg\u002fd)","E_20 \u00b7 kg per maand (kg\u002fmnd)","E_43 \u00b7 procent (%)","E_38 \u00b7 kilogram (kg)","E_47 \u00b7 liter per dag (L\u002fd)","E_5 \u00b7 kilogram per kubieke meter (kg\u002fm\u00b3)","E_92 \u00b7 megawatt (MW)","E_62 \u00b7 graden Celsius (\u00b0C)","E_46 \u00b7 kubieke meter per uur (m\u00b3\u002fu)","E_45 \u00b7 kubieke meter per dag (m\u00b3\u002fd)","E_50 \u00b7 kubieke meter per jaar (m\u00b3\u002fjr)","E_13 \u00b7 kilogram per uur (kg\u002fu)","E_33 \u00b7 liter (L)","E_95 \u00b7 vierkante meter (m\u00b2)","E_15 \u00b7 ton per jaar (t\u002fjr)","E_175 \u00b7 normaal kubieke meter per uur (Nm\u00b3\u002fu)","E_78 \u00b7 Inwoner equivalent (IE)","E_59 \u00b7 meter (m)","E_32 \u00b7 kubieke meter (m\u00b3)","E_23 \u00b7 ton per dag (t\u002fd)","E_41 \u00b7 ton (ton)","E_83 \u00b7 aantal (#)"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"margin":{"l":60,"r":30,"t":50,"b":60},"legend":{"orientation":"h","y":-0.12},"barmode":"stack","title":{"text":"22 bestaande CSOR-eenheden worden door VLAREM-strings gebruikt"},"xaxis":{"title":{"text":"Aantal VLAREM-strings"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"height":712,"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb","yaxis":{"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"}},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><h2>Nieuwe eenheden</h2><p><b>23</b> eenheden ontbreken in CSOR; <b>15</b> daarvan hebben een QUDT-eenheid (<code>skos:exactMatch</code>). Vier daarvan hebben ook een nieuwe natuurkundige dimensie nodig: aantal per tijd, geluidsdrukniveau, kracht, vervuilingseenheid — CSOR heeft nu geen dimensie voor kracht, geluidsniveau, aantal per tijd of vervuilingseenheden. De eenheid <code>uur</code> (E_94) bestaat al maar is nog niet aan QUDT gekoppeld: <code>unit:HR</code>, niet <code>unit:U</code> (zie <code>reports/rapport_conceptschemas_en_qudt.md</code> §3.6).</p><div style="height:510px; width:100%;">                            <div id="142d6425-98d0-46eb-86a6-85bfcd876a61" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("142d6425-98d0-46eb-86a6-85bfcd876a61")) {                    Plotly.newPlot(                        "142d6425-98d0-46eb-86a6-85bfcd876a61",                        [{"marker":{"color":"#1baf7a"},"name":"bestaande dimensie","orientation":"h","x":{"dtype":"i1","bdata":"AQEBAgIDAwM="},"y":["massa","massa per tijd","oppervlakte","tijd","vermogen","energie","volume","volume per tijdseenheid"],"type":"bar"},{"marker":{"color":"#008300"},"name":"nieuwe dimensie","orientation":"h","x":{"dtype":"i1","bdata":"AQICAg=="},"y":["vervuilingseenheid","aantal per tijd","geluidsdrukniveau","kracht"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"legend":{"orientation":"h","y":-0.15},"barmode":"stack","title":{"text":"23 nieuwe eenheden per natuurkundige dimensie"},"xaxis":{"title":{"text":"Aantal nieuwe eenheden"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"height":510,"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb","yaxis":{"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"}},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbool</th>
+      <th>label</th>
+      <th>dimensie</th>
+      <th>nieuwe dimensie</th>
+      <th>QUDT (unit:…)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>t CO₂-eq</td>
+      <td>ton CO₂-equivalent</td>
+      <td>massa</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>J</td>
+      <td>joule</td>
+      <td>energie</td>
+      <td>nee</td>
+      <td>J</td>
+    </tr>
+    <tr>
+      <td>kVA</td>
+      <td>kilovoltampère</td>
+      <td>vermogen</td>
+      <td>nee</td>
+      <td>KiloVA</td>
+    </tr>
+    <tr>
+      <td>kW</td>
+      <td>kilowatt</td>
+      <td>vermogen</td>
+      <td>nee</td>
+      <td>KiloW</td>
+    </tr>
+    <tr>
+      <td>VAh</td>
+      <td>voltampère-uur</td>
+      <td>energie</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t/u</td>
+      <td>ton per uur</td>
+      <td>massa per tijd</td>
+      <td>nee</td>
+      <td>TONNE-PER-HR</td>
+    </tr>
+    <tr>
+      <td>ha</td>
+      <td>hectare</td>
+      <td>oppervlakte</td>
+      <td>nee</td>
+      <td>HA</td>
+    </tr>
+    <tr>
+      <td>jr</td>
+      <td>jaar</td>
+      <td>tijd</td>
+      <td>nee</td>
+      <td>YR</td>
+    </tr>
+    <tr>
+      <td>mnd</td>
+      <td>maand</td>
+      <td>tijd</td>
+      <td>nee</td>
+      <td>MO</td>
+    </tr>
+    <tr>
+      <td>dm³</td>
+      <td>kubieke decimeter</td>
+      <td>volume</td>
+      <td>nee</td>
+      <td>DeciM3</td>
+    </tr>
+    <tr>
+      <td>kL</td>
+      <td>kiloliter</td>
+      <td>volume</td>
+      <td>nee</td>
+      <td>KiloL</td>
+    </tr>
+    <tr>
+      <td>10⁶ m³</td>
+      <td>miljoen kubieke meter</td>
+      <td>volume</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>10⁶ L/jr</td>
+      <td>miljoen liter per jaar</td>
+      <td>volume per tijdseenheid</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>10⁶ m³/jr</td>
+      <td>miljoen kubieke meter per jaar</td>
+      <td>volume per tijdseenheid</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Nm³/d</td>
+      <td>normaal kubieke meter per dag</td>
+      <td>volume per tijdseenheid</td>
+      <td>nee</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>VE</td>
+      <td>vervuilingseenheid</td>
+      <td>vervuilingseenheid</td>
+      <td>ja</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kN</td>
+      <td>kiloNewton</td>
+      <td>kracht</td>
+      <td>ja</td>
+      <td>KiloN</td>
+    </tr>
+    <tr>
+      <td>MN</td>
+      <td>meganewton</td>
+      <td>kracht</td>
+      <td>ja</td>
+      <td>MegaN</td>
+    </tr>
+    <tr>
+      <td>dB</td>
+      <td>decibel</td>
+      <td>geluidsdrukniveau</td>
+      <td>ja</td>
+      <td>DeciB</td>
+    </tr>
+    <tr>
+      <td>dB(A)</td>
+      <td>decibel A-gewogen</td>
+      <td>geluidsdrukniveau</td>
+      <td>ja</td>
+      <td>DeciB_A</td>
+    </tr>
+    <tr>
+      <td>kJ</td>
+      <td>kilojoule</td>
+      <td>energie</td>
+      <td>nee</td>
+      <td>KiloJ</td>
+    </tr>
+    <tr>
+      <td>#/d</td>
+      <td>aantal per dag</td>
+      <td>aantal per tijd</td>
+      <td>ja</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>#/jr</td>
+      <td>aantal per jaar</td>
+      <td>aantal per tijd</td>
+      <td>ja</td>
+      <td>NUM-PER-YR</td>
+    </tr>
+  </tbody>
+</table></div><h2>Strings die geen eenheid zijn</h2><p>Een <code>csor:Eenheid</code> is een maat voor één natuurkundige dimensie. In veel VLAREM-strings zit daarnaast <i>wat</i> geteld of gewogen wordt, <i>hoe</i> het bepaald wordt of <i>onder welke voorwaarde</i> de rubriek geldt. Die delen horen in <code>csor:Variabele</code> (44 voorgestelde variabelen), <code>csor:SoortWaardebepaling</code> (capaciteit is een ontwerpwaarde, geen meting), <code>csor:ParameterAspect</code> (LAeq-middelingstijd) of blijven in het VLAREM-rubriekenmodel (drempels, oventype, opslagplaats).</p><div style="height:100%; width:100%;">                            <div id="26fdb731-d27c-4be3-bbd7-28722a92d275" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("26fdb731-d27c-4be3-bbd7-28722a92d275")) {                    Plotly.newPlot(                        "26fdb731-d27c-4be3-bbd7-28722a92d275",                        [{"marker":{"color":"#2a78d6"},"x":["csor:Variabele","rubriekvoorwaarde (blijft in VLAREM)","csor:SoortWaardebepaling","csor:ParameterAspect"],"y":[58,9,4,2],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Waar de niet-eenheid-delen van de strings heen moeten (aantal strings)"},"xaxis":{"title":{"text":"Bestemming"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"title":{"text":"Aantal"},"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"margin":{"l":60,"r":30,"t":50,"b":60},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>bron</th>
+      <th>eenheid</th>
+      <th>bestemming</th>
+      <th>afgesplitst deel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>kilojoule per hamer</td>
+      <td>kJ (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>slagenergie per hamer</td>
+    </tr>
+    <tr>
+      <td>m diepte ten opzichte van het maaiveld</td>
+      <td>m</td>
+      <td>csor:Variabele</td>
+      <td>diepte ten opzichte van het maaiveld</td>
+    </tr>
+    <tr>
+      <td>m onder het maaiveld</td>
+      <td>m</td>
+      <td>csor:Variabele</td>
+      <td>diepte ten opzichte van het maaiveld</td>
+    </tr>
+    <tr>
+      <td>ton in een lokaal</td>
+      <td>ton</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>opslag in lokaal</td>
+    </tr>
+    <tr>
+      <td>ton in open lucht</td>
+      <td>ton</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>opslag in openlucht</td>
+    </tr>
+    <tr>
+      <td>ton in openlucht</td>
+      <td>ton</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>opslag in openlucht</td>
+    </tr>
+    <tr>
+      <td>ton schroot</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>schroot</td>
+    </tr>
+    <tr>
+      <td>ton totale capaciteit</td>
+      <td>ton</td>
+      <td>csor:SoortWaardebepaling</td>
+      <td>capaciteit (totaal)</td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak</td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die al dan niet vloeistoffen of andere gevaarlijke onderdelen bevatten</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak (alle)</td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die noch vloeistoffen, noch andere gevaarlijke onderdelen bevatten</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak (ontdaan)</td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die wel nog vloeistoffen en/of andere gevaarlijke onderdelen bevatten</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak (niet ontdaan)</td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die wel nog vloeistoffen of andere gevaarlijke onderdelen kunnen bevatten</td>
+      <td>ton</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak (niet ontdaan)</td>
+    </tr>
+    <tr>
+      <td>ton per dag indien niet meer dan 90 achtereenvolgende dagen in bedrijf</td>
+      <td>t/d</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>≤ 90 achtereenvolgende dagen in bedrijf</td>
+    </tr>
+    <tr>
+      <td>ton/dag eindproducten</td>
+      <td>t/d</td>
+      <td>csor:Variabele</td>
+      <td>eindproduct</td>
+    </tr>
+    <tr>
+      <td>ton/dag geslachte dieren</td>
+      <td>t/d</td>
+      <td>csor:Variabele</td>
+      <td>geslacht dier</td>
+    </tr>
+    <tr>
+      <td>ton/dag in andere ovens</td>
+      <td>t/d</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>type oven: andere</td>
+    </tr>
+    <tr>
+      <td>ton/dag in draaiovens</td>
+      <td>t/d</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>type oven: draaioven</td>
+    </tr>
+    <tr>
+      <td>ton/dag niet meer dan 90 achtereenvolgende dagen in bedrijf</td>
+      <td>t/d</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>≤ 90 achtereenvolgende dagen in bedrijf</td>
+    </tr>
+    <tr>
+      <td>ton/jaar levend gewicht</td>
+      <td>t/jr</td>
+      <td>csor:SoortWaardebepaling</td>
+      <td>levend gewicht</td>
+    </tr>
+    <tr>
+      <td>% overgebracht water v/h debiet</td>
+      <td>%</td>
+      <td>csor:Variabele</td>
+      <td>overgebracht water (fractie van het debiet)</td>
+    </tr>
+    <tr>
+      <td>kg/m³ plaatsingsdichtheid per oven</td>
+      <td>kg/m³</td>
+      <td>csor:Variabele</td>
+      <td>plaatsingsdichtheid (per oven)</td>
+    </tr>
+    <tr>
+      <td>m³ (capaciteit)</td>
+      <td>m³</td>
+      <td>csor:SoortWaardebepaling</td>
+      <td>capaciteit</td>
+    </tr>
+    <tr>
+      <td>m³ in een lokaal</td>
+      <td>m³</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>opslag in lokaal</td>
+    </tr>
+    <tr>
+      <td>m³ in openlucht</td>
+      <td>m³</td>
+      <td>rubriekvoorwaarde (blijft in VLAREM)</td>
+      <td>opslag in openlucht</td>
+    </tr>
+    <tr>
+      <td>m³ ovencapaciteit</td>
+      <td>m³</td>
+      <td>csor:SoortWaardebepaling</td>
+      <td>capaciteit (oven)</td>
+    </tr>
+    <tr>
+      <td>Nm³/uur aanzuigzijdig debiet</td>
+      <td>Nm³/u</td>
+      <td>csor:Variabele</td>
+      <td>aanzuigzijdig debiet</td>
+    </tr>
+    <tr>
+      <td>dieren/dag</td>
+      <td>#/d (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>dier</td>
+    </tr>
+    <tr>
+      <td>motorvoertuigen en hun aanhangwagens/dag</td>
+      <td>#/d (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>motorvoertuig of aanhangwagen</td>
+    </tr>
+    <tr>
+      <td>voertuigen en hun aanhangwagens/dag</td>
+      <td>#/d (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>voertuig of aanhangwagen</td>
+    </tr>
+    <tr>
+      <td>wedstrijd/jaar</td>
+      <td>#/jr (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>wedstrijd</td>
+    </tr>
+    <tr>
+      <td>wedstrijden/jaar</td>
+      <td>#/jr (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>wedstrijd</td>
+    </tr>
+    <tr>
+      <td>wrakken/jaar</td>
+      <td>#/jr (nieuw)</td>
+      <td>csor:Variabele</td>
+      <td>voertuigwrak</td>
+    </tr>
+    <tr>
+      <td>dB(A)LAeq,15min</td>
+      <td>dB(A) (nieuw)</td>
+      <td>csor:ParameterAspect</td>
+      <td>LAeq, middelingstijd 15 min</td>
+    </tr>
+    <tr>
+      <td>dB(A)LAeq,60min</td>
+      <td>dB(A) (nieuw)</td>
+      <td>csor:ParameterAspect</td>
+      <td>LAeq, middelingstijd 60 min</td>
+    </tr>
+  </tbody>
+</table></div><h2>Waar het in het CSOR-model landt</h2><p>Het model is dat uit <code>reports/rapport_conceptschemas_en_qudt.md</code> §3.1. Alleen de oranje klassen krijgen nieuwe concepten. <code>Parameter</code> is bewust een vervolgstap: pas als de variabelen bestaan kan per variabele een parameter (variabele + drager + soort waardebepaling) worden aangemaakt. Het aantal kwantificeerbare aspecten is afgeleid (elke nieuwe dimensie heeft er minstens één nodig) en niet apart getoetst.</p><div style="height:560px; width:100%;">                            <div id="f96bea38-141b-44db-a018-6d8f10270ed5" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f96bea38-141b-44db-a018-6d8f10270ed5")) {                    Plotly.newPlot(                        "f96bea38-141b-44db-a018-6d8f10270ed5",                        [],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":0.10000000000000009,"x1":3.5,"y0":5.1,"y1":6.1},{"fillcolor":"rgba(0,0,0,0)","line":{"color":"#c3c2b7","dash":"solid","width":1.6},"type":"rect","x0":3.7,"x1":7.1000000000000005,"y0":5.1,"y1":6.1},{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":7.3,"x1":10.7,"y0":5.1,"y1":6.1},{"fillcolor":"rgba(137,135,129,0.10)","line":{"color":"#898781","dash":"dash","width":1.6},"type":"rect","x0":3.7,"x1":7.1000000000000005,"y0":3.6500000000000004,"y1":4.65},{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":3.7,"x1":7.1000000000000005,"y0":2.2,"y1":3.2},{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":3.7,"x1":7.1000000000000005,"y0":0.75,"y1":1.75},{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":0.10000000000000009,"x1":3.5,"y0":-0.7,"y1":0.3},{"fillcolor":"rgba(235,104,52,0.16)","line":{"color":"#eb6834","dash":"solid","width":1.6},"type":"rect","x0":7.3,"x1":10.7,"y0":-0.7,"y1":0.3},{"fillcolor":"rgba(0,0,0,0)","line":{"color":"#898781","dash":"dot","width":1.4},"type":"rect","x0":9.55,"x1":12.25,"y0":1.6,"y1":3.8000000000000003}],"annotations":[{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:Variabele\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+44 variabelen\u003cbr\u003e(getelde objecten, kenmerken)\u003c\u002fspan\u003e","x":1.8,"y":5.6},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:Drager\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003eongewijzigd\u003c\u002fspan\u003e","x":5.4,"y":5.6},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:SoortWaardebepaling\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+4 (capaciteit,\u003cbr\u003elevend gewicht)\u003c\u002fspan\u003e","x":9.0,"y":5.6},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:Parameter\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003evervolgstap:\u003cbr\u003eparameters voor de nieuwe variabelen\u003c\u002fspan\u003e","x":5.4,"y":4.15},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:ParameterAspect\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+2 (LAeq 15 min \u002f 60 min)\u003c\u002fspan\u003e","x":5.4,"y":2.7},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:KwantificeerbaarAspect\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+5 (afgeleid: 1 per nieuwe\u003cbr\u003edimensie + CO\u2082-eq)\u003c\u002fspan\u003e","x":5.4,"y":1.25},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:Eenheid\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+23 eenheden\u003cbr\u003ealiassen op 20 bestaande eenheden\u003c\u002fspan\u003e","x":1.8,"y":-0.2},{"align":"center","font":{"color":"#0b0b0b","size":12},"showarrow":false,"text":"\u003cb\u003ecsor:NatuurkundigeDimensie\u003c\u002fb\u003e\u003cbr\u003e\u003cspan style='font-size:11px'\u003e+4 dimensies\u003c\u002fspan\u003e","x":9.0,"y":-0.2},{"align":"center","font":{"color":"#52514e","size":11},"showarrow":false,"text":"\u003cb\u003eVLAREM-rubriekenmodel\u003c\u002fb\u003e\u003cbr\u003e(buiten CSOR)\u003cbr\u003e\u003cbr\u003e9 strings bevatten een\u003cbr\u003erubriekvoorwaarde, bv. \u2264 90 dagen in bedrijf,\u003cbr\u003eopslag in lokaal, type oven","x":10.9,"y":2.7},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":4.4,"axref":"x","ay":4.65,"ayref":"y","showarrow":true,"text":"","x":2.7,"xref":"x","y":5.1,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":5.4,"axref":"x","ay":4.65,"ayref":"y","showarrow":true,"text":"","x":5.4,"xref":"x","y":5.1,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":6.4,"axref":"x","ay":4.65,"ayref":"y","showarrow":true,"text":"","x":8.1,"xref":"x","y":5.1,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":5.4,"axref":"x","ay":3.6500000000000004,"ayref":"y","showarrow":true,"text":"","x":5.4,"xref":"x","y":3.2,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":5.4,"axref":"x","ay":2.2,"ayref":"y","showarrow":true,"text":"","x":5.4,"xref":"x","y":1.75,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":4.4,"axref":"x","ay":0.75,"ayref":"y","showarrow":true,"text":"","x":2.7,"xref":"x","y":0.3,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":6.4,"axref":"x","ay":0.75,"ayref":"y","showarrow":true,"text":"","x":8.1,"xref":"x","y":0.3,"yref":"y"},{"arrowcolor":"#898781","arrowhead":2,"arrowsize":1,"arrowwidth":1.3,"ax":3.5,"axref":"x","ay":-0.2,"ayref":"y","showarrow":true,"text":"","x":7.3,"xref":"x","y":-0.2,"yref":"y"}],"xaxis":{"visible":false,"range":[-0.3,12.5],"fixedrange":true,"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"yaxis":{"visible":false,"range":[-1.0,6.3],"fixedrange":true,"gridcolor":"#e1e0d9","linecolor":"#c3c2b7","zerolinecolor":"#c3c2b7"},"margin":{"l":60,"r":30,"t":50,"b":60},"title":{"text":"Wat er in het CSOR-datamodel bijkomt (oranje = wijziging, gestreept = vervolgstap)"},"height":560,"showlegend":false,"font":{"family":"system-ui, -apple-system, 'Segoe UI', sans-serif","color":"#0b0b0b","size":13},"plot_bgcolor":"#fcfcfb","paper_bgcolor":"#fcfcfb"},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div><h2>Openstaande beslissingen</h2><p><b>1. Telbare objecten (categorie E, 38 strings).</b> Voorstel: <code>csor:Variabele</code> per object + eenheid E_83, resultaattype RT_3 <i>Aantal</i>. Alternatief, en het patroon van de lokale <code>E_xxx</code> <i>aantal varkens jonger dan drie maanden</i>: een narrower van E_83 per object. Bezwaar: een eenheid hoort de betekenis van het getal te wijzigen (<code>mgN/L</code> versus <code>mgNO₃/L</code>), niet wát je telt — en de lijst groeit met elke rubriek.</p><p><b>2. Nieuwe dimensies</b> (aantal per tijd, geluidsdrukniveau, kracht, vervuilingseenheid). <i>schijnbaar vermogen</i> (kVA) is dimensioneel gelijk aan vermogen maar conceptueel niet; hier ondergebracht bij <i>vermogen</i>.</p><p><b>3. Schaaleenheden</b> (<code>miljoen m³</code>, <code>miljoen l/jaar</code>): eigen eenheid met conversiefactor (zoals E_24 kt/jr), of m³ met de schaal in de rubriekdrempel?</p><p><b>4. Onduidelijk in de bron:</b> <code>kg/cm druk</code> (categorie H); <code>MW</code> (elektrisch of thermisch? thermisch is E_177 <i>MWth</i>); <code>ton/dag geslachte dieren</code> (levend of karkasgewicht?).</p><h2>Volledige triage</h2><p>Alle 133 strings met hun bestemming. Bron: <code>data/source/vlarem_eenheden_triage.csv</code>.</p><div class="table-wrap"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>bron</th>
+      <th>categorie</th>
+      <th>bestaande eenheid</th>
+      <th>symbool</th>
+      <th>nieuwe eenheid</th>
+      <th>dimensie</th>
+      <th>context</th>
+      <th>afgesplitst deel</th>
+      <th>toelichting</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Inwonerequivalent</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_78</td>
+      <td>IE</td>
+      <td></td>
+      <td>inwonersequivalent</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inwonerequivalenten</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_78</td>
+      <td>IE</td>
+      <td></td>
+      <td>inwonersequivalent</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inwonersequivalenten</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_78</td>
+      <td>IE</td>
+      <td></td>
+      <td>inwonersequivalent</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MW</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_92</td>
+      <td>MW</td>
+      <td></td>
+      <td>vermogen</td>
+      <td></td>
+      <td></td>
+      <td>Rubriek meldt niet of het thermisch (MWth, E_177) of elektrisch vermogen is — bronrubriek nakijken.</td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_59</td>
+      <td>m</td>
+      <td></td>
+      <td>lengte</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>meter</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_59</td>
+      <td>m</td>
+      <td></td>
+      <td>lengte</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_38</td>
+      <td>kg</td>
+      <td></td>
+      <td>massa</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg/dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_11</td>
+      <td>kg/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg/h</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_13</td>
+      <td>kg/u</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg/maand</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_20</td>
+      <td>kg/mnd</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg/uur</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_13</td>
+      <td>kg/u</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t/d</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t/jaar</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_15</td>
+      <td>t/jr</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton per dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/jaar</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_15</td>
+      <td>t/jr</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m2</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_95</td>
+      <td>m²</td>
+      <td></td>
+      <td>oppervlakte</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m²</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_95</td>
+      <td>m²</td>
+      <td></td>
+      <td>oppervlakte</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>stuk</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td></td>
+      <td></td>
+      <td>"stuk" = "aantal": alias van E_83, geen nieuwe eenheid.</td>
+    </tr>
+    <tr>
+      <td>°C</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_62</td>
+      <td>°C</td>
+      <td></td>
+      <td>temperatuur</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_33</td>
+      <td>L</td>
+      <td></td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>liter</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_33</td>
+      <td>L</td>
+      <td></td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m3</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>l/dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_47</td>
+      <td>L/d</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m3/jaar</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_50</td>
+      <td>m³/jr</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³ per dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_45</td>
+      <td>m³/d</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³/dag</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_45</td>
+      <td>m³/d</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³/h</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_46</td>
+      <td>m³/u</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³/jaar</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_50</td>
+      <td>m³/jr</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³/uur</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_46</td>
+      <td>m³/u</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Nm3/h</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_175</td>
+      <td>Nm³/u</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Nm³/h</td>
+      <td>A · alias van bestaande eenheid</td>
+      <td>E_175</td>
+      <td>Nm³/u</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton CO2–equivalent</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>t CO₂-eq</td>
+      <td>massa</td>
+      <td></td>
+      <td></td>
+      <td>Naar analogie met de TEQ-eenheden hoort er een nieuw kwantificeerbaar aspect "massa CO₂-equivalent" bij.</td>
+    </tr>
+    <tr>
+      <td>joule</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>J</td>
+      <td>energie</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kVA</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kVA</td>
+      <td>vermogen</td>
+      <td></td>
+      <td></td>
+      <td>Schijnbaar vermogen: dimensioneel gelijk aan vermogen, conceptueel niet — overweeg een eigen dimensie.</td>
+    </tr>
+    <tr>
+      <td>KVA</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kVA</td>
+      <td>vermogen</td>
+      <td></td>
+      <td></td>
+      <td>Hoofdlettervariant: hiddenLabel op kVA.</td>
+    </tr>
+    <tr>
+      <td>kW</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kW</td>
+      <td>vermogen</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>KW</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kW</td>
+      <td>vermogen</td>
+      <td></td>
+      <td></td>
+      <td>Hoofdlettervariant: hiddenLabel op kW.</td>
+    </tr>
+    <tr>
+      <td>VAh</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>VAh</td>
+      <td>energie</td>
+      <td></td>
+      <td></td>
+      <td>QUDT-eenheid V-A-HR is deprecated in 3.5.0: geen koppeling, hooguit closeMatch.</td>
+    </tr>
+    <tr>
+      <td>ton/h</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>t/u</td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/uur</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>t/u</td>
+      <td>massa per tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ha</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>ha</td>
+      <td>oppervlakte</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>jaar</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>jr</td>
+      <td>tijd</td>
+      <td></td>
+      <td></td>
+      <td>QUDT-symbool is "a"; zelfde jr/a-verschil als bij E_15.</td>
+    </tr>
+    <tr>
+      <td>maand</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>mnd</td>
+      <td>tijd</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>maanden</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>mnd</td>
+      <td>tijd</td>
+      <td></td>
+      <td></td>
+      <td>Meervoud: altLabel op mnd.</td>
+    </tr>
+    <tr>
+      <td>dm³</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>dm³</td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kl</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kL</td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>miljoen m³</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>10⁶ m³</td>
+      <td>volume</td>
+      <td></td>
+      <td></td>
+      <td>Geschaalde eenheid (conversiefactor 10⁶ t.o.v. m³), naar analogie met E_24 kt/jr.</td>
+    </tr>
+    <tr>
+      <td>miljoen l/jaar</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>10⁶ L/jr</td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td>Geschaalde eenheid (10⁶ L = 10³ m³).</td>
+    </tr>
+    <tr>
+      <td>miljoen m³/jaar</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>10⁶ m³/jr</td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td>Geschaalde eenheid, zie 10⁶ m³.</td>
+    </tr>
+    <tr>
+      <td>Nm³/dag</td>
+      <td>B · nieuwe eenheid, bestaande dimensie</td>
+      <td></td>
+      <td></td>
+      <td>Nm³/d</td>
+      <td>volume per tijdseenheid</td>
+      <td></td>
+      <td></td>
+      <td>Geen QUDT-eenheid voor normaal-m³.</td>
+    </tr>
+    <tr>
+      <td>vervuilingseenheden</td>
+      <td>C · nieuwe eenheid + nieuwe dimensie</td>
+      <td></td>
+      <td></td>
+      <td>VE</td>
+      <td>vervuilingseenheid</td>
+      <td></td>
+      <td></td>
+      <td>Conventionele eenheid zoals IE (ND_21 inwonersequivalent); eigen dimensie voorgesteld.</td>
+    </tr>
+    <tr>
+      <td>kN</td>
+      <td>C · nieuwe eenheid + nieuwe dimensie</td>
+      <td></td>
+      <td></td>
+      <td>kN</td>
+      <td>kracht</td>
+      <td></td>
+      <td></td>
+      <td>Er is geen dimensie kracht (E_288 kN/m² valt onder druk).</td>
+    </tr>
+    <tr>
+      <td>MN</td>
+      <td>C · nieuwe eenheid + nieuwe dimensie</td>
+      <td></td>
+      <td></td>
+      <td>MN</td>
+      <td>kracht</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>dB</td>
+      <td>C · nieuwe eenheid + nieuwe dimensie</td>
+      <td></td>
+      <td></td>
+      <td>dB</td>
+      <td>geluidsdrukniveau</td>
+      <td></td>
+      <td></td>
+      <td>Logaritmische eenheid: geen conversiefactor naar een referentie-eenheid.</td>
+    </tr>
+    <tr>
+      <td>dB(A)</td>
+      <td>C · nieuwe eenheid + nieuwe dimensie</td>
+      <td></td>
+      <td></td>
+      <td>dB(A)</td>
+      <td>geluidsdrukniveau</td>
+      <td></td>
+      <td></td>
+      <td>Apart van dB: A-gewogen is een ander niveau.</td>
+    </tr>
+    <tr>
+      <td>kilojoule per hamer</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td></td>
+      <td></td>
+      <td>kJ</td>
+      <td>energie</td>
+      <td>variabele</td>
+      <td>slagenergie per hamer</td>
+      <td>Energie per object: hamer is de teleenheid.</td>
+    </tr>
+    <tr>
+      <td>m diepte ten opzichte van het maaiveld</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_59</td>
+      <td>m</td>
+      <td></td>
+      <td>lengte</td>
+      <td>variabele</td>
+      <td>diepte ten opzichte van het maaiveld</td>
+      <td>Bestaande variabele "Bemonsteringsdiepte" is een andere grootheid.</td>
+    </tr>
+    <tr>
+      <td>m onder het maaiveld</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_59</td>
+      <td>m</td>
+      <td></td>
+      <td>lengte</td>
+      <td>variabele</td>
+      <td>diepte ten opzichte van het maaiveld</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton in een lokaal</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>rubriekvoorwaarde</td>
+      <td>opslag in lokaal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton in open lucht</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>rubriekvoorwaarde</td>
+      <td>opslag in openlucht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton in openlucht</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>rubriekvoorwaarde</td>
+      <td>opslag in openlucht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton schroot</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>schroot</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton totale capaciteit</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>soortwaardebepaling</td>
+      <td>capaciteit (totaal)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>voertuigwrak</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die al dan niet vloeistoffen of andere gevaarlijke onderdelen bevatten</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>voertuigwrak (alle)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die noch vloeistoffen, noch andere gevaarlijke onderdelen bevatten</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>voertuigwrak (ontdaan)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die wel nog vloeistoffen en/of andere gevaarlijke onderdelen bevatten</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>voertuigwrak (niet ontdaan)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton voertuigwrakken of afgedankte voertuigen die wel nog vloeistoffen of andere gevaarlijke onderdelen kunnen bevatten</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_41</td>
+      <td>ton</td>
+      <td></td>
+      <td>massa</td>
+      <td>variabele</td>
+      <td>voertuigwrak (niet ontdaan)</td>
+      <td>Nagenoeg identiek aan de vorige ("en/of" versus "of ... kunnen").</td>
+    </tr>
+    <tr>
+      <td>ton per dag indien niet meer dan 90 achtereenvolgende dagen in bedrijf</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>rubriekvoorwaarde</td>
+      <td>≤ 90 achtereenvolgende dagen in bedrijf</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/dag eindproducten</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>variabele</td>
+      <td>eindproduct</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/dag geslachte dieren</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>variabele</td>
+      <td>geslacht dier</td>
+      <td>Levend of karkasgewicht is niet gespecificeerd.</td>
+    </tr>
+    <tr>
+      <td>ton/dag in andere ovens</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>rubriekvoorwaarde</td>
+      <td>type oven: andere</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/dag in draaiovens</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>rubriekvoorwaarde</td>
+      <td>type oven: draaioven</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/dag niet meer dan 90 achtereenvolgende dagen in bedrijf</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_23</td>
+      <td>t/d</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>rubriekvoorwaarde</td>
+      <td>≤ 90 achtereenvolgende dagen in bedrijf</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ton/jaar levend gewicht</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_15</td>
+      <td>t/jr</td>
+      <td></td>
+      <td>massa per tijd</td>
+      <td>soortwaardebepaling</td>
+      <td>levend gewicht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>% overgebracht water v/h debiet</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_43</td>
+      <td>%</td>
+      <td></td>
+      <td>dimensieloze verhouding</td>
+      <td>variabele</td>
+      <td>overgebracht water (fractie van het debiet)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>kg/m³ plaatsingsdichtheid per oven</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_5</td>
+      <td>kg/m³</td>
+      <td></td>
+      <td>massaconcentratie</td>
+      <td>variabele</td>
+      <td>plaatsingsdichtheid (per oven)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³ (capaciteit)</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td>soortwaardebepaling</td>
+      <td>capaciteit</td>
+      <td>Ontwerpwaarde, geen meting.</td>
+    </tr>
+    <tr>
+      <td>m³ in een lokaal</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td>rubriekvoorwaarde</td>
+      <td>opslag in lokaal</td>
+      <td>Plaats van opslag blijft in het VLAREM-rubriekenmodel.</td>
+    </tr>
+    <tr>
+      <td>m³ in openlucht</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td>rubriekvoorwaarde</td>
+      <td>opslag in openlucht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m³ ovencapaciteit</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_32</td>
+      <td>m³</td>
+      <td></td>
+      <td>volume</td>
+      <td>soortwaardebepaling</td>
+      <td>capaciteit (oven)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Nm³/uur aanzuigzijdig debiet</td>
+      <td>D · eenheid + context afsplitsen</td>
+      <td>E_175</td>
+      <td>Nm³/u</td>
+      <td></td>
+      <td>volume per tijdseenheid</td>
+      <td>variabele</td>
+      <td>aanzuigzijdig debiet</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>autovoertuigen en aanhangwagens, andere dan personenwagens</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>autovoertuig of aanhangwagen (excl. personenwagen)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>autovoertuigen en/of aanhangwagens, andere dan personenwagens</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>autovoertuig of aanhangwagen (excl. personenwagen)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>autovoertuigen of aanhangwagens, andere dan personenwagens</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>autovoertuig of aanhangwagen (excl. personenwagen)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>bijenvolken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>bijenvolk</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>dier</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>dier</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>dier(en)</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>dier</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>dieren</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>dier</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>dieren ouder dan 3 weken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>dier (&gt; 3 weken)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>geaccidenteerde voertuigen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>geaccidenteerd voertuig</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>gespeende dieren</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>gespeend dier</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>mestvarkens van meer dan 30 kg</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>mestvarken (&gt; 30 kg)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>modelvliegtuigen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>modelvliegtuig</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>motorvoertuigen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>motorvoertuig</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>motorvoertuigen of aanhangwagens, andere dan personenwagens</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>motorvoertuig of aanhangwagen (excl. personenwagen)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>plaatsen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>plaats</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>plaatsen voor mestvarkens van meer dan 30 kg</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>plaats voor mestvarken (&gt; 30 kg)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>plaatsen voor pluimvee</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>plaats voor pluimvee</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>plaatsen voor zeugen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>plaats voor zeug</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>plaatsen voor zeugen en gedekte jonge zeugen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>plaats voor zeug of gedekte jonge zeug</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>schouwputten of hefbruggen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>schouwput of hefbrug</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>speelautomaten</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>speelautomaat</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>stuks gevogelte ouder dan 1 week</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>gevogelte (&gt; 1 week)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>stuks gevogelte ouder dan 3 weken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>gevogelte (&gt; 3 weken)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>varkens ouder dan 10 weken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>varken (&gt; 10 weken)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>verdeelpomp</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>verdeelpomp</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>verdeelslang</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>verdeelslang</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>verdeelslangen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>verdeelslang</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>voertuig</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>voertuig</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>voertuigwrakken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>voertuigwrak</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>voertuigwrakken of afgedankte voertuigen die noch vloeistoffen, noch andere gevaarlijke onderdelen bevatten</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>voertuigwrak (ontdaan)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>voertuigwrakken of afgedankte voertuigen die wel nog vloeistoffen en/of andere gevaarlijke onderdelen bevatten</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>voertuigwrak (niet ontdaan)</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>vogels</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>vogel</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>volwassen dieren</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>volwassen dier</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>windturbines</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>windturbine</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>windturbines die een aanzienlijke invloed hebben of kunnen hebben op een bijzonder beschermd gebied</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>windturbine met aanzienlijke invloed op beschermd gebied</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>wrakken</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>voertuigwrak</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>zeugen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>zeug</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>zeugen en gedekte jonge zeugen</td>
+      <td>E · telling van een object</td>
+      <td>E_83</td>
+      <td>#</td>
+      <td></td>
+      <td>aantal</td>
+      <td>variabele</td>
+      <td>zeug of gedekte jonge zeug</td>
+      <td>Teleenheid = E_83 "aantal"; wat geteld wordt is de variabele (of, alternatief, een narrower van E_83).</td>
+    </tr>
+    <tr>
+      <td>dieren/dag</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/d</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>dier</td>
+      <td>Geen QUDT-eenheid NUM-PER-DAY.</td>
+    </tr>
+    <tr>
+      <td>motorvoertuigen en hun aanhangwagens/dag</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/d</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>motorvoertuig of aanhangwagen</td>
+      <td>Geen QUDT-eenheid NUM-PER-DAY.</td>
+    </tr>
+    <tr>
+      <td>voertuigen en hun aanhangwagens/dag</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/d</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>voertuig of aanhangwagen</td>
+      <td>Geen QUDT-eenheid NUM-PER-DAY.</td>
+    </tr>
+    <tr>
+      <td>wedstrijd/jaar</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/jr</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>wedstrijd</td>
+      <td>Enkelvoud: altLabel.</td>
+    </tr>
+    <tr>
+      <td>wedstrijden/jaar</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/jr</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>wedstrijd</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>wrakken/jaar</td>
+      <td>F · telling per tijd</td>
+      <td></td>
+      <td></td>
+      <td>#/jr</td>
+      <td>aantal per tijd</td>
+      <td>variabele</td>
+      <td>voertuigwrak</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>dB(A)LAeq,15min</td>
+      <td>G · meetvoorschrift</td>
+      <td></td>
+      <td></td>
+      <td>dB(A)</td>
+      <td>geluidsdrukniveau</td>
+      <td>parameteraspect</td>
+      <td>LAeq, middelingstijd 15 min</td>
+      <td>Eenheid = dB(A); "LAeq,15min" is het meetvoorschrift.</td>
+    </tr>
+    <tr>
+      <td>dB(A)LAeq,60min</td>
+      <td>G · meetvoorschrift</td>
+      <td></td>
+      <td></td>
+      <td>dB(A)</td>
+      <td>geluidsdrukniveau</td>
+      <td>parameteraspect</td>
+      <td>LAeq, middelingstijd 60 min</td>
+      <td>Eenheid = dB(A); "LAeq,60min" is het meetvoorschrift.</td>
+    </tr>
+    <tr>
+      <td>kg/cm druk</td>
+      <td>H · onduidelijk — nakijken</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Onduidelijke eenheid (kg per cm? kgf/cm²?) — bronrubriek nakijken voor er iets voorgesteld wordt.</td>
+    </tr>
+  </tbody>
+</table></div>
+</body>
+</html>
