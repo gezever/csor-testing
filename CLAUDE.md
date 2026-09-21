@@ -357,3 +357,10 @@ De zes gegenereerde rapporten (bestandsnaam = scriptnaam zonder `check_`-prefix)
 | `output/reports/samenstellende_variabelen.html` | `scripts/check_samenstellende_variabelen.py` |
 | `output/reports/variabele_identity.html` | `scripts/check_variabele_identity.py` |
 | `output/reports/terminologie.html` | `scripts/check_terminologie.py` |
+
+Daarnaast één rapport dat geen check op het register is maar een voorstel visualiseert:
+`output/reports/vlarem_eenheden.html`, gegenereerd door `scripts/rapport_vlarem_eenheden.py`
+(niet in `run_all.py`). Invoer is `data/source/vlarem_eenheden_triage.csv`, een handmatig
+getrieerde lijst van de eenheden-strings uit de VLAREM-rubriekenlijst; het script toetst elke
+bewering in die lijst (bestaande eenheid, dimensie, QUDT-eenheid, geen duplicaat) tegen de
+registersnapshot en faalt luid bij een afwijking.
