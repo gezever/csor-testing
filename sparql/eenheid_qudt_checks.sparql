@@ -80,3 +80,21 @@ WHERE {
     FILTER NOT EXISTS { ?eenheid owl:deprecated true }
   }
 }
+
+
+# ----------------------------------------------------------------------------
+# QUERY 5 — Natuurkundige dimensie per actieve eenheid — gebruikt om QUDT-symboolsuggesties te
+# toetsen op grootheid (scripts/check_eenheden_qudt.py, ND_QUANTITYKINDS): een symbool-match
+# met een QUDT-eenheid van een andere grootheid (bv. `u` = uur vs. `unit:U` = atomaire
+# massa-eenheid) is een botsing, geen kandidaat.
+# ----------------------------------------------------------------------------
+SELECT ?eenheid ?dimensie
+WHERE {
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-eenheid> {
+    ?eenheid a csor:Eenheid ; csor:heeftNatuurkundigeDimensie ?nd .
+    FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+  }
+  GRAPH <https://data.omgeving.vlaanderen.be/id/graph/codelijst-csor-natuurkundige-dimensie> {
+    ?nd skos:prefLabel ?dimensie .
+  }
+}

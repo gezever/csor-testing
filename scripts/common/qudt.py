@@ -147,8 +147,10 @@ def fetch_unit_vocabulary(
 ) -> list[dict]:
     """Haalt (gecached) de volledige QUDT-eenhedenvocabulaire op.
 
-    Geeft een lijst `[{"uri": ..., "symbol": ...}, ...]` terug voor alle niet-`qudt:deprecated`
-    units met een `qudt:symbol` (zie METHODOLOGY voor de cache-/versie-aanpak).
+    Geeft een lijst `[{"uri": ..., "symbol": ..., "quantity_kinds": [...]}, ...]` terug voor
+    alle niet-`qudt:deprecated` units met een `qudt:symbol` (zie METHODOLOGY voor de cache-/
+    versie-aanpak). `quantity_kinds` zijn de lokale namen (bv. `Mass`) van `qudt:hasQuantityKind`
+    — nodig om een symbool-match tegen de dimensie van de eenheid te kunnen toetsen.
     """
     global live_call_count
     cache_path = cache_root / f"vocab-unit-{version}.ttl"
@@ -172,5 +174,6 @@ def fetch_unit_vocabulary(
             continue
         symbol = g.value(s, QUDT.symbol)
         if symbol is not None:
-            units.append({"uri": str(s), "symbol": str(symbol)})
+            kinds = sorted(str(k).rsplit("/", 1)[-1] for k in g.objects(s, QUDT.hasQuantityKind))
+            units.append({"uri": str(s), "symbol": str(symbol), "quantity_kinds": kinds})
     return units

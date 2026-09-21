@@ -29,7 +29,8 @@ toegevoegd aan de bestaande pijplijn:
   kardinaliteiten, inverse-paar-consistentie, orphan-detectie.
 - `scripts/check_eenheden_qudt.py` — QUDT-koppelingsdekking, live HTTP- en
   edit-distance-gebaseerde symboolcontrole, en een interne spelling-/label-symbool-
-  consistentiecheck op alle 357 eenheden (los van QUDT-beschikbaarheid).
+  consistentiecheck op alle 357 eenheden (los van QUDT-beschikbaarheid), en koppelings-
+  suggesties voor ongekoppelde eenheden, getoetst op grootheid (zie §3.6).
 
 Queries: `sparql/conceptschema_checks.sparql`, `sparql/eenheid_qudt_checks.sparql`.
 
@@ -249,6 +250,43 @@ overlappen lexicaal (`C` matcht ook binnen `Cl`/`Ca`; `N` binnen `Na`/`Nm³`; `S
 `E_323`-fout werd er zelfs door gemaskeerd). De uiteindelijke check matcht daarom enkel op
 het volledige, woordgrens-bewust geëxtraheerde stofkwalificatie-token.
 
+### 3.6 Koppelingssuggesties: drie symboolbotsingen, opgelost met een dimensietoets
+
+De eerste versie van `scripts/check_eenheden_qudt.py` zocht voor elke ongekoppelde eenheid een
+QUDT-eenheid met een (bijna) identiek symbool en toetste niet of die eenheid dezelfde
+grootheid uitdrukt. Bij nazicht van de 56 kandidaat-rijen bleken **3 eenheden een foute
+suggestie te krijgen**, alle drie een symbool dat in QUDT bij een andere grootheid hoort:
+
+| Eenheid | CSOR-symbool / dimensie | Foute suggestie | Wat dat in QUDT is | Correct |
+|---|---|---|---|---|
+| `E_94` uur | `u` / tijd | `unit:U` | atomaire massa-eenheid (`Mass`) | `unit:HR` (symbool `h`) |
+| `E_230` kelvin | `K` / temperatuur | `unit:K` **en** `unit:KY` | `KY` is de kayser (`InverseLength`) | enkel `unit:K` |
+| `E_75` Franse hardheidsgraden | `°F` / Hardheid | `unit:DEG_F` | graden Fahrenheit (`Temperature`) | geen — QUDT heeft geen hardheidseenheden |
+
+`E_94` was de meest hinderlijke: de Vlaamse notatie `u` voor uur werd door `normalize_symbol()`
+enkel herkend in noemers (`/u` → `/h`), niet als losstaand symbool. `unit:HR` werd daardoor nooit
+gevonden en de enige kandidaat was de atomaire massa-eenheid. `E_75` valt buiten wat symbool-
+matching kan opvangen: `°F` is hier Franse hardheid, geen Fahrenheit.
+
+**Aanpassing.** Elke kandidaat wordt nu getoetst tegen de `csor:NatuurkundigeDimensie` van de
+eenheid, via een curated tabel `ND_QUANTITYKINDS` (dimensie → toegelaten QUDT quantity kinds; 29
+dimensies). Een kandidaat zonder minstens één toegelaten quantity kind wordt afgewezen
+(`output/tables/eenheid_qudt_suggesties_afgewezen.csv`, 4 rijen). Pas als een tier daardoor leeg
+is, volgt de volgende (zo komt `u` via normalisatie alsnog bij `unit:HR` uit; `unit:H` — de
+henry, `Inductance` — valt om dezelfde reden af). `normalize_symbol()` kent nu ook losstaand
+`u` → `h`. Dimensies die niet in de tabel staan worden niet getoetst; de kolom `dimensie_check`
+in `eenheid_qudt_suggesties.csv` maakt dat zichtbaar (in de huidige run: 54 van 54 `ok`).
+
+**Resultaat** (zelfde snapshot van 14 augustus): 52 van 197 ongekoppelde eenheden hebben nu een
+dimensie-compatibele QUDT-kandidaat (54 rijen; voorheen 53 eenheden en 56 rijen). Verschil:
+`E_230` verliest `KY`, `E_75` verliest zijn enige (foute) kandidaat, `E_94` krijgt `HR` in plaats
+van `U`.
+
+**Beperking.** De tabel is curated en gevalideerd tegen de gepinde QUDT-versie (3.5.0):
+`check_dimension_table()` faalt luid als een genoemde quantity kind na een versiebump niet meer
+bestaat. De toets vangt botsingen op grootheid, geen verschil in **conversiefactor** of schaal
+(bv. `t/jr` tegenover QUDT's `t/a`); dat blijft handmatige review.
+
 ## 4. Aanbevelingen
 
 1. **Verifieer bij de registerbeheerders** of het ontbreken van conceptschema-lidmaatschap
@@ -259,8 +297,13 @@ het volledige, woordgrens-bewust geëxtraheerde stofkwalificatie-token.
    welk correct symbool "milligram koolstofdisulfide per liter" wél moet dragen).
 3. **Documenteer de µ (U+00B5) vs. μ (U+03BC) Unicode-conventie** als bekende valkuil voor
    wie CSOR- en QUDT-symbolen ooit programmatisch vergelijkt.
-4. **Onderzoek QUDT-koppeling** voor de plausibel-koppelbare subset van de 195 ontbrekende
-   eenheden, te beginnen met de bevestigde `t/jr`- en `PJ`-kandidaten.
+4. **Onderzoek QUDT-koppeling** voor de plausibel-koppelbare subset van de ongekoppelde
+   eenheden (`output/tables/eenheid_qudt_suggesties.csv`), te beginnen met de bevestigde
+   `t/jr`- en `PJ`-kandidaten. Koppel `E_94` (uur) aan `unit:HR` en gebruik **niet** `unit:U`
+   (§3.6); voor `E_230` (kelvin) enkel `unit:K`; voor `E_75` (Franse hardheidsgraden) geen QUDT-
+   koppeling. Twee kandidaten per eenheid blijven over bij `E_252` (`t/m³`) en `E_259` (`t/ha`):
+   `unit:TONNE-…` en `unit:TON_Metric-…` zijn in QUDT synoniemen — kies er één en gebruik die
+   consequent.
 5. **Verifieer de 71 parameters zonder `ParameterAspect`** en de **15 eenheden zonder
    `KwantificeerbaarAspect`** — bewust onvolledig (nieuw, nog niet afgewerkt) of een
    registratiegat?

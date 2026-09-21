@@ -26,7 +26,8 @@ METHODOLOGY
 - QUDT-crosscheck: voor elke unieke gekoppelde QUDT-URI wordt live gedereferentieerd
   (HTTP-statuscontrole) en wordt `qudt:symbol` vergeleken met `csor:symbool` via
   Levenshtein edit-distance, zowel ruw als na normalisatie van de gekende
-  notatieconventies (µ->μ, jr->a, /u->/h). Own addition: edit-distance i.p.v. exacte match,
+  notatieconventies (µ->μ, jr->a, /u->/h, losstaand u->h). Own addition: edit-distance i.p.v.
+  exacte match,
   omdat een binaire match/no-match geen onderscheid maakt tussen een pure notatiekwestie en
   een echte inhoudelijke afwijking.
 - Interne spellingscontrole (los van QUDT-beschikbaarheid, op alle 357 eenheden):
@@ -48,7 +49,15 @@ METHODOLOGY
   de volledige QUDT-eenhedenvocabulaire op (zie DATA PROVENANCE); voor elke van de 195
   ongekoppelde eenheden wordt eerst hoofdlettergevoelig exact op `qudt:symbol` gezocht, pas
   daarna — als fallback — genormaliseerd via dezelfde `normalize_symbol()` als de crosscheck
-  hierboven. Own addition: hoofdlettergevoelig eerst lost de meeste schijnbare dubbelzinnigheid
+  hierboven. Elke tier wordt bovendien getoetst op dimensie: de `csor:NatuurkundigeDimensie`
+  van de eenheid wordt via de curated tabel ND_QUANTITYKINDS vertaald naar QUDT quantity kinds,
+  en een kandidaat zonder minstens één van die quantity kinds wordt afgewezen
+  (`eenheid_qudt_suggesties_afgewezen.csv`). Own addition, na drie gevonden symboolbotsingen:
+  `u` (uur) -> `unit:U` (atomaire massa-eenheid), `K` (kelvin) -> `unit:KY` (kayser, inverse
+  lengte) en `°F` (Franse hardheidsgraden) -> `unit:DEG_F` (Fahrenheit). Pas als een tier na de
+  toets leeg is, volgt de volgende (zo vindt `u` alsnog `unit:HR` via `normalize_symbol()`).
+  Dimensies die niet in de tabel staan worden niet getoetst (`dimensie_check` =
+  `niet_getoetst`). Own addition: hoofdlettergevoelig eerst lost de meeste schijnbare dubbelzinnigheid
   vanzelf op (bv. csor:symbool `Pa` matcht dan enkel de QUDT-eenheid met symbol `Pa` (Pascal),
   niet ook `PA`/`pA` (PetaAmpère/PicoAmpère) — die zouden anders via de case-insensitieve
   normalisatiestap onterecht meematchen). Blijft er per eenheid toch meer dan één kandidaat
@@ -60,14 +69,16 @@ INTERPRETATION
 Elke vlag hier is een kandidaat voor handmatige review, geen automatische correctie — met
 uitzondering van de expliciet in het rapport benoemde, individueel geverifieerde fouten
 (E_105, E_113, E_323), die als directe aanbeveling gelden. Idem voor de koppelingssuggesties:
-een (bijna) identiek symbool is een sterke aanwijzing, geen bevestiging — de daadwerkelijke
-QUantityKind/dimensie is niet getoetst.
+een (bijna) identiek symbool is een sterke aanwijzing, geen bevestiging. De grootheid wordt
+enkel getoetst voor de dimensies in ND_QUANTITYKINDS; verder is de conversiefactor
+(bv. `t/jr` vs. `t/a`) niet gecontroleerd.
 
 OUTPUTS
 -------
 output/tables/eenheid_qudt_koppeling.csv
 output/tables/eenheid_qudt_ontbrekend.csv
 output/tables/eenheid_qudt_suggesties.csv
+output/tables/eenheid_qudt_suggesties_afgewezen.csv
 output/tables/eenheid_spelling_vlaggen.csv
 output/reports/eenheden_qudt.html
 data/interim/eenheid_*.parquet (tussentijds)
@@ -115,13 +126,54 @@ SUBSTANCE_CODES = {
 }
 KNOWN_CODES = set(SUBSTANCE_CODES.values())
 
+# Curated: csor:NatuurkundigeDimensie (prefLabel) -> QUDT quantity kinds die een kandidaat-eenheid
+# minstens één keer moet dragen. Enkel voor het toetsen van symbool-suggesties (zie
+# METHODOLOGY); een dimensie die hier ontbreekt wordt niet getoetst (`niet_getoetst`).
+# Een lege set betekent: QUDT heeft geen enkele quantity kind voor deze dimensie, dus elke
+# symbool-match is per definitie een botsing (bv. Franse hardheidsgraden `°F` vs. Fahrenheit).
+ND_QUANTITYKINDS: dict[str, set[str]] = {
+    "tijd": {"Time"},
+    "temperatuur": {"Temperature", "ThermodynamicTemperature"},
+    "lengte": {"Length"},
+    "massa": {"Mass"},
+    "druk": {"ForcePerArea"},
+    "energie": {"Energy"},
+    "energie per massa": {"SpecificEnergy"},
+    "energie per tijd": {"Power"},
+    "vermogen": {"Power"},
+    "vermogen per oppervlakte": {"PowerPerArea"},
+    "spanning": {"ElectricPotential", "Voltage"},
+    "oppervlakte": {"Area"},
+    "oppervlakte per tijd": {"AreaPerTime", "KinematicViscosity"},
+    "lengte per tijdseenheid": {"Velocity", "Speed", "LinearVelocity"},
+    "massa per tijd": {"MassPerTime", "MassFlowRate"},
+    "massa per oppervlakte": {"MassPerArea"},
+    "massaconcentratie": {"MassConcentration", "MassDensity", "Density"},
+    "massaverhouding": {"MassRatio", "MassFraction"},
+    "volumeverhouding": {"VolumeFraction"},
+    "volume": {"Volume"},
+    "volume per tijdseenheid": {"VolumeFlowRate", "VolumePerTime"},
+    "mol per massa": {"AmountOfSubstancePerMass"},
+    "molaire concentratie": {"Concentration"},
+    "equivalenten per volume": {"EquivalentConcentration"},
+    "elektrische geleidbaarheid per lengte": {"ElectricConductivity"},
+    "dimensieloze verhouding": {"DimensionlessRatio"},
+    # QUDT modelleert "1/g" en "1/mL" als inverse grootheid, niet als 'aantal per massa/volume'.
+    "aantal per massa": {"InverseMass"},
+    "aantal per volume": {"InverseVolume", "VolumetricEntityDensity", "NumberDensity"},
+    "Hardheid": set(),
+}
+
 QUALIFIER_RE = re.compile(r"^[mµkn]?g\s*([A-Za-z][A-Za-z0-9]{0,4})?(?:/|$)")
 
 
 def normalize_symbol(s: str) -> str:
     if not isinstance(s, str):
         return ""
-    return s.replace("µ", "μ").replace("jr", "a").replace("/u", "/h").lower()
+    # Losstaand "u" (uur) -> "h", naast "/u" -> "/h"; zonder deze regel vindt `u` (E_94 "uur")
+    # enkel `unit:U` (atomaire massa-eenheid, symbool "u") en nooit `unit:HR`.
+    s = re.sub(r"^u$", "h", s.replace("µ", "μ").replace("jr", "a").replace("/u", "/h"))
+    return s.lower()
 
 
 def fetch_linked_units(graph: rdflib.Graph) -> pd.DataFrame:
@@ -162,6 +214,31 @@ def fetch_all_units(graph: rdflib.Graph) -> pd.DataFrame:
     """
     )
     return sc.select_dataframe_local(q, graph)
+
+
+def fetch_unit_dimensions(graph: rdflib.Graph) -> dict[str, str]:
+    """Eenheid-URI -> prefLabel van de csor:NatuurkundigeDimensie (zie sparql/ QUERY 5)."""
+    q = (
+        PREFIXES
+        + """
+    SELECT ?eenheid ?dimensie
+    WHERE {
+      ?eenheid a csor:Eenheid ; csor:heeftNatuurkundigeDimensie/skos:prefLabel ?dimensie .
+      FILTER NOT EXISTS { ?eenheid owl:deprecated true }
+    }
+    """
+    )
+    df = sc.select_dataframe_local(q, graph)
+    return dict(zip(df["eenheid"], df["dimensie"]))
+
+
+def check_dimension_table(units: list[dict]) -> None:
+    """Faalt luid als ND_QUANTITYKINDS een quantity kind noemt die de gepinde QUDT-versie niet
+    kent (bv. na een versiebump) — anders zou de tabel stilzwijgend alles afwijzen."""
+    known = {k for u in units for k in u["quantity_kinds"]}
+    unknown = sorted({k for kinds in ND_QUANTITYKINDS.values() for k in kinds} - known)
+    if unknown:
+        raise ValueError(f"ND_QUANTITYKINDS verwijst naar onbekende QUDT quantity kinds: {unknown}")
 
 
 def qudt_crosscheck(linked_df: pd.DataFrame) -> pd.DataFrame:
@@ -235,11 +312,31 @@ def spelling_flags(all_df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(flags, columns=["eenheid", "label", "symbool", "flag_type", "detail"])
 
 
-def suggest_missing_links(missing_df: pd.DataFrame, units: list[dict]) -> pd.DataFrame:
+SUGGESTIE_COLUMNS = [
+    "eenheid",
+    "label",
+    "symbool",
+    "match_tier",
+    "aantal_kandidaten",
+    "qudt_uri",
+    "qudt_symbool",
+    "csor_dimensie",
+    "qudt_quantitykinds",
+    "dimensie_check",
+]
+
+
+def suggest_missing_links(
+    missing_df: pd.DataFrame, units: list[dict], dimensions: dict[str, str]
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Zoekt voor elke ongekoppelde eenheid een QUDT-kandidaat met (bijna) identiek symbool.
 
     Zie METHODOLOGY: hoofdlettergevoelig exact eerst, genormaliseerd (normalize_symbol()) als
-    fallback. Eén rij per (eenheid, kandidaat)-paar; eenheden zonder kandidaat komen niet voor.
+    fallback. Elke tier wordt eerst tegen de dimensie van de eenheid getoetst
+    (ND_QUANTITYKINDS); pas als een tier na die toets geen kandidaat overhoudt, volgt de
+    volgende tier. Geeft `(suggesties, afgewezen)`: één rij per (eenheid, kandidaat)-paar,
+    `afgewezen` bevat de symbool-matches die op dimensie botsen (`dimensie_check` =
+    `dimensie_conflict`).
     """
     by_exact: dict[str, list[dict]] = {}
     by_norm: dict[str, list[dict]] = {}
@@ -247,40 +344,52 @@ def suggest_missing_links(missing_df: pd.DataFrame, units: list[dict]) -> pd.Dat
         by_exact.setdefault(u["symbol"], []).append(u)
         by_norm.setdefault(normalize_symbol(u["symbol"]), []).append(u)
 
-    rows = []
+    def row(r, tier: str, n: int, k: dict, dimensie: str | None, check: str) -> dict:
+        return {
+            "eenheid": r["eenheid"],
+            "label": r["label"],
+            "symbool": r["symbool"],
+            "match_tier": tier,
+            "aantal_kandidaten": n,
+            "qudt_uri": k["uri"],
+            "qudt_symbool": k["symbol"],
+            "csor_dimensie": dimensie,
+            "qudt_quantitykinds": ",".join(k["quantity_kinds"]),
+            "dimensie_check": check,
+        }
+
+    accepted, rejected = [], []
     for _, r in missing_df.iterrows():
         symbool = r["symbool"]
         if not isinstance(symbool, str) or not symbool:
             continue
-        if symbool in by_exact:
-            match_tier, kandidaten = "exact", by_exact[symbool]
-        elif normalize_symbol(symbool) in by_norm:
-            match_tier, kandidaten = "genormaliseerd", by_norm[normalize_symbol(symbool)]
-        else:
-            continue
-        for k in kandidaten:
-            rows.append(
-                {
-                    "eenheid": r["eenheid"],
-                    "label": r["label"],
-                    "symbool": symbool,
-                    "match_tier": match_tier,
-                    "aantal_kandidaten": len(kandidaten),
-                    "qudt_uri": k["uri"],
-                    "qudt_symbool": k["symbol"],
-                }
-            )
+        dimensie = dimensions.get(r["eenheid"])
+        toegelaten = ND_QUANTITYKINDS.get(dimensie) if dimensie else None
 
-    columns = [
-        "eenheid",
-        "label",
-        "symbool",
-        "match_tier",
-        "aantal_kandidaten",
-        "qudt_uri",
-        "qudt_symbool",
-    ]
-    return pd.DataFrame(rows, columns=columns)
+        tiers = []
+        if symbool in by_exact:
+            tiers.append(("exact", by_exact[symbool]))
+        if normalize_symbol(symbool) in by_norm:
+            genorm = [k for k in by_norm[normalize_symbol(symbool)] if k not in by_exact.get(symbool, [])]
+            if genorm:
+                tiers.append(("genormaliseerd", genorm))
+
+        for tier, kandidaten in tiers:
+            if toegelaten is None:
+                good, bad = kandidaten, []
+            else:
+                good = [k for k in kandidaten if toegelaten & set(k["quantity_kinds"])]
+                bad = [k for k in kandidaten if k not in good]
+            check = "niet_getoetst" if toegelaten is None else "ok"
+            rejected += [row(r, tier, len(kandidaten), k, dimensie, "dimensie_conflict") for k in bad]
+            if good:
+                accepted += [row(r, tier, len(good), k, dimensie, check) for k in good]
+                break
+
+    return (
+        pd.DataFrame(accepted, columns=SUGGESTIE_COLUMNS),
+        pd.DataFrame(rejected, columns=SUGGESTIE_COLUMNS),
+    )
 
 
 def build_html_report(
@@ -288,6 +397,7 @@ def build_html_report(
     missing_df: pd.DataFrame,
     flags_df: pd.DataFrame,
     suggesties_df: pd.DataFrame,
+    afgewezen_df: pd.DataFrame,
 ) -> Path:
     linkage_counts = cross_df["matchType"].value_counts()
     linkage_counts["geen koppeling"] = len(missing_df)
@@ -372,8 +482,11 @@ def build_html_report(
     disc_suggesties = (
         f"{n_kandidaat_eenheden} van {len(missing_df)} ongekoppelde eenheden hebben een "
         "QUDT-kandidaat met een (bijna) identiek symbool (hoofdlettergevoelig exact of na "
-        "normalisatie) — een kandidaat voor een vergeten koppeling, geen automatische "
-        "koppeling."
+        "normalisatie) én een dimensie-compatibele quantity kind — een kandidaat voor een "
+        "vergeten koppeling, geen automatische koppeling. "
+        f"Daarnaast zijn {afgewezen_df['eenheid'].nunique()} eenheid/eenheden met een "
+        "symbool-botsing afgewezen omdat de QUDT-eenheid een andere grootheid draagt "
+        "(zie eenheid_qudt_suggesties_afgewezen.csv)."
         if n_kandidaat_eenheden
         else f"Geen van de {len(missing_df)} ongekoppelde eenheden heeft een QUDT-kandidaat "
         "met een (bijna) identiek symbool."
@@ -456,22 +569,34 @@ def main(graph: rdflib.Graph | None = None) -> None:
     if len(flags_df):
         print(flags_df[["label", "symbool", "flag_type", "detail"]].to_string())
 
-    # Columns: eenheid/label/symbool zoals hierboven; match_tier (exact = hoofdlettergevoelig
-    # identiek csor:symbool/qudt:symbol, genormaliseerd = enkel gelijk na normalize_symbol());
-    # aantal_kandidaten (>1 = dubbelzinnig, meerdere QUDT-eenheden met dat symbool); qudt_uri/
-    # qudt_symbool van de kandidaat. Eén rij per (eenheid, kandidaat)-paar.
+    # Columns (suggesties én afgewezen): eenheid/label/symbool zoals hierboven; match_tier (exact =
+    # hoofdlettergevoelig identiek csor:symbool/qudt:symbol, genormaliseerd = enkel gelijk na
+    # normalize_symbol()); aantal_kandidaten (>1 = dubbelzinnig, meerdere dimensie-compatibele
+    # QUDT-eenheden met dat symbool; bij afgewezen: aantal symbool-matches voor de dimensietoets);
+    # qudt_uri/qudt_symbool van de kandidaat; csor_dimensie = prefLabel van de
+    # csor:NatuurkundigeDimensie van de eenheid; qudt_quantitykinds = qudt:hasQuantityKind van de
+    # kandidaat (kommagescheiden); dimensie_check = ok (dimensie-compatibel), niet_getoetst
+    # (dimensie niet in ND_QUANTITYKINDS) of dimensie_conflict (enkel in het afgewezen-bestand).
+    # Eén rij per (eenheid, kandidaat)-paar.
     units = qudt.fetch_unit_vocabulary(CACHE_ROOT)
-    suggesties_df = suggest_missing_links(missing_df, units)
+    check_dimension_table(units)
+    dimensions = fetch_unit_dimensions(graph)
+    suggesties_df, afgewezen_df = suggest_missing_links(missing_df, units, dimensions)
     suggesties_df.to_csv(OUTPUT_DIR / "eenheid_qudt_suggesties.csv", index=False)
+    afgewezen_df.to_csv(OUTPUT_DIR / "eenheid_qudt_suggesties_afgewezen.csv", index=False)
     n_kandidaat_eenheden = suggesties_df["eenheid"].nunique()
     print(
         f"\nKoppelingssuggesties: {n_kandidaat_eenheden} van {len(missing_df)} ongekoppelde "
-        f"eenheden hebben een QUDT-kandidaat ({len(suggesties_df)} kandidaat-rijen totaal)."
+        f"eenheden hebben een dimensie-compatibele QUDT-kandidaat ({len(suggesties_df)} "
+        f"kandidaat-rijen totaal); {afgewezen_df['eenheid'].nunique()} eenheid/eenheden hadden "
+        f"een symbool-match die op dimensie botst ({len(afgewezen_df)} rijen afgewezen)."
     )
+    if len(afgewezen_df):
+        print(afgewezen_df[["eenheid", "label", "symbool", "csor_dimensie", "qudt_uri", "qudt_quantitykinds"]].to_string())
 
     print(f"\nlive QUDT-calls deze run: {qudt.live_call_count}")
 
-    report_path = build_html_report(cross_df, missing_df, flags_df, suggesties_df)
+    report_path = build_html_report(cross_df, missing_df, flags_df, suggesties_df, afgewezen_df)
     print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 

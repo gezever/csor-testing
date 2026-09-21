@@ -1,0 +1,5 @@
+eenheid,label,symbool,match_tier,aantal_kandidaten,qudt_uri,qudt_symbool,csor_dimensie,qudt_quantitykinds,dimensie_check
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_230,kelvin,K,exact,2,http://qudt.org/vocab/unit/KY,K,temperatuur,InverseLength,dimensie_conflict
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_94,uur,u,exact,1,http://qudt.org/vocab/unit/U,u,tijd,Mass,dimensie_conflict
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_94,uur,u,genormaliseerd,2,http://qudt.org/vocab/unit/H,H,tijd,Inductance,dimensie_conflict
+https://data.omgeving.vlaanderen.be/id/concept/csor/eenheid/E_75,Franse hardheidsgraden,°F,exact,1,http://qudt.org/vocab/unit/DEG_F,°F,Hardheid,"BoilingPoint,DewPointTemperature,DryBulbTemperature,FahrenheitTemperature,FlashPoint,MeltingPoint,Temperature,WetBulbTemperature",dimensie_conflict
