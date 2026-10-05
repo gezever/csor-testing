@@ -4,14 +4,15 @@ run_all.py — draait alle datakwaliteitschecks en regenereert het datamodel-dia
 PURPOSE
 -------
 Eén ingang om alle herhaalbare analyses (samenstellende variabelen, chemische identiteit,
-conceptschema-structuur/-volledigheid, QUDT-koppelingskwaliteit, inhoudelijke Parameter-/
-ParameterAspect-consistentie, terminologie-/VMM-woordenboekdekking) na elkaar uit te voeren, met
-een korte samenvatting op stdout, en aansluitend het TikZ-datamodeldiagram te regenereren
-(README.md). Analoog aan run_all.R in het zusterproject A-Substance-Is-Not-Always-a-Substance.
+conceptschema-structuur/-volledigheid, semantische consistentie van conceptschema's/collecties,
+QUDT-koppelingskwaliteit, inhoudelijke Parameter-/ParameterAspect-consistentie, terminologie-/
+VMM-woordenboekdekking) na elkaar uit te voeren, met een korte samenvatting op stdout, en
+aansluitend het TikZ-datamodeldiagram te regenereren (README.md). Analoog aan run_all.R in het
+zusterproject A-Substance-Is-Not-Always-a-Substance.
 
 DATA PROVENANCE
 ----------------
-Roept de zes scripts/check_*.py en scripts/generate_diagram.py aan als submodules (geen
+Roept de zeven scripts/check_*.py en scripts/generate_diagram.py aan als submodules (geen
 subprocess) zodat een gedeelde Python-sessie/venv volstaat. Regenereert vóór de checks de
 lokale volledige-registersnapshot (`analyse/csor_merged.ttl`, zie
 scripts/common/dataset.py::fetch_and_save()) en geeft die éénmalig opgehaalde graph door aan
@@ -42,6 +43,7 @@ from common import dataset  # noqa: E402
 import check_samenstellende_variabelen  # noqa: E402
 import check_variabele_identity  # noqa: E402
 import check_conceptschemas  # noqa: E402
+import check_conceptschema_consistentie  # noqa: E402
 import check_eenheden_qudt  # noqa: E402
 import check_parameter_inhoud  # noqa: E402
 import check_terminologie  # noqa: E402
@@ -51,6 +53,7 @@ CHECKS = [
     ("check_samenstellende_variabelen.py", check_samenstellende_variabelen),
     ("check_variabele_identity.py", check_variabele_identity),
     ("check_conceptschemas.py", check_conceptschemas),
+    ("check_conceptschema_consistentie.py", check_conceptschema_consistentie),
     ("check_eenheden_qudt.py", check_eenheden_qudt),
     ("check_parameter_inhoud.py", check_parameter_inhoud),
     ("check_terminologie.py", check_terminologie),

@@ -6,8 +6,8 @@ PURPOSE
 Test de datakwaliteit van de chemische-identiteitsvelden op csor:Variabele: kan een
 CAS-nummer betrouwbaar naar een InChIKey herleid worden, zijn de reeds opgeslagen
 eigenschappen (cas, inchikey, iupacNaam) consistent met een externe referentiebron (PubChem),
-en klopt `csor:eea` (voor individuele stoffen empirisch vaak het EC/EINECS-nummer, zie
-METHODOLOGY) tegen ECHA en PubChem? v1-scope: PubChem + ECHA-regelgevingslijsten als externe
+en wat ís `csor:eea` — een echte EEA-rapporteringscode (Eionet wise/ObservedProperty) of een
+EC/EINECS-nummer — en klopt die waarde tegen EEA resp. ECHA/PubChem? v1-scope: PubChem + ECHA-regelgevingslijsten als externe
 bronnen; ChEBI-crosscheck blijft bewust buiten scope (zie reports/rapport_variabele_identiteit.md,
 paragraaf "buiten scope" — de EC/EEA-consistentie die daar destijds ook als buiten scope
 vermeld stond, is inmiddels wél gedekt, zie hieronder).
@@ -22,8 +22,11 @@ snapshot-regeneratie zelf, zie common/dataset.py).
 Externe bronnen: PubChem PUG-REST (common.pubchem), met bestandscache — blijft per definitie
 live/extern. Voor de EC-nummercrosscheck (zie METHODOLOGY): `data/source/echa_lijsten_ec_cas.csv`
 — een gecommitte, door `scripts/fetch_echa_lists.py` ververste combinatie van 14 publieke
-ECHA-regelgevingslijsten (CAS↔EC-paren) — dit script leest enkel dat bestand, haalt zelf niets
-live op bij ECHA.
+ECHA-regelgevingslijsten (CAS↔EC-paren). Own addition (2026-10-05, na feedback VMM, J.
+Meirlaen): daarnaast ECHA's volledige stoffendatabank via `common.echa` (live per EC-nummer, met
+bestandscache onder data/cache/echa/ — enkel daar staat het gezaghebbende EC↔CAS-paar), en
+`data/source/eea_wise_observedproperty.csv` (de Eionet-codelijst wise/ObservedProperty, ververst
+door `scripts/fetch_eea_observedproperty.py`).
 
 METHODOLOGY
 -----------
@@ -87,6 +90,21 @@ METHODOLOGY
   verkenning: CAS `79-57-2` (Oxytetracycline) → InChIKey `OWFJMIVZYSDULZ-...`; PubChem's
   xrefs-kandidaat `103-115-5` → zelfde CID (54675779) én InChIKey — geverifieerd; CSOR's eigen
   `eea` (`218-161-2`) blijkt bij PubChem zelfs helemaal onbekend als zoekterm.
+- Verfijning EEA/EC (own addition, 2026-10-05, na feedback VMM — J. Meirlaen):
+  (1) `csor:eea` is **niet** altijd een EC-nummer. Het veld bevat ook echte EEA-
+  rapporteringscodes uit de Eionet-codelijst wise/ObservedProperty, zonder prefix (bv. V_362
+  Nitrobenzeen: `33-21-6` = `EEA_33-21-6`; Dichloormethaan: `75-09-2` = `CAS_75-09-2`). Elke
+  ingevulde `csor:eea` wordt daarom eerst geclassificeerd (`eea_type()`: `eea_code`/`ec`/
+  `onbekend`) en getoetst tegen die codelijst (`eea_vocab_check()` → eea_vocabulaire.csv:
+  geldig, superseded/retired, of een CAS_-code voor een ander CAS-nummer). Een `eea_code` wordt
+  in de EC-checks nooit meer als afwijking geteld. (2) Stofgroep vs. isomeer: PubChem hangt het
+  groeps-CAS `12002-48-1` (trichloorbenzenen) aan de CID van 1,2,3-trichloorbenzeen, waardoor de
+  InChIKey-verificatie het isomeer-EC `201-757-1` "bevestigde" en het correcte groeps-EC
+  `234-413-4` als afwijkend markeerde. Verificatie gebeurt nu eerst via ECHA's eigen EC↔CAS-paar
+  (`ec_cas_verified()`, `common.echa`): kent ECHA het EC-nummer, dan beslist dat paar; enkel
+  anders volgt de InChIKey-terugval. `csor:eea` zelf wordt ook rechtstreeks geverifieerd, niet
+  enkel als die toevallig tussen de kandidaten zit. ECHA's InChI-velden worden bewust niet
+  gebruikt: ook ECHA koppelt aan 234-413-4 de InChI van het isomeer.
 
 INTERPRETATION
 --------------
@@ -98,14 +116,18 @@ mogelijk incorrect is (zie ook de CAS-checksumcheck) of dat PubChem die stof nie
 `cas_afwijkend`-resultaat in cas_resolution_omgekeerd.csv is een sterke aanwijzing dat CSOR's
 CAS-nummer verouderd/fout is (de inchikey — een structuurgebaseerde sleutel — wijst naar een
 andere PubChem-CAS-notatie); `geen_cas_synoniem` is geen aanwijzing van een fout, enkel dat
-PubChem voor die stof geen CAS-synoniem publiceert. Voor `eea_ec_crosscheck.csv`: `afwijkend`
-(minstens één bron vond EC-kandidaten voor dat CAS-nummer, maar `csor:eea` zit er niet tussen)
-is een concrete aanwijzing voor een fout `eea`-veld; `onbekend` (geen van beide bronnen vond
-EC-data) is — gezien de beperkte dekking van de 14 regelgevingslijsten — geen aanwijzing van
-een fout, enkel dat die stof op geen van de geraadpleegde lijsten voorkomt. Voor
-`cas_ec_suggesties.csv`: `suggestie` (een geverifieerde EC-kandidaat gevonden, maar `csor:eea`
-zelf is leeg) is een concrete aanvulling, geen fout; `afwijkend` is dezelfde sterke aanwijzing
-als hierboven; `kandidaten_niet_bevestigd` (een kandidaat gevonden in de bronlijsten, maar de
+PubChem voor die stof geen CAS-synoniem publiceert. Voor `eea_vocabulaire.csv`:
+`eea_code_superseded`/`eea_code_retired` betekent dat EEA de code niet meer als geldig voert
+(rapporteren onder een opvolgcode, vaak de CAS_-code in `eea_suggestie`, nagaan met EEA/VMM);
+`eea_code_ander_cas` is een sterke aanwijzing dat `csor:eea` naar een andere stof verwijst;
+`niet_in_eea_lijst` is noch een EEA-code noch een EC-nummer. Voor `eea_ec_crosscheck.csv`:
+`afwijkend` (ECHA koppelt `csor:eea` aan een ander CAS-nummer) is een concrete aanwijzing voor
+een fout `eea`-veld of een fout `cas`-veld — vaak zout vs. vrije base (bv. Oxytetracycline
+`218-161-2` is bij ECHA het hydrochloride); `ec_onbekend_bij_echa` is verdacht (ECHA's
+stoffendatabank bevat alle EINECS-nummers). Voor `cas_ec_suggesties.csv`: `suggestie` (een
+geverifieerde EC-kandidaat gevonden, maar `csor:eea` zelf is leeg) is een concrete aanvulling,
+geen fout; `afwijkend` is dezelfde sterke aanwijzing als hierboven; `eea_code` is geen fout
+(een EC-kandidaat is dan hoogstens bijkomende info); `kandidaten_niet_bevestigd` (een kandidaat gevonden in de bronlijsten, maar de
 InChIKey-verificatie kon geen enkele bevestigen) wijst op een mogelijk foute CAS/EC-koppeling
 in de **bronlijst zelf** (ECHA of PubChem), niet per se in CSOR.
 
@@ -117,6 +139,7 @@ output/tables/cid_crosscheck.csv
 output/tables/cas_ec_suggesties.csv
 output/tables/internal_flags.csv
 output/tables/eea_ec_crosscheck.csv
+output/tables/eea_vocabulaire.csv
 output/reports/variabele_identity.html
 data/interim/variabele_records.parquet (tussentijds)
 """
@@ -131,11 +154,12 @@ import pandas as pd
 import rdflib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import dataset, pubchem, report, sparql_client as sc  # noqa: E402
+from common import dataset, echa, pubchem, report, sparql_client as sc  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INTERIM_DIR = REPO_ROOT / "data" / "interim"
 CACHE_ROOT = REPO_ROOT / "data" / "cache" / "pubchem"
+ECHA_CACHE_ROOT = REPO_ROOT / "data" / "cache" / "echa"
 OUTPUT_DIR = REPO_ROOT / "output" / "tables"
 SOURCE_DIR = REPO_ROOT / "data" / "source"
 
@@ -442,11 +466,110 @@ def _echa_by_cas(echa_df: "pd.DataFrame") -> dict[str, set[str]]:  # noqa: F821
     return echa_by_cas
 
 
+def load_eea_vocab() -> dict[str, dict]:
+    """{code: rij} uit data/source/eea_wise_observedproperty.csv (zie fetch_eea_observedproperty.py).
+    `code` is de EEA-notatie zonder `CAS_`/`EEA_`-prefix — zo staat ze in csor:eea."""
+    vocab_df = pd.read_csv(SOURCE_DIR / "eea_wise_observedproperty.csv", dtype=str)
+    return {r["code"]: r for r in vocab_df.to_dict("records")}
+
+
+def eea_type(eea: str | None, eea_vocab: dict[str, dict]) -> str:
+    """Wat ís deze csor:eea-waarde? `eea_code` (komt voor in de EEA WISE ObservedProperty-lijst),
+    `ec` (EC-vormig — EEA-codes hebben altijd een 2-cijferige middengroep, dus nooit verwarbaar),
+    `leeg`, of `onbekend` (geen van beide)."""
+    if eea is None or pd.isna(eea):
+        return "leeg"
+    if eea in eea_vocab:
+        return "eea_code"
+    if EC_RE.match(eea):
+        return "ec"
+    return "onbekend"
+
+
+def ec_cas_verified(ec: str, cas: str, inchikey_cas: str | None) -> tuple[bool, str]:
+    """Hoort EC-nummer `ec` bij CAS-nummer `cas`? ECHA's eigen EC↔CAS-paar is gezaghebbend: kent
+    ECHA het EC-nummer, dan beslist dat paar (ook als PubChem iets anders zegt — PubChem hangt
+    stofgroep- en isomeer-CAS-nummers soms aan dezelfde CID, zie V_236 Trichloorbenzenen). Enkel
+    als ECHA het EC-nummer niet kent, valt dit terug op de InChIKey-vergelijking via PubChem.
+    Geeft (geverifieerd, bron) terug, met bron `echa`, `pubchem_inchikey` of `""`."""
+    echa_cas = echa.cas_for_ec(ec, ECHA_CACHE_ROOT)
+    if echa_cas:
+        return (cas in echa_cas, "echa")
+    if inchikey_cas is not None:
+        pc_ec = pubchem.get_by_name(ec, CACHE_ROOT, properties=["InChIKey"])
+        if pc_ec.get("found") and pc_ec.get("InChIKey") == inchikey_cas:
+            return (True, "pubchem_inchikey")
+    return (False, "")
+
+
+def eea_vocab_check(
+    df: "pd.DataFrame", eea_vocab: dict[str, dict]  # noqa: F821
+) -> "pd.DataFrame":  # noqa: F821
+    """Toetst elke ingevulde csor:eea tegen de EEA WISE ObservedProperty-lijst (zie METHODOLOGY)."""
+    rows = []
+    for _, r in df[df["eea"].notna()].iterrows():
+        eea = r["eea"]
+        cas = r["cas"] if pd.notna(r["cas"]) else None
+        soort = eea_type(eea, eea_vocab)
+        v = eea_vocab.get(eea, {})
+        # Bestaat er voor het CAS-nummer van de variabele een geldige CAS_<cas>-code bij EEA?
+        cas_code = eea_vocab.get(cas) if cas else None
+        suggestie = (
+            cas
+            if cas_code is not None and cas_code["prefix"] == "CAS" and cas_code["status"] == "valid"
+            and cas != eea
+            else None
+        )
+
+        if soort == "eea_code":
+            if v["status"] != "valid":
+                resultaat = f"eea_code_{v['status']}"
+            elif v["prefix"] == "CAS" and cas is not None and eea != cas:
+                resultaat = "eea_code_ander_cas"
+            else:
+                resultaat = "eea_code_geldig"
+        elif soort == "ec":
+            resultaat = "ec_nummer"
+        else:
+            resultaat = "niet_in_eea_lijst"
+
+        rows.append(
+            {
+                "notatie": r["notatie"],
+                "label": r["label"],
+                "cas": cas,
+                "csor_eea": eea,
+                "eea_type": soort,
+                "eea_notatie": v.get("notation"),
+                "eea_label": v.get("label"),
+                "eea_status": v.get("status"),
+                "eea_suggestie": suggestie,
+                "resultaat": resultaat,
+            }
+        )
+    return pd.DataFrame(
+        rows,
+        columns=[
+            "notatie",
+            "label",
+            "cas",
+            "csor_eea",
+            "eea_type",
+            "eea_notatie",
+            "eea_label",
+            "eea_status",
+            "eea_suggestie",
+            "resultaat",
+        ],
+    )
+
+
 def eea_ec_crosscheck(
     df: "pd.DataFrame", echa_df: "pd.DataFrame"  # noqa: F821
 ) -> "pd.DataFrame":  # noqa: F821
-    """Toetst csor:eea (voor individuele stoffen empirisch vaak het EC/EINECS-nummer) tegen
-    ECHA's regelgevingslijsten en PubChem's Registry-Number-kruisverwijzingen (zie METHODOLOGY)."""
+    """Toetst csor:eea-waarden die een EC-nummer zijn tegen ECHA's eigen EC↔CAS-koppeling
+    (gezaghebbend), met de ECHA-regelgevingslijsten en PubChem's Registry-Number-
+    kruisverwijzingen als aanvullende bronnen (zie METHODOLOGY)."""
     candidates = df[df["eea"].notna() & df["cas"].notna()]
     candidates = candidates[candidates["eea"].str.match(EC_RE)]
 
@@ -457,6 +580,7 @@ def eea_ec_crosscheck(
         cas = r["cas"]
         eea = r["eea"]
 
+        echa_cas_voor_eea = sorted(echa.cas_for_ec(eea, ECHA_CACHE_ROOT))
         echa_kandidaten = sorted(echa_by_cas.get(cas, set()))
 
         pc = pubchem.get_by_cas(cas, CACHE_ROOT, properties=["InChIKey"])
@@ -468,12 +592,12 @@ def eea_ec_crosscheck(
         echa_match = eea in echa_kandidaten
         pubchem_match = eea in pubchem_kandidaten
 
-        if echa_match or pubchem_match:
+        if echa_cas_voor_eea:
+            resultaat = "bevestigd" if cas in echa_cas_voor_eea else "afwijkend"
+        elif echa_match or pubchem_match:
             resultaat = "bevestigd"
-        elif echa_kandidaten or pubchem_kandidaten:
-            resultaat = "afwijkend"
         else:
-            resultaat = "onbekend"
+            resultaat = "ec_onbekend_bij_echa"
 
         rows.append(
             {
@@ -481,6 +605,7 @@ def eea_ec_crosscheck(
                 "label": r["label"],
                 "cas": cas,
                 "csor_eea": eea,
+                "echa_cas_voor_eea": "; ".join(echa_cas_voor_eea),
                 "echa_ec_kandidaten": "; ".join(echa_kandidaten),
                 "echa_match": echa_match,
                 "pubchem_ec_kandidaten": "; ".join(pubchem_kandidaten),
@@ -495,6 +620,7 @@ def eea_ec_crosscheck(
             "label",
             "cas",
             "csor_eea",
+            "echa_cas_voor_eea",
             "echa_ec_kandidaten",
             "echa_match",
             "pubchem_ec_kandidaten",
@@ -505,11 +631,11 @@ def eea_ec_crosscheck(
 
 
 def cas_ec_suggestions(
-    df: "pd.DataFrame", echa_df: "pd.DataFrame"  # noqa: F821
+    df: "pd.DataFrame", echa_df: "pd.DataFrame", eea_vocab: dict[str, dict]  # noqa: F821
 ) -> "pd.DataFrame":  # noqa: F821
     """Omgekeerde, bredere variant van eea_ec_crosscheck(): voor élke variabele met een cas
     (ongeacht of/hoe eea al ingevuld is) EC-kandidaten zoeken bij ECHA en PubChem, en elke
-    kandidaat onafhankelijk verifiëren via InChIKey (zie METHODOLOGY)."""
+    kandidaat onafhankelijk verifiëren via ec_cas_verified() (zie METHODOLOGY)."""
     candidates = df[df["cas"].notna()]
     echa_by_cas = _echa_by_cas(echa_df)
 
@@ -517,6 +643,7 @@ def cas_ec_suggestions(
     for _, r in candidates.iterrows():
         cas = r["cas"]
         eea = r["eea"] if pd.notna(r["eea"]) else None
+        soort = eea_type(eea, eea_vocab)
 
         pc_cas = pubchem.get_by_cas(cas, CACHE_ROOT, properties=["InChIKey"])
         inchikey_cas = pc_cas.get("InChIKey") if pc_cas.get("found") else None
@@ -530,22 +657,43 @@ def cas_ec_suggestions(
         alle_kandidaten = sorted(set(echa_kandidaten) | set(pubchem_kandidaten))
 
         geverifieerd: list[str] = []
-        if inchikey_cas is not None:
-            for ec in alle_kandidaten:
-                pc_ec = pubchem.get_by_name(ec, CACHE_ROOT, properties=["InChIKey"])
-                if pc_ec.get("found") and pc_ec.get("InChIKey") == inchikey_cas:
-                    geverifieerd.append(ec)
+        bronnen: list[str] = []
+        for ec in alle_kandidaten:
+            ok, bron = ec_cas_verified(ec, cas, inchikey_cas)
+            if ok:
+                geverifieerd.append(ec)
+                bronnen.append(f"{ec}={bron}")
 
-        if not alle_kandidaten:
-            resultaat = "onbekend"
-        elif not geverifieerd:
-            resultaat = "kandidaten_niet_bevestigd"
-        elif eea is None:
-            resultaat = "suggestie"
-        elif eea in geverifieerd:
+        # csor:eea zelf ook rechtstreeks verifiëren, ook als het niet tussen de kandidaten zit
+        # (bv. het stofgroep-EC-nummer 234-413-4 van V_236, dat PubChem niet kent).
+        eea_ok, eea_bron = (False, "")
+        echa_cas_voor_eea: list[str] = []
+        if soort == "ec":
+            eea_ok, eea_bron = ec_cas_verified(eea, cas, inchikey_cas)
+            echa_cas_voor_eea = sorted(echa.cas_for_ec(eea, ECHA_CACHE_ROOT))
+            if eea_ok and eea not in geverifieerd:
+                bronnen.append(f"{eea}={eea_bron}")
+
+        if soort == "eea_code":
+            # Een echte EEA-code is geen EC-nummer: een EC-kandidaat is dan hoogstens aanvullende
+            # info, nooit een correctie (zie eea_vocabulaire.csv voor de toets van de code zelf).
+            resultaat = "eea_code"
+        elif soort == "ec" and eea_ok:
             resultaat = "bevestigd"
-        else:
+        elif soort == "ec" and (echa_cas_voor_eea or geverifieerd):
+            # Negatief bewijs: ECHA koppelt csor:eea aan een ander CAS-nummer, of er is een
+            # geverifieerd alternatief.
             resultaat = "afwijkend"
+        elif soort == "ec":
+            resultaat = "niet_verifieerbaar"
+        elif soort == "onbekend":
+            resultaat = "eea_onbekend_formaat"
+        elif geverifieerd:
+            resultaat = "suggestie"
+        elif alle_kandidaten:
+            resultaat = "kandidaten_niet_bevestigd"
+        else:
+            resultaat = "onbekend"
 
         rows.append(
             {
@@ -553,9 +701,12 @@ def cas_ec_suggestions(
                 "label": r["label"],
                 "cas": cas,
                 "csor_eea": eea,
+                "eea_type": soort,
+                "echa_cas_voor_eea": "; ".join(echa_cas_voor_eea),
                 "echa_ec_kandidaten": "; ".join(echa_kandidaten),
                 "pubchem_ec_kandidaten": "; ".join(pubchem_kandidaten),
                 "geverifieerde_ec_kandidaten": "; ".join(geverifieerd),
+                "verificatiebron": "; ".join(bronnen),
                 "resultaat": resultaat,
             }
         )
@@ -566,19 +717,22 @@ def cas_ec_suggestions(
             "label",
             "cas",
             "csor_eea",
+            "eea_type",
+            "echa_cas_voor_eea",
             "echa_ec_kandidaten",
             "pubchem_ec_kandidaten",
             "geverifieerde_ec_kandidaten",
+            "verificatiebron",
             "resultaat",
         ],
     )
-
 
 def build_html_report(
     flags_df: "pd.DataFrame",  # noqa: F821
     cid_df: "pd.DataFrame",  # noqa: F821
     cas_df: "pd.DataFrame",  # noqa: F821
     reverse_df: "pd.DataFrame",  # noqa: F821
+    eea_vocab_df: "pd.DataFrame",  # noqa: F821
     eea_df: "pd.DataFrame",  # noqa: F821
     cas_ec_df: "pd.DataFrame",  # noqa: F821
 ) -> Path:
@@ -677,6 +831,38 @@ def build_html_report(
             )
         )
 
+    if len(eea_vocab_df):
+        fig_vocab = report.bar_counts(
+            eea_vocab_df["resultaat"].value_counts(),
+            title="csor:eea t.o.v. de EEA WISE ObservedProperty-lijst",
+            xaxis_title="resultaat",
+        )
+        telling = eea_vocab_df["resultaat"].value_counts()
+        n = lambda k: int(telling.get(k, 0))  # noqa: E731
+        disc_vocab = (
+            f"{len(eea_vocab_df)} ingevulde csor:eea-waarden getoetst tegen de Eionet-codelijst "
+            "wise/ObservedProperty (de codes waaronder aan Europa gerapporteerd wordt). "
+            f"{n('eea_code_geldig')} zijn een geldige EEA-code, {n('ec_nummer')} zijn een "
+            "EC-nummer (geen EEA-code — zie de EC-secties hieronder), "
+            f"{n('niet_in_eea_lijst')} komen in geen van beide vormen voor. Aandacht: "
+            f"{n('eea_code_superseded') + n('eea_code_retired')} verwijzen naar een EEA-code die "
+            f"niet meer 'valid' is, {n('eea_code_ander_cas')} naar een CAS_-code voor een ander "
+            "CAS-nummer dan dat van de variabele. Kolom eea_suggestie geeft het cas-nummer als "
+            "daarvoor een geldige CAS_-code bestaat."
+        )
+        aandacht_vocab_df = eea_vocab_df[
+            ~eea_vocab_df["resultaat"].isin(["eea_code_geldig", "ec_nummer"])
+        ]
+        sections.append(
+            report.Section(
+                heading="csor:eea t.o.v. de EEA-codelijst",
+                discussion=disc_vocab,
+                figures=[fig_vocab],
+                table_df=aandacht_vocab_df if len(aandacht_vocab_df) else None,
+                table_n=len(aandacht_vocab_df),
+            )
+        )
+
     if len(eea_df):
         fig_eea = report.bar_counts(
             eea_df["resultaat"].value_counts(),
@@ -685,17 +871,16 @@ def build_html_report(
         )
         n_bevestigd_eea = int((eea_df["resultaat"] == "bevestigd").sum())
         n_afwijkend_eea = int((eea_df["resultaat"] == "afwijkend").sum())
-        n_onbekend_eea = int((eea_df["resultaat"] == "onbekend").sum())
+        n_onbekend_eea = int((eea_df["resultaat"] == "ec_onbekend_bij_echa").sum())
         disc_eea = (
-            f"{len(eea_df)} csor:Variabele met een EC-vormige csor:eea getoetst tegen 14 "
-            "ECHA-regelgevingslijsten (data/source/echa_lijsten_ec_cas.csv) en PubChem's "
-            f"Registry-Number-kruisverwijzingen — {n_bevestigd_eea} bevestigd (minstens één "
-            f"bron komt overeen met CSOR's eea), {n_afwijkend_eea} afwijkend (een bron vond een "
-            f"ander EC-nummer), {n_onbekend_eea} onbekend (geen van beide bronnen kent dit "
-            "CAS-nummer — verwacht, gezien de 14 lijsten regelgevende deelverzamelingen zijn, "
-            "geen volledige stoffendatabank; geen aanwijzing van een fout)."
+            f"{len(eea_df)} csor:Variabele met een EC-vormige csor:eea getoetst tegen ECHA's "
+            "eigen EC↔CAS-koppeling (stoffendatabank chem.echa.europa.eu), aangevuld met 14 "
+            "ECHA-regelgevingslijsten en PubChem's Registry-Number-kruisverwijzingen — "
+            f"{n_bevestigd_eea} bevestigd, {n_afwijkend_eea} afwijkend (ECHA koppelt dit "
+            f"EC-nummer aan een ander CAS-nummer, zie kolom echa_cas_voor_eea), {n_onbekend_eea} "
+            "onbekend bij ECHA en niet bevestigd door de andere bronnen."
         )
-        afwijkend_eea_df = eea_df[eea_df["resultaat"] == "afwijkend"]
+        afwijkend_eea_df = eea_df[eea_df["resultaat"] != "bevestigd"]
         sections.append(
             report.Section(
                 heading="EC-nummercrosscheck (csor:eea)",
@@ -715,24 +900,28 @@ def build_html_report(
         n_suggestie = int((cas_ec_df["resultaat"] == "suggestie").sum())
         n_afwijkend_cas_ec = int((cas_ec_df["resultaat"] == "afwijkend").sum())
         n_niet_bevestigd = int((cas_ec_df["resultaat"] == "kandidaten_niet_bevestigd").sum())
+        n_eea_code = int((cas_ec_df["resultaat"] == "eea_code").sum())
         disc_cas_ec = (
             f"Omgekeerde, bredere check t.o.v. de vorige sectie: voor alle {len(cas_ec_df)} "
             "variabelen met een cas (ongeacht of eea al ingevuld is) EC-kandidaten gezocht bij "
-            "ECHA en PubChem, elk onafhankelijk geverifieerd via InChIKey (het EC-nummer zelf "
-            "als PubChem-zoekterm, vergeleken met de InChIKey van het cas-nummer). "
+            "ECHA en PubChem. Elke kandidaat wordt geverifieerd via ECHA's eigen EC↔CAS-paar; "
+            "enkel als ECHA het EC-nummer niet kent, via InChIKey (PubChem). "
             f"{n_suggestie} variabelen hebben een geverifieerde EC-kandidaat maar nog geen "
             f"csor:eea (aanvulling, geen fout — volledige lijst in cas_ec_suggesties.csv). "
-            f"{n_afwijkend_cas_ec} tonen een afwijking met de al ingevulde csor:eea. "
-            f"{n_niet_bevestigd} hebben een kandidaat in de bronlijsten die de InChIKey-check "
-            "niet kon bevestigen — mogelijk een foute koppeling in de bronlijst zelf, niet per "
-            "se in CSOR."
+            f"{n_afwijkend_cas_ec} hebben een EC-nummer als csor:eea dat ECHA niet aan dit "
+            f"cas-nummer koppelt. {n_eea_code} hebben een echte EEA-code als csor:eea — geen "
+            f"EC-nummer, dus niet als afwijking geteld. {n_niet_bevestigd} hebben een kandidaat "
+            "in de bronlijsten die niet bevestigd kon worden — mogelijk een foute koppeling in "
+            "de bronlijst zelf, niet per se in CSOR."
         )
         aandacht_cas_ec_df = cas_ec_df[
-            cas_ec_df["resultaat"].isin(["afwijkend", "kandidaten_niet_bevestigd"])
+            cas_ec_df["resultaat"].isin(
+                ["afwijkend", "niet_verifieerbaar", "eea_onbekend_formaat", "kandidaten_niet_bevestigd"]
+            )
         ]
         sections.append(
             report.Section(
-                heading="CAS→EC-suggesties (InChIKey-geverifieerd)",
+                heading="CAS→EC-suggesties (ECHA-/InChIKey-geverifieerd)",
                 discussion=disc_cas_ec,
                 figures=[fig_cas_ec],
                 table_df=aandacht_cas_ec_df if len(aandacht_cas_ec_df) else None,
@@ -808,11 +997,29 @@ def main(graph: rdflib.Graph | None = None) -> None:
         f"{reverse_df['resultaat'].value_counts().to_dict() if len(reverse_df) else {}}"
     )
 
-    # Columns: notatie/label/cas zoals hierboven; csor_eea (het opgeslagen csor:eea-veld);
-    # echa_ec_kandidaten (";"-gescheiden EC-nummers gevonden voor dit cas in de 14
-    # ECHA-regelgevingslijsten); echa_match (True als csor_eea daarin voorkomt);
-    # pubchem_ec_kandidaten (";"-gescheiden EC-vormige entries uit PubChem's xrefs/RN);
-    # pubchem_match (idem); resultaat (bevestigd/afwijkend/onbekend, zie METHODOLOGY).
+    eea_vocab = load_eea_vocab()
+
+    # Columns: notatie/label/cas zoals hierboven (cas leeg = variabele zonder cas); csor_eea (het
+    # opgeslagen csor:eea-veld); eea_type (eea_code/ec/onbekend, zie eea_type()); eea_notatie/
+    # eea_label/eea_status (de overeenkomstige EEA WISE ObservedProperty-code, leeg als csor_eea
+    # er niet in voorkomt); eea_suggestie (het cas-nummer, als daarvoor een geldige
+    # CAS_<cas>-code bestaat die verschilt van csor_eea — leeg anders); resultaat
+    # (eea_code_geldig/eea_code_superseded/eea_code_retired/eea_code_ander_cas/ec_nummer/
+    # niet_in_eea_lijst, zie METHODOLOGY).
+    eea_vocab_df = eea_vocab_check(df, eea_vocab)
+    eea_vocab_df.to_csv(OUTPUT_DIR / "eea_vocabulaire.csv", index=False)
+    print(
+        f"\nEEA-vocabulairecheck: {len(eea_vocab_df)} ingevulde csor:eea — "
+        f"{eea_vocab_df['resultaat'].value_counts().to_dict() if len(eea_vocab_df) else {}}"
+    )
+
+    # Columns: notatie/label/cas zoals hierboven; csor_eea (het opgeslagen csor:eea-veld, enkel
+    # EC-vormige); echa_cas_voor_eea (";"-gescheiden CAS-nummers die ECHA's stoffendatabank aan
+    # csor_eea koppelt — leeg als ECHA het EC-nummer niet kent); echa_ec_kandidaten
+    # (";"-gescheiden EC-nummers gevonden voor dit cas in de 14 ECHA-regelgevingslijsten);
+    # echa_match (True als csor_eea daarin voorkomt); pubchem_ec_kandidaten (";"-gescheiden
+    # EC-vormige entries uit PubChem's xrefs/RN); pubchem_match (idem); resultaat (bevestigd/
+    # afwijkend/ec_onbekend_bij_echa, zie METHODOLOGY).
     print("\nEC-nummercrosscheck voor csor:eea loopt (gecached, ~0.2s/live-call)...")
     eea_df = eea_ec_crosscheck(df, echa_df)
     eea_df.to_csv(OUTPUT_DIR / "eea_ec_crosscheck.csv", index=False)
@@ -822,13 +1029,16 @@ def main(graph: rdflib.Graph | None = None) -> None:
     )
 
     # Columns: notatie/label/cas/csor_eea zoals hierboven (csor_eea leeg mag hier, i.t.t.
-    # eea_ec_crosscheck.csv); echa_ec_kandidaten/pubchem_ec_kandidaten (";"-gescheiden, ruwe
-    # kandidaten vóór verificatie); geverifieerde_ec_kandidaten (";"-gescheiden, enkel de
-    # kandidaten waarvan de InChIKey — via een onafhankelijke PubChem-naamzoekopdracht op het
-    # EC-nummer zelf — overeenkomt met de InChIKey van het cas-nummer); resultaat (onbekend/
-    # kandidaten_niet_bevestigd/suggestie/bevestigd/afwijkend, zie METHODOLOGY).
-    print("\nCAS->EC-suggesties (InChIKey-geverifieerd) lopen (gecached, ~0.2s/live-call)...")
-    cas_ec_df = cas_ec_suggestions(df, echa_df)
+    # eea_ec_crosscheck.csv); eea_type (zie eea_vocabulaire.csv, plus `leeg`); echa_cas_voor_eea
+    # (zoals in eea_ec_crosscheck.csv, enkel ingevuld als eea_type=ec);
+    # echa_ec_kandidaten/pubchem_ec_kandidaten (";"-gescheiden, ruwe kandidaten vóór
+    # verificatie); geverifieerde_ec_kandidaten (";"-gescheiden, enkel de kandidaten die
+    # ec_cas_verified() bij dit cas bevestigt); verificatiebron (";"-gescheiden `<ec>=<bron>`,
+    # bron = echa of pubchem_inchikey); resultaat (eea_code/bevestigd/afwijkend/
+    # niet_verifieerbaar/eea_onbekend_formaat/suggestie/kandidaten_niet_bevestigd/onbekend, zie
+    # METHODOLOGY).
+    print("\nCAS->EC-suggesties (ECHA-/InChIKey-geverifieerd) lopen (gecached)...")
+    cas_ec_df = cas_ec_suggestions(df, echa_df, eea_vocab)
     cas_ec_df.to_csv(OUTPUT_DIR / "cas_ec_suggesties.csv", index=False)
     print(
         f"CAS->EC-suggesties: {len(cas_ec_df)} kandidaten — "
@@ -836,8 +1046,11 @@ def main(graph: rdflib.Graph | None = None) -> None:
     )
 
     print(f"\nlive PubChem-calls deze run: {pubchem.live_call_count}")
+    print(f"live ECHA-calls deze run: {echa.live_call_count}")
 
-    report_path = build_html_report(flags_df, cid_df, cas_df, reverse_df, eea_df, cas_ec_df)
+    report_path = build_html_report(
+        flags_df, cid_df, cas_df, reverse_df, eea_vocab_df, eea_df, cas_ec_df
+    )
     print(f"\nRapport geschreven naar {report_path.relative_to(REPO_ROOT)}")
 
 

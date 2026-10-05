@@ -37,7 +37,7 @@ csor-testing/
 │   │                          # (niet via run_all.py, zie §4)
 │   ├── raw/                  # gitignored — losse .ttl-snapshots van individuele scripts
 │   ├── interim/               # gitignored — tussentijdse pandas-tabellen (.parquet)
-│   └── cache/{pubchem,qudt}/  # gitignored — API-cache (JSON per lookup)
+│   └── cache/{pubchem,qudt,echa}/  # gitignored — API-cache (JSON per lookup)
 ├── output/
 │   ├── tables/                # gegenereerde CSV's — WEL gecommit (reproduceerbare resultaten)
 │   ├── diagrams/              # gegenereerd TikZ/PDF/PNG-diagram — WEL gecommit
@@ -62,10 +62,13 @@ curated foutief->correctie-lijst van Stichting OpenTaal), gebruikt door `check_t
 ECHA-regelgevingslijsten — SVHC-kandidatenlijst, restricties, POPs, geharmoniseerde
 classificatie, en de bijhorende procesluik-lijsten — tot één CAS↔EC-nummertabel), gebruikt door
 `check_variabele_identity.py::eea_ec_crosscheck()` om `csor:eea` (voor individuele stoffen
-empirisch vaak het EC/EINECS-nummer) te toetsen. Elk bestand wordt ververst door zijn eigen
+empirisch vaak het EC/EINECS-nummer) te toetsen; en `eea_wise_observedproperty.csv` (de
+Eionet-codelijst wise/ObservedProperty — de EEA-rapporteringscodes, want `csor:eea` bevat naast
+EC-nummers ook echte EEA-codes zonder `CAS_`/`EEA_`-prefix), eveneens gebruikt door
+`check_variabele_identity.py`. Elk bestand wordt ververst door zijn eigen
 `scripts/fetch_*.py`-script (`fetch_vmm_woordenboek.py`, `fetch_opentaal_wordlist.py`,
-`fetch_echa_lists.py`) — handmatig herdraaid, bewust **niet** onderdeel van `scripts/run_all.py`
-(dat betreft uitsluitend de CSOR-registerpijplijn zelf). Wél gecommit (i.t.t.
+`fetch_echa_lists.py`, `fetch_eea_observedproperty.py`) — handmatig herdraaid, bewust **niet**
+onderdeel van `scripts/run_all.py` (dat betreft uitsluitend de CSOR-registerpijplijn zelf). Wél gecommit (i.t.t.
 `data/raw/`/`analyse/`), want het zijn kant-en-klare, direct bruikbare brondata-snapshots, geen
 tussentijdse/regenereerbare CSOR-data.
 
@@ -287,6 +290,10 @@ te verifiëren zijn zonder de CSV's te openen.
 - `time.sleep(0.2)` tussen live calls; geen sleep bij cache-hit.
 - Geen bulk-hercalls zonder cache-check — een tweede run met gevulde cache mag nul live calls
   doen (zie verificatiecriteria in het plan).
+- Zelfde etiquette voor ECHA's stoffendatabank (`scripts/common/echa.py`, cache
+  `data/cache/echa/by_ec/<ec>.json`): EC↔CAS-paar per EC-nummer. Dat paar is gezaghebbend boven
+  PubChem's InChIKey-koppeling, die stofgroepen en isomeren kan verwarren (zie
+  `check_variabele_identity.py`, V_236 Trichloorbenzenen).
 
 ## 8. Rapportconventie
 
@@ -347,11 +354,12 @@ te leiden en blijven ongewijzigd.
   byte-identieke HTML. Niet vereist voor dit rapporttype.
 - Vereist `plotly` in `requirements.txt` (§2), geen andere nieuwe dependency.
 
-De zes gegenereerde rapporten (bestandsnaam = scriptnaam zonder `check_`-prefix):
+De zeven gegenereerde rapporten (bestandsnaam = scriptnaam zonder `check_`-prefix):
 
 | Rapport | Gegenereerd door |
 |---|---|
 | `output/reports/conceptschemas.html` | `scripts/check_conceptschemas.py` |
+| `output/reports/conceptschema_consistentie.html` | `scripts/check_conceptschema_consistentie.py` |
 | `output/reports/eenheden_qudt.html` | `scripts/check_eenheden_qudt.py` |
 | `output/reports/parameter_inhoud.html` | `scripts/check_parameter_inhoud.py` |
 | `output/reports/samenstellende_variabelen.html` | `scripts/check_samenstellende_variabelen.py` |
